@@ -1,0 +1,745 @@
+---
+title: "Mobilty hub information: practice synthesis and development of tactical urbanism tools"
+author:
+  - name: James Reynolds
+    email: julianj.reynolds@atu.ie
+    footnote: 1
+    correspondingauthor: true
+  - name: Brian McCann
+    email: brian.mccann@atu.ie
+    footnote: 1  
+  - name: Noreen Armstrong
+    email: noreen.armstrong@atu.ie
+    footnote: 2
+  - name: Sarbast Molsem
+    email: molsem@tcd.ie
+    footnote: 3
+  - name: Agnieszka Stefaniec
+    email: a.stefaniec@soton.ac.uk
+    footnote: 4
+  - name: Brian Caulfield
+    email: brian.caulfield@tcd.ie
+    affiliation: 
+    footnote: 3
+  - name: Amaya Vega
+    email: amaya.Vega@atu.ie
+    footnote: 2
+
+footnote:
+  - code: 1
+    text: "Atlantic Technological University, Sligo campus, Ireland"
+  - code: 2
+    text: "Atlantic Technological University, Galway City campus, Ireland"
+  - code: 3
+    text: "Centre for Transport Research, Dept of Civil, Structural and Environmental Engineering, Trinity College Dublin, Ireland"
+  - code: 4
+    text: "Department of Decision Analytics and Risk at Southampton Business School, University of Southampton, UK"
+abstract: | 
+keywords: 
+journal: "CERC 2026?"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: References.bib, packages.bib
+linenumbers: false
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+    extra_dependencies: "subfig"
+    fig_caption: true
+---
+
+```{r setup, include=FALSE}
+library(devtools)
+library(dplyr)
+library(ggimage)
+library(ggplot2)
+library(gridExtra)
+library(grid)
+library(janitor)
+library(kableExtra)
+library(knitr)
+library(lattice)
+library(magrittr)
+library(mobilityHubTools)
+library(osmdata)
+library(osmplotr)
+library(scales)
+library(sp)
+library(sf)
+library(rlist)
+library(rnaturalearth)
+library(rnaturalearthhires)
+library(tidyverse)
+library(tufte)
+library(viridis)
+library(tidyverse)
+
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
+```
+
+
+
+
+# Introduction
+
+Shared mobility hubs are a relatively new development in transport systems.  
+These provide various shared modes, services and other offerings at a nearby location, 
+and so help support shifts towards more sustainable and less-carbon intensive travel.  
+@Roukouni:2023aa developed a definition from a literature review^[
+*“A shared mobility hub is a place where different transport modes are integrated seamlessly, promoting efficient and sustainable urban mobility. Emphasis is given on shared mobility options such as bikes, scooters and cars. Connection with public transport (transit) is desirable but not necessary. The integration between mobility suppliers is important to provide a seamless, flexible connection at these transfer points. Ensuring an enjoyable experience for travelers is a crucial part of the hub concept as well, and therefore the hub should be considered not just as a transfer node but as a place where a variety of services come together, such as logistics services or restaurants.”* (Roukouni et al. 2023)], 
+and this emphasises the need for mobility hubs to be integrated and to provide seamless transfers from one mode to another.  A similar need to support transfers between services, access and egress from stations, stops and other facilities has long been a focus for the design of transit maps and other public information (see for example @Ovenden:2003aa and @London-Transport-Museum:2016aa). 
+
+Public information provision will likely be an important consideration in developing and implementing mobility hubs. However, in a case study of mobility hubs in London, Bristol and Birmingham @Reynolds:2026aa found a range of maps, informational pedestals and other signage at some hubs, but little to no information at others. @Reynolds:2026aa also developed an initial set of software tools for generating such material for other locations using Open Street Maps (OSM) data, and the Geographic Information System (GIS) and other functionality available in the R programming language.  However, this work was based on examples from just Bristol and Birmingham, rather than from a wider selection of mobility hub informational materials developed by practitioners and in use in real world contexts.  
+
+This paper, therefore, seeks to improve understandings of mobility hub information provision through review of existing practices and development of refined versions thorugh synthesis and an iternative design processes. The study follows the Double Diamond approach \cite{UK-Design-Council:0aa} by stepping through alternating divergent and convergent stages of discovery, definition, development and delivery. Outputs of the research include software tools for producing mobility hub information products in the style of Bristol, Birmingham and other cases included in the study. A amalgamated set of designs are also developed and applied to a shared electric mobility hub site in Galway, Ireland, as an input to upcoming future research involving stakeholder co-design and public engagement for user testing purposes.  
+
+# Research context
+
+Origins of the mobility hub concept can be traced back at least to regional planning activities in Toronto, Canada, in the 2000s [@Engel-Yan:2012aa, @Metrolinx:2008aa, @Salsberg:2010aa].  To a larger extent, however, railway stations, tram and bus stops, park-and-ride facilities,  and many other locations supporting modal interchange and tavellers are provided might be considered a 'mobility hub'. @Roukouni:2023aa, however, notes the emphasis on shared and micro-mobility offerings at mobility hubs, although perhaps this might similarly broaden the possible locations given that shared bicycles, e-bikes and e-scooters can now be relatively easily added to a mix of transport offerings. 
+
+Micro-mobility systems, especially of the dockless variety, are not without their issues.  @Meigs:2023aa and @Zhang:2022aa discuss some of the problems relating to battery swapping, recharging-related fires, inappropriate user behaviours and parking, and a lack of standards, quality and system management. Shared *electric* mobility hubs (sometimes 'e-Hubs') may have the potential to reduce some of these, as these incorporate on-site recharging of vehicles which eliminates many of the issues associated with operational staff travel for battery swapping and inappropriate recharging facilities. Power grid connections and the other infrastructure installed for an electrified hub might also allow other services to be be provided, for example publicly-accessibility charging facilities for electric cars.  
+
+The @Reynolds:2026aa study involves one such e-Hub, being a site in Galway that is part of the ElectRic shared mObility hUbS Trial (ROBUST) project currently underway in Ireland \cite{ROBUST:2025aa}. As shown in Figure \ref{fig:CERC_output}, the output of software developed by @Reynolds:2026aa generally replicates the informational displays present at the Gainsborough Square mobility hub in Bristol, although without the need for bespoke graphic design and mapping. Rather, the software uses publicaly-available data from Open Street Maps (OSM) to produce site-specific mobility hub information that might be sufficient for a pop-up, trial or other tactical-urbanism-style implementation.  
+
+
+```{r CERC_output, out.width = "100%", fig.align = "center", fig.cap = "Gainsborough Square, Bristol, mobility hub signage (left) and mockup for ROBUST Galway site (right). Source: Reynolds et al (in press)", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval = TRUE}
+knitr::include_graphics("graphics/CERC_outputs.png") 
+
+```
+ 
+While this output is might provide practitioners, researchers and activists with enough for an initial concept or temporary implementation of a Bristol-style information display, there appears to be opportunities for further development. Notably, it is unclear what other styles of informational displays at mobility hubs have already been developed, and what might represent best practices in this area.  Nor is it clear what other forms of public information are being used, such as websites or apps, to promote mobility hubs or to define them as places and components of larger transportation systems.  
+
+The study reported in this paper, therefore, involves cases studies of further mobility hub locations and a synthesis of current practices. As dicussed in the following section, the methodology also involves use of an iterative design process to better understand the design problem that such information provision measures are seeking to address, various approaches developed by practitioners, and to deliver a 'model' solution. 
+
+
+
+# Methodology
+
+Techniques from industrial design and related fields are readily applicable to, but perhaps under utilized in, the field of transport research \citep{Coxon:2018aa,Coxon:2021ab}. Similarly, case-based research is often under utilized due to a narrow focus on methods that involve random sampling and a search for statistical significance, because of confusion about or lack of acceptance of the methodology, or because of unfamiliarity with the approach (see \citet{Denscombe:2007aa, Yin:2018ab} and others. Here, the adopted research methodology combines the Double Diamond design approach, as per @UK-Design-Council:0aa, with case studies of various mobility hubs selected from UK and European locations.  
+
+The cases themselves form the primary data source for the discovery phase of the research. On-site and online data collection was used to explore information provision at and around mobility hubs, and develop a definition of the design problem to be addressed in the third (development) and fourth (delivery) phases. The cases again provided the primary input for the development phase, which involved the development of maps, signs, websites and other informational offerings along the lines of those present at each case location. Finally, a combined 'best practices' version was created and delivered through standard R package development processes (as per @wickham2023r).  
+
+Hubs were selected for inclusion as cases in the study on the basis of being particularly unusual, relevatory or leading examples, as per \citet{Eisenhardt:1989aa, Voss:2002aa, Denscombe:2007aa, Yin:2018ab} and others. The larger sample available at https://www.como.org.uk/mobility-hubs/built-and-planned-hubs provided a pool from which potential cases were drawn.  
+
+
+```{r case_study_hub_locations_and_details, out.width = "100%", fig.align = "center", fig.cap = "ROBUST hub locations. Source: authors based on Open Street Maps (OSM). OSM data and graphics copyright OSM contributors.", eval = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+
+hub_locations_all <- list(
+  abbey_wood = tibble(lat = 51.507374018425104, lon =  -2.557977642470572, name = "Abbey Wood", city = "Bristol", crs = 27700), 
+  UWE_Frenchay = tibble(lat = 51.500103870678025, lon =  -2.546301107865488, name = "UWE Frenchay", city = "Bristol", crs = 27700), 
+  gainsborough_square = tibble(lat = 51.49007921451471, lon = -2.562807494900329, name = "Gainsborough Square", city = "Bristol", crs = 27700), 
+  horfield_library = tibble(lat = 51.494931138321185, lon = -2.5741801829392097, name = "Horfield Library", city = "Bristol", crs = 27700),
+  andrew_road = tibble(lat = 52.448568212245036, lon = -2.053861046130594, name = "Andrew Road", city = "Brimingham", crs = 27700), 
+  huntingtree_park = tibble(lat = 52.44756630128951, lon = -2.06866200462800, name = "Huntingtree Park", city = "Birmingham", crs = 27700))
+
+```
+
+
+# Results
+
+## Discovery
+
+```{r synthesis_table_site_components, eval = TRUE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+tibble(Component = c(
+  "Bike", "eBike", "Cargobike", "eCargobike", "Scooter", "eScooter", 
+  "Bus", "Tram", "Train", 
+  "Taxi", "Ride-hail",
+  "Share-car", "Share eCar", 
+  "Bike parking", "Car parking",
+  "Bike repair", "eBike charge", "eCar charge",
+  "Toilets", "Phone charge", "Wifi",
+  "Shelter", "Seating", "Water",
+  "Food", "Groceries", "Library",
+  "Totem/Pedestal", "Local map", "Area map", "Visual indicators",
+  "Website", "App", 
+  "Pricing"
+  ), 
+Bristol = c("Bike", "X", "Cargobike", "X", "Scooter", "X", 
+  "X", "Tram", "Train", 
+  "Taxi", "Ride-hail",
+  "X", "X", 
+  "X", "Car parking",
+  "X", "eBike charge", "X",
+  "X", "X", "X",
+  "Shelter", "X,", "Water",
+  "X", "X", "X",
+  "X", "X", "X", "X",
+  "Website", "App", 
+  "Pricing"),
+) %>% 
+  kable(
+    caption = "Mobility hub components and information offerings. Source: authors' assessment.") 
+
+
+```
+
+
+
+
+
+```{r andrew_road_images, out.width = "100%", fig.align = "center", fig.cap = "Andrew Road hub, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+knitr::include_graphics("graphics/andrew_road.png") 
+
+```
+
+## Definition
+
+
+
+
+
+
+## Development
+
+
+### Bristol
+
+
+```{r download_osm_data_function, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
+
+### Create hub locations
+hub_location <- lapply(hub_location, function(x) x %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>%
+  st_transform(crs = crs_local_metres) %>% 
+  st_cast("POINT"))
+
+
+
+place_sf <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) 
+                  )
+
+placebb <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) %>%
+                    st_bbox()
+                  )
+
+
+
+download_osm_data_by_category_function <- function(
+    hub_location = hub_location, crs_local_metres = crs_local_metres, 
+    key = key)
+{
+### Create hub locations
+hub_location <- lapply(hub_location, function(x) x %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>%
+  st_transform(crs = crs_local_metres) %>% 
+  st_cast("POINT"))
+
+place_sf <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) 
+                  )
+
+placebb <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) %>%
+                    st_bbox()
+                  )
+### based on https://github.com/ropensci/osmdata/blob/main/vignettes/query-split.Rmd
+
+split_bbox <- function (bbox, grid = 2, eps = 0.05) {
+    xmin <- bbox ["x", "min"]
+    ymin <- bbox ["y", "min"]
+    dx <- (bbox ["x", "max"] - bbox ["x", "min"]) / grid
+    dy <- (bbox ["y", "max"] - bbox ["y", "min"]) / grid
+
+    bboxl <- list ()
+
+    for (i in 1:grid) {
+        for (j in 1:grid) {
+            b <- matrix (c (
+                xmin + ((i - 1 - eps) * dx),
+                ymin + ((j - 1 - eps) * dy),
+                xmin + ((i + eps) * dx),
+                ymin + ((j + eps) * dy)
+            ),
+            nrow = 2,
+            dimnames = dimnames (bbox)
+            )
+
+            bboxl <- append (bboxl, list (b))
+        }
+    }
+    bboxl
+}
+
+final <- list()
+
+for(i in seq_along(place_sf)){
+
+bb_vector <- place_sf[[i]] %>% st_bbox() %>% as.numeric()
+bb <- data.frame(min = bb_vector[1:2], max = bb_vector[3:4])
+rownames(bb) <- c("x", "y")               
+                 
+queue <- split_bbox (bb)
+result <- list ()
+
+while (length (queue) > 0) {
+
+    print (queue [[1]])
+
+    opres <- NULL
+    opres <- try ({
+        opq (bbox = queue [[1]], timeout = 25) |>
+            add_osm_feature (key = key) |>
+            osmdata_sf ()
+    })
+
+    if (class (opres) [1] != "try-error") {
+        result <- append (result, list (opres))
+        queue <- queue [-1]
+    } else {
+        bboxnew <- split_bbox (queue [[1]])
+        queue <- append (bboxnew, queue [-1])
+    }
+}
+final[[i]] <- do.call (c, result)
+}
+
+names(final) <- names(place_sf)
+
+return(final)
+}
+
+layers_to_download <- c("amenity", "building", "highway", "leisure", "landuse", "natural", "railway", "waterway")
+
+output <- list()
+
+
+for(i in seq_along(layers_to_download)){
+o1 <- list()
+ q1 <- c("download_osm_data_by_category_function(hub_location = hub_location, crs_local_metres = crs_local_metres, key = '", layers_to_download[i], "')")
+  q1 <- paste(q1,collapse="")
+o1 <-  str2expression(q1) %>% eval()
+output[[i]] <- o1  
+  
+  q1 <- c("list.save(output[[i]], ", "'data/bristol_", layers_to_download[i], "_260627.rdata')")
+  q1 <- paste(q1,collapse="")
+  str2expression(q1) %>% eval()  
+  
+  
+}
+
+net <- list()
+net <- lapply(placebb, function(x) dodgr::dodgr_streetnet(x))
+list.save(net, "data/bristol_net_260627.rdata")
+
+list.save(hub_location, "data/bristol_hub_location.rdata")
+
+
+```
+
+
+```{r extract_osm_data_ROBUST_hubs_bristol, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
+
+process_osm_list_function <- function(
+    list_to_load_and_process, 
+    list_to_save_to,
+    crs_local_metres){
+
+holding <- list.load(list_to_load_and_process)
+holding <- lapply(holding, function(x) 
+  bind_rows(x$osm_points, x$osm_lines, x$osm_polygons, x$osm_multilines, x$osm_multipolygons) %>% 
+  st_transform(crs = crs_local_metres)) %>% 
+  list.save(list_to_save_to)
+}
+
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_amenity_260627.rdata", 
+  list_to_save_to = "data/bristol_amenity.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_building_260627.rdata", 
+  list_to_save_to = "data/bristol_building.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_highway_260627.rdata", 
+  list_to_save_to = "data/bristol_highway.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_highway_260627.rdata", 
+  list_to_save_to = "data/bristol_highway.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_leisure_260627.rdata", 
+  list_to_save_to = "data/bristol_leisure.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_landuse_260627.rdata", 
+  list_to_save_to = "data/bristol_landuse.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_natural_260627.rdata", 
+  list_to_save_to = "data/bristol_natural.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_railway_260627.rdata", 
+  list_to_save_to = "data/bristol_railway.rdata", 
+  crs_local_metres = crs_local_metres)
+process_osm_list_function(
+  list_to_load_and_process = "data/bristol_waterway_260627.rdata", 
+  list_to_save_to = "data/bristol_waterway.rdata", 
+  crs_local_metres = crs_local_metres)
+
+
+
+
+
+```
+
+```{r load_bristol_data, eval = TRUE, echo=FALSE}
+bristol_amenity <- list.load("data/bristol_amenity.rdata")
+bristol_building <- list.load("data/bristol_building.rdata")
+bristol_highway <- list.load("data/bristol_highway.rdata")
+bristol_leisure <- list.load("data/bristol_leisure.rdata")
+bristol_landuse <- list.load("data/bristol_landuse.rdata")
+bristol_natural <- list.load("data/bristol_natural.rdata")
+bristol_railway <- list.load("data/bristol_railway.rdata")
+bristol_waterway <- list.load("data/bristol_waterway.rdata")
+bristol_hub_location <- list.load("data/bristol_hub_location.rdata")
+
+crs_local_metres <- 27700
+
+#drop points from building layers
+for (i in seq(bristol_building %>% names())){
+bristol_building[[i]] <- bristol_building[[i]][!(bristol_building[[i]] %>% st_geometry_type() == "POINT"),]
+}
+
+
+#list.save(bristol_amenity[[4]], "data/greensborough_amenity.rdata")
+#list.save(bristol_building[[4]], "data/greensborough_building.rdata")
+#list.save(bristol_highway[[4]], "data/greensborough_highway.rdata")
+#list.save(bristol_leisure[[4]], "data/greensborough_leisure.rdata")
+#list.save(bristol_landuse[[4]], "data/greensborough_landuse.rdata")
+#list.save(bristol_natural[[4]], "data/greensborough_natural.rdata")
+#list.save(bristol_railway[[4]], "data/greensborough_railway.rdata")
+#list.save(bristol_waterway[[4]], "data/greensborough_waterway.rdata")
+#list.save(bristol_hub_location[[4]], "data/greensborough_hub_location.rdata")
+
+```
+
+
+```{r bristol_local_maps_function, eval = TRUE, echo=FALSE}
+
+i <- 1
+
+highlight_building <- list(
+  abbey_wood = c("Asda", "Travelodge", "Sainsbury's", "Aldi", "Premier Inn", "Holiday Inn Express"), 
+  UWE_Frenchay = c("	Hewlett Packard Enterprise", "Bristol Robotics Laboratory (T)", "Centre for Sport", "Bristol Business School (X)", "School of Engineering (Z)", "Halley Nursery", "Exhibition and Conference Centre", "Students' Union 2", "Students' Union", "Northavon House"),
+  horfield_library = c("Horfield Library", "Horfield Leisure Centre"),
+  gainsborough_square = c("North Bristol Advice Centre", "The Hub")
+)
+highlight_amenity <- list(
+  abbey_wood = c("SGS College (WISE Campus)", "City of Bristol College (Parkway Centre)"),
+  UWE_Frenchay = c("Bristol Business Park", "Filton Cemetery", "Frenchay Campus Library"),
+  horfield_library = c("nill"),
+  gainsborough_square = c("Stoke Park Primary School",
+                          "Saint Mary Magdalen and Saint Francis Lockleaze",
+                          "St James Church")
+)
+highlight_leisure <- list(
+  abbey_wood = c("Stoke Gifford Stadium"),
+  UWE_Frenchay = c("nill"),
+  horfield_library = c("nill"),
+  gainsborough_square = c("Lockleaze Youth And Play Space",
+                           "Gainsborough Square")
+)
+highlight_landuse <- list(
+  abbey_wood = c("Abbey Wood Shopping Park"), 
+  UWE_Frenchay = c("Filton Cemetery"),
+  horfield_library = c("nill"),
+  gainsborough_square = c("nill")
+)
+
+highlight_building_regional <- list(
+  abbey_wood = c("Elm Park Leisure Centre"), 
+  UWE_Frenchay = c("Centre for Sport", "Bristol Golf Centre"),
+  horfield_library = c("Horfield Health Centre", "Horfield Library"),
+  gainsborough_square = c("Horfield Library", "Horfield Health Centre")
+)
+highlight_amenity_regional <- list(
+  abbey_wood = c("SGS College (WISE Campus)", "City of Bristol College (Parkway Centre)", "SGS College (Filton Campus)", "University of the West of England (Frenchay Campus)"),
+  UWE_Frenchay = c("Abbey Wood Shopping Park", "SGS College (WISE Campus)", 	"University of the West of England (Frenchay Campus)", "University of the West of England"),
+  horfield_library = c("nill"),
+  gainsborough_square = c("nill")
+)
+highlight_leisure_regional <- list(
+  abbey_wood = c("Northville Millennium Green"),
+  UWE_Frenchay = c("nill"),
+  horfield_library = c("Southmead Hospital"),
+  gainsborough_square = c("Bristol County Ground")
+)
+highlight_landuse_regional <- list(
+  abbey_wood = c("Abbey Wood Shopping Park"), 
+  UWE_Frenchay = c("nill"),
+  horfield_library = c("nill"),
+  gainsborough_square = c("nill")
+)
+
+
+file_to_save_to <- list(
+  abbey_wood = "results/abbey_wood.pdf", 
+  UWE_Frenchay = "results/UWE_Frenchay.pdf",
+  horfield_library = "results/horfield_library.pdf",
+  gainsborough_square = "results/gainsborough_square.pdf"
+  )
+
+
+hub_name_text <- list(
+  abbey_wood = "Abbey Wood Shopping Park", 
+  UWE_Frenchay = "UWE Frenchay",
+  horfield_library = "Horfield Library",
+  gainsborough_square = "Gainsborough Square"
+  )
+
+icons_to_include_in_header <- list(
+  abbey_wood = list(
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
+  UWE_Frenchay = list(
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
+  horfield_library = list(
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
+  gainsborough_square = list(
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"))
+
+)
+
+
+directions_image = list(
+  abbey_wood = system.file("extdata/bristol_greensborough_directions.png", package
+    = "mobilityHubTools"),
+  UWE_Frenchay = system.file("extdata/bristol_greensborough_directions.png", package
+    = "mobilityHubTools"),
+  horfield_library = system.file("extdata/bristol_greensborough_directions.png", package
+    = "mobilityHubTools"),
+  gainsborough_square = system.file("extdata/bristol_greensborough_directions.png", package
+    = "mobilityHubTools"))
+  
+facilities_image = list(
+  abbey_wood = system.file("extdata/bristol_facilities.png", package =
+    "mobilityHubTools"),
+  UWE_Frenchay = system.file("extdata/bristol_facilities.png", package =
+    "mobilityHubTools"),
+  horfield_library = system.file("extdata/bristol_facilities.png", package =
+    "mobilityHubTools"),
+  gainsborough_square = system.file("extdata/bristol_facilities.png", package =
+    "mobilityHubTools"))
+  
+logo_image = list(
+  abbey_wood = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+  UWE_Frenchay = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+  horfield_library = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
+  gainsborough_square = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"))
+
+
+for(i in seq(1:length(bristol_hub_location))){
+
+# create dataframe with other hubs   
+  other_hubs_as_dataframe <- bristol_hub_location[[i]] 
+other_hubs_as_dataframe[1,] <- NA
+  for(j in seq(1:length(bristol_hub_location))){
+    if (j != i) other_hubs_as_dataframe <- other_hubs_as_dataframe %>%
+        add_row(bristol_hub_location[[j]])
+  }
+other_hubs_as_dataframe <- other_hubs_as_dataframe %>% 
+  drop_na()
+  
+map_local_test <- bristol_local_map(
+  amenity = bristol_amenity[[i]], 
+  building = bristol_building[[i]], 
+  highway = bristol_highway[[i]], 
+  leisure = bristol_leisure[[i]], 
+  landuse = bristol_landuse[[i]], 
+  natural = bristol_natural[[i]],  
+  railway = bristol_railway[[i]], 
+  waterway = bristol_waterway[[i]], 
+  hub_location = bristol_hub_location[[i]], 
+  highlight_building = highlight_building[[i]],
+  highlight_amenity = highlight_amenity[[i]], 
+  highlight_leisure = highlight_leisure[[i]],
+  highlight_landuse = highlight_landuse[[i]]) 
+
+#Add any of the other hubs that are close enough to be in the map
+hub_location = bristol_hub_location[[i]]
+map_local_test <- map_local_test +
+ggplot2::geom_sf(data = other_hubs_as_dataframe %>%
+                   sf::st_transform(crs = crs_local_metres) %>%
+                   sf::st_make_valid() %>%
+                   sf::st_crop(hub_location %>%
+                                 sf::st_buffer(dist = 500) %>%
+                                 sf::st_bbox()
+                   ),
+                 mapping = ggplot2::aes()) +
+  ggrepel::geom_label_repel(
+    data = other_hubs_as_dataframe %>%
+      sf::st_transform(crs = crs_local_metres) %>%
+      sf::st_make_valid() %>%
+      sf::st_crop(hub_location %>%
+                    sf::st_buffer(dist = 500) %>%
+                    sf::st_bbox()),
+    mapping = ggplot2::aes(label = stringr::str_wrap(name, 20),
+                           geometry = geometry),
+    nudge_y = 50,
+    size = 2,
+    stat = "sf_coordinates") 
+
+
+map_regional_test <- bristol_regional_map(
+  amenity = bristol_amenity[[i]], 
+  building = bristol_building[[i]], 
+  highway = bristol_highway[[i]], 
+  leisure = bristol_leisure[[i]], 
+  landuse = bristol_landuse[[i]], 
+  natural = bristol_natural[[i]],  
+  railway = bristol_railway[[i]], 
+  waterway = bristol_waterway[[i]], 
+  hub_location = bristol_hub_location[[i]],
+  highlight_building_regional = highlight_building_regional[[i]],
+  highlight_amenity_regional = highlight_amenity_regional[[i]], 
+  highlight_leisure_regional = highlight_leisure_regional[[i]], 
+  highlight_landuse_regional = highlight_landuse_regional[[i]]) 
+
+
+map_regional_test <- map_regional_test +
+ggplot2::geom_sf(data = other_hubs_as_dataframe %>%
+                   sf::st_transform(crs = crs_local_metres) %>%
+                   sf::st_make_valid() %>%
+                   sf::st_crop(hub_location %>%
+                                 sf::st_buffer(dist = 1500) %>%
+                                 sf::st_bbox()
+                   ),
+                 mapping = ggplot2::aes()) +
+  ggrepel::geom_label_repel(
+    data = other_hubs_as_dataframe %>%
+      sf::st_transform(crs = crs_local_metres) %>%
+      sf::st_make_valid() %>%
+      sf::st_crop(hub_location %>%
+                    sf::st_buffer(dist = 1500) %>%
+                    sf::st_bbox()),
+    mapping = ggplot2::aes(label = stringr::str_wrap(name, 20),
+                           geometry = geometry),
+    nudge_y = 50,
+    size = 2,
+    stat = "sf_coordinates") 
+
+
+bristol_totem_pedestal(
+  file_to_save_to = file_to_save_to[[i]],
+  hub_name_text = hub_name_text[[i]],
+  icons_to_include_in_header = icons_to_include_in_header[[i]],
+  directions_image = directions_image[[i]],
+  map_local = map_local_test,
+  facilities_image = facilities_image[[i]],
+  map_regional = map_regional_test,
+  logo_image = logo_image[[i]]
+)
+}
+
+
+```  
+ 
+
+
+
+
+
+### Adjusting and generalising
+
+
+
+## Delivery
+
+
+
+
+
+
+
+
+# Discussion
+
+# Conclusions
+
+
+
+
+```{r contribution_matrix_template, eval = TRUE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+tibble(Component = c("Conceptualization", "Data Curation", "Formal Analysis", "Funding Acquisition", "Investigation", "Methodology", "Project Administration", "Resources", "Software", "Supervision", "Validation", "Visualization", "Writing – Original Draft Preparation", "Writing – Review & Editing"),
+#       Description = c("Ideas; formulation or evolution of overarching research goals and aims.", "Management activities to annotate (produce metadata), scrub data and maintain research data (including software code, where it is necessary for interpreting the data itself) for initial use and later reuse.",  "Application of statistical, mathematical, computational, or other formal techniques to analyze or synthesize study data.", "Acquisition of the financial support for the project leading to this publication.", "Conducting a research and investigation process, specifically performing the experiments, or data/evidence collection.", "Development or design of methodology; creation of models.", "Management and coordination responsibility for the research activity planning and execution.", "Provision of study materials, reagents, materials, patients, laboratory samples, animals, instrumentation, computing resources, or other analysis tools.", "Programming, software development; designing computer programs; implementation of the computer code and supporting algorithms; testing of existing code components.", "Oversight and leadership responsibility for the research activity planning and execution, including mentorship external to the core team.", "Verification, whether as a part of the activity or separate, of the overall replication/reproducibility of results/experiments and other research outputs.", "Preparation, creation and/or presentation of the published work, specifically visualization/data presentation.", "Creation and/or presentation of the published work, specifically writing the initial draft (including substantive translation).", "Preparation, creation and/or presentation of the published work by those from the original research group, specifically critical review, commentary or revision – including pre- or post-publication stages."), 
+`NA` = c(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "),
+BC = c(" ", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "),
+BM = c(" ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", "X"),
+SM = c(" ", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", " ", " "),
+JR = c("X", "X", "X", " ", "X", "X", " ", " ", "X", " ", "X", "X", "X", "X"),
+AS = c(" ", " ", " ", "X", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "),
+AV = c(" ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ")) %>% 
+  kable(
+    caption = "Author contribution matrix, as per CRediT (Contribution Roles Taxonomy)") 
+  
+
+```
+
+
+
+# References {-}
+
+
+
+```{r, include=FALSE}
+knitr::write_bib(file = 'packages.bib')
+```
+ 
+
+
+
+
+
