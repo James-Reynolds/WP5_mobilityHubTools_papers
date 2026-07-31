@@ -1,5 +1,5 @@
 ---
-title: "Tactical urbanism for mobility hubs? DIY mapping with mobilityHubTools"
+title: "Do-It-Yourself hub creation with mobilityHubTools"
 author:
   - name: James Reynolds
     email: julianj.reynolds@atu.ie
@@ -34,8 +34,8 @@ footnote:
     text: "Centre for Transport Research, Dept of Civil, Structural and Environmental Engineering, Trinity College Dublin, Ireland"
   - code: 4
     text: "Department of Decision Analytics and Risk at Southampton Business School, University of Southampton, UK"
-abstract: Mobility hubs are an emerging approach for encouraging more sustainable travel behaviours. However, many of the elements needed to ‘make’ a mobility hub already exist in communities. Railway stations, bus and tram stops, shared car parking spaces, docked and dockless bicycle or scooter parking, and many other facilities might already be present, and well known to users or surrounding communities. What may be lacking are the mapping and other software tools that might help practitioners, tactical urbanists or just anyone seeking to make transport systems more sustainable and easier to use from defining their own mobility hub and producing supporting informational material. This paper reports the development basic tools for creating maps and a poster, informational pillar or otherwise. Are there mobility offerings in your community? These tools, a printer and somewhere hang a poster might be all that is needed to spread the word. 
-keywords: Mobility hubs, tactical urbanism, mapping, informational displays
+abstract:  
+keywords: Mobility hubs, informational displays
 journal: "CERC 2026?"
 date: "`r Sys.Date()`"
 classoption: preprint, 3p, authoryear
@@ -82,60 +82,272 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 # Introduction
-Mobility hubs are an emerging approach involving shared electric cars, bikes and cargo-bikes, e-bikes and e-cargo bikes, or other vehicles. These might help in shifting towards more walking, cycling and transit-based travel through providing options or those, more occasional, trips that are otherwise difficult without a car. In some cases it may be that a range of offerings are already in place, especially where the private sector has already implemented car-, scooter-, bike- or other -share services. Converting such places into a ‘mobility hub’ may be within reach with just some minimal physical interventions such as signage and advertising. 
+Shared cars, bikes, and electric bikes and scooters 
+are now common in many urban locations.  
+Consolidating these into 'mobility hubs' 
+is an emerging direction, 
+which might help improve management, 
+make transfers and access easier for users, 
+and promote combined offerings 
+that are more competitive with private car ownership.  
+Electrification of mobility hubs might further 
+help towards improving the sustainability of transport systems, 
+and shifting travel behaviour away from petrol-driven mobility 
+without the need for members of the public to pay the upfront costs of 
+purchasing an electric vehicle. 
 
-However, tools for transforming such locations into ‘mobility hubs’ do not yet appear to be readily available. Instead, individual agencies implementing mobility hubs appear to have been largely created signage, advertising and similar elements afresh and bespoke by on a site-by-site basis. Such creation might involve graphic design, mapping or similar and so limit the opportunities for trials, bottom-up implementation or other low-cost interventions by practitioners or (potentially through tactical urbanism and/or grassroots activism) sustainability-focused advocates or other actors.
+In many locations the initial 
+building blocks needed for
+such mobility hubs are already present, 
+be it a bike share dock close to transit 
+or a public electric car charging station 
+that could be expanded to offer shared e-cars as well.  
+Converting such places into a 'mobility hub may be within reach 
+with just some minimal physical interventions such as signage and advertising. 
+However, tools for transforming such locations 
+into ‘mobility hubs’ 
+do not yet appear to be readily available. 
 
-This paper reports findings from case and design-based research seeking to
-develop new tools to support low-cost mobility hub implementation. The rest of
-this paper is structured as follows: the next section outlines the context for this
-research, including brief discussion of mobility hubs and tactical urbanism. The
-research methodology is then described, followed by presentation of the results,
-which are then briefly discussed in conjunction with a conclusion identifying
-directions for future research.
+Instead, individual agencies implementing mobility hubs 
+appear to have been largely created 
+signage, advertising and similar elements 
+afresh and bespoke 
+and on a site-by-site basis. 
+Such creation might involve graphic design, 
+mapping or similar technical tasks, 
+and so limit the opportunities 
+for trials, bottom-up implementation 
+or other low-cost interventions 
+by practitioners or through grassroots activism. 
+
+This paper reports findings 
+from case and design-based research 
+seeking to develop new tools 
+to support low-cost mobility hub implementation. 
+The research included site visits 
+to a range of mobility hubs in the United Kingdom 
+to explore and develop a synthesis of existing practices.  
+A refined information panel design was then developed, 
+together with software tools allowing 
+publicly available and open source data 
+to be used at applied the design 
+to other suitable locations.  
+
+The rest of this paper is structured as follows: 
+the next section outlines the context for this research, 
+including brief discussion of mobility hubs and implementation. 
+The research methodology is then described, 
+followed by presentation of the results. 
+These are then briefly discussed 
+in conjunction with a conclusion 
+that identifies directions for future research.
 
 # Research context
 The plethora of independent private-sector transport offerings now available, including car-share and dockless bike/scooter systems, may have helped towards development of the mobility hub concept. Although driven largely by start-up, technology and communications, and related sectors, various governmental agencies have sought to both: regulate such offerings; and make them more than the sum of their parts. Defining dockless parking locations, allocating dedicated carshare parking spaces, installation of branding and informational signage and similar efforts may help to provide geo-spatial context and collectivisation. As well, there have been some emerging problems, including with respect to inappropriate parking of dockless bikes/scooters (i.e. blocking footpaths), and risks and environmental impacts of recharging models that rely on batteries being collected and then charged elsewhere, often without the appropriate facilities to deal with electrical loads or battery fires [@Meigs:2023aa, @Zhang:2022aa] Shared electric mobility hubs, such as those currently being trialled in Ireland as part of the ROBUST project [@ROBUST:2025aa], may provide solutions to such problems by shifting the recharging of vehicles to be at a hub itself where appropriate parking, electrical connections and other equipment (importantly for fires involving lithium batteries) are outside and typically unenclosed.
 
 Other challenges for implementers and communities, however, may relate to the difficulty of developing mobility hubs, including the planning processes and funding acquisition necessary to build new facilities. Mobility hubs might tend to be located in public road reserves, within parking facilities or otherwise where there may be less clear authority and power to make changes without widespread public, institutional and government approvals or buy-in. These may also often require outside expertise and/or involve top-down policy-making in which those making decisions might be somewhat removed from the real mobility needs of individual communities, or who may adopt ‘one size fits all’ approaches lacking responsiveness to local context. Research in public policy analysis has long been examining on such non-rational factors and how they might influence decision-making, but these tend to be overlooked in transport policy research [@Marsden:2017aa]. Instutionalism, political approaches, incrementalism and other public policy models, however, are clearly applicable to transport systems (see for example [@Reynolds:2017ah]). Important within these are the top-down, bottom-up and hybrid theories of implementation, which emphasise the influence that street-level bureaucrats can wield to obtain outcomes that respond to their local needs and context, including sometimes outcomes that might be in opposition to central policy directions (see @Weible:2009aa and others).
 
-Perhaps of more relevance, however, is the field of tactical urbanism, which adopts many such bottom-up and grassroots approaches to defining and re-imaging public spaces, especially those spaces within road reserves and related to transport systems. Tactical urbanism can involve making changes to public environments, often unsanctioned, that sometimes question what urban space is for or the legitimacy of how it is allocated. “PARKing Day” provides an example, having started as lunchtime take-over of an on-street car parking space by an architecture firm, who rolled out some green grass and a park bench, paid the parking meter, and in doing so questioned the validity of using such spaces for storing vehicles instead of as a parklet for people. This has since grown into an annual event [@Lydon:2012aa; @Lydon:2015aa; @Davidson:2013aa; @Blumgart:2016ab; @Morhayim:2012aa; @Longhurst:2015aa].
+‘Pop-ups’ have helped legitimise bike and bus lanes, 
+other changes to transport systems and urban environments, 
+and are sometimes used by 
+engineers, planners and other implementers
+to help build public and institutional support [@Fucoloro:2013aa; @News:2019ab; @TransitCenter:2018ab ;@Transportation-Studies:2019aa]. 
+These might invovle 
+tactical urbanism [@Lydon:2012aa; @Lydon:2015aa; @Davidson:2013aa; @Blumgart:2016ab; @Morhayim:2012aa; @Longhurst:2015aa] or
+street-reclaiming [@Dobson:2023ae; @Engwicht:1999aa; @Fotel:2009aa; @Institute:2015aa} approaches, 
+and appear similar to the invention of the first ‘woornef’ [@Guttenberg:1982aa; @Lydon:2015aa] 
+More broadly, shifts in practices relating the 
+Local Area Traffic Management [@Damen:2017aa], 
+‘Movement and Place’ and ‘Complete Streets’ [@Delbosc:2018aa], 
+and similar are reconceptualising what road infrastruce is for,  
+how it should be managed 
+and who gets to make change [@Reynolds:2025aa].  
 
-Similar ‘pop-up’ or protest-based approaches have helped legitimise bicycle lanes, delegitimise car-use of bus lanes, and are sometimes used as more mainstream ways (amongst engineers and planners) to help build public and institutional support for implementation, including for the installation of transit lanes [@Fucoloro:2013aa; @News:2019ab; @TransitCenter:2018ab ;@Transportation-Studies:2019aa]. These build on or have similarities to various earlier approaches including street-reclaiming [@Dobson:2023ae; @Engwicht:1999aa; @Fotel:2009aa; @Institute:2015aa}, the invention of the first ‘woornef’ [@Guttenberg:1982aa; @Lydon:2015aa] and Local Area Traffic Management [@Damen:2017aa], as well as being evident in the make-up of current directions towards ‘Movement and Place’, ‘Complete Streets’ and Network Operation Planning approaches [@Delbosc:2018aa].
 
-Despite the many names, variations and foci of these and other interventional and decision-making approaches, the call from @Marsden:2017aa to “pay greater attention to context, politics, power, resources and legitimacy” retains relevance. Participating in unsanctioned activities, especially for minorities or others who might attract higher levels of attention from authorities, can be a risk that might limit engagement in tactical urbanism or similar activities [@Douglas:2018aa]. Intersections between illegality, illegitimacy and the ill-enforced similarly exist in the context of street art and its place on a continuum that includes commissioned murals, counter-culturism and the avant-garde, graffiti and vandalism. @Killen:2021aa and @Killen:2017aa  explore these topics in the context of trains, but of relevance here, however, are questions relating to who is allowed to post a public notice, define a ‘mobility hub’ or otherwise share knowledge about transport options. Engineers, planners, operational managers, communications teams and others may have less need to engage in tactical-urbanist-type implementation given that they might already have legitimate authority to make changes to the built environment, at least within the scope of their employment and remit. However, pop-ups, trials, bottom-up and incremental approaches to implementation may still be of use, or even necessary, for such actors when seeking legitimacy for new, unusual or just controversial interventions. @Reynolds:2021ab define these as ‘pragmatic strategies for legitimation through implementation’ based on case research of such approaches helping in the implementation of Bus Rapid Transit in Curitiba and other forms of transit priority in Zurich, Melbourne and Toronto. Other strategies include building legitimacy before implementation using technical evaluation, vision-based planning and/or public decision-making processes; or avoiding impacts on those who might seek to delegitimise change. Basic signage, linemarking or the public display of travel information would appear likely to be relatively easy for many practitioners to implement within their own institutional setting. What may be lacking, however, are tools and standarised approaches to mobility hub information provision for quick and relatively easy adaptation to local contexts. Likewise, for activists, practitioners wishing to affect change outside the remit of their specific employment situation, or the general public there do not appear to be tools that might support tactical urbanism efforts related to mobility hubs. This might be particularly relevant for the ‘creation’ of a mobility hub out of already existing and geographically-proximate facilitates, which might not be immediately obvious to travellers but something informally well-known and readily apparent to those with local knowledge of the geography and community. Leaflets, posters for shop windows and community noticeboards, or even resources for a tactical urbanist to launch a ‘guerilla marketing’ campaign of posters, Do-It-Yourself (DIY) signage and websites, might be all that is needed to facilitate bottom-up action and empower communities to define their own hubs and advertise their pre-existing mobility services and related facilities.
+Engineers, planners and others with road management agencies 
+might already have legitimate authority change built environments. 
+However, pop-ups, trials or bottom-up and incremental approaches 
+may still be of use, 
+or even necessary, 
+for the successful implementation of 
+new, unusual or controversial changes.  
+@Reynolds:2021ab define these as three 
+‘pragmatic strategies 
+for legitisation *through* implementation’ 
+based on case research about how such approaches 
+helped towards the success of 
+Bus Rapid Transit in Curitiba, 
+and transit prioritisation in 
+Zurich, Melbourne and Toronto. 
 
-What appears to be lacking in the research literature, or in practice, are the tools to quickly and easily produce the sorts of maps, analysis and interpretations that might support the definition of a place as a hub and the communication of its existing and potential mobility and other offerings. Mapping, signage and similar interventions in both the physical and virtual might usually tend to be produced on a bespoke (ie. Location-by-location) basis by specialist geographers and graphic designers, and involve commercially-controlled datasets or platforms. With the advent of crowd-sourcing, open data and the widespread availability of open source software, however, there is the possibility of developing location-bespoke, but generalised, mapping and similar tools useful for practitioners or others wishing to ‘mobility hub-erise’ some part of the urban environment. The methods used in this research to define what such tools might do, and then to deliver a software to more easily develop their own mobility hub mapping and informational materials, which might provide an initial version for future refinement, are therefore described in the following. 
+
+Basic signage, linemarking or similar 
+would appear likely to be relatively easy 
+for many practitioners to implement 
+within their own institutional setting. 
+What may be lacking, however, 
+are tools and standarised approaches 
+for mobility hub information provision 
+based on current best practices 
+that can be quickly and easily adapted to local contexts. 
+Such tools might allow for the 
+creation of a mobility hub 
+out of already existing 
+and geographically-proximate facilitates, 
+enabling bottom-up action 
+and the empowerment of communities 
+to define and advertise 
+their pre-existing services and facilities.
+The methods used in this research to 
+discover existing mobility hub practices, 
+define what such tools might do, 
+develop solutions 
+and deliver software package 
+for practitioners and/or activists 
+are therefore described in the following section. 
 
 
 # Methodology
 
-\citet{Coxon:2018aa,Coxon:2021ab} outline 
-various industrial design approaches and tools, 
-as well as discussing their relevance and potential applicability 
-to transport systems. 
-Notable amongst these is the Double Diamond, 
-which involves iteration across 
-four phases alternating between: 
-diverging (1) Discovery 
-and then converging (2) Definition phases; 
-followed by diverging (3) Development 
-and convergence to (4) Delivery of a design output \citep{UK-Design-Council:0aa}. 
+## Study design
+This study is designed 
+as per the Double Diamond design process \citep{UK-Design-Council:0aa}, 
+which \citet{Coxon:2018aa,Coxon:2021ab} identify 
+as a research tool applicable 
+for influencing travel behaviours, 
+improving traveller experiences 
+and developing solutions to mobility problems. 
+The Double Diamond involves 
+four phases that alternatively  
+diverge and converge. 
+In the (diverging) *Discovery* phase 
+the issue being researched is explored 
+before (converging) on a *Definition* of the problem to be solved.  
+This is followed by (diverging) *Development* and exploration of options 
+and then (covergence) on the *Delivery* of design output, 
+which forms the research findings \citep{UK-Design-Council:0aa}. 
+With this being an iterative process, however, 
+the findings reported in this paper 
+represent only an initial foray into 
+mobility hub information design and 
+software development.  
 
-This study adopts this approach together
-with case studies of existing mobility hubs. Case studies can be especially effective
-when theory development is at an early stage and when there is a need to explore
-phenomena within real-world contexts, as is the situation here. A challenge, however,
-is the need to be seeking generalisable findings despite researching at depth within the
-case contexts (@Yin:2018ab and others). Here the need to be seeking generalisable
-findings is addressed directly by the form taken by outputs, namely: the research
-produces a software of package tools for mobility hubs in any location, not just those
-selected as cases
-   
-Hubs were visited in the UK^[Cases were selected from a larger sample available at https://www.como.org.uk/mobility-hubs/built-andplanned-hubs. *London*: South Woodford and High Street Wanstead; and in *Camden*: Charrington Street, Goldington Crescent, Werrington Street, Cranlegith Street, Brill Place, Doric Way and Chalton Street. *Bristol*: 1 Abbey Wood, UWE Frenchay, Horfield Library and Gainsborough Square. *Birmingham*: Huntingtree Park and Andrew Road] . Case selection for this study was somewhat constrained by logistics, but in line with the recommendations of the methodological literature, the cases selected included leading and particularly novel examples. Findings from site visits where synthesised through cross-case comparison to develop the design problem Definition. The Development was guided by standardised approaches to package development for the R language, chosen here because: it is open source and freely available, therefore supporting goals of developing an accessible suite of tools; it has an extensive set of packages for geospatial analysis and mapping; and there is a large community of users who might help support those with less experience in troubleshooting.
+
+The *Discovery* phase utilised a case research approach, 
+as  @Denscombe:2007aa, @Yin:2018ab and others 
+identify this as being especially effective
+for when theory development 
+is at an early stage, 
+for how and why research questions, and
+when exploring phenomena within real-world contexts. 
+Here the research question relates to 
+*how do real-world mobility hub information provision practices indicate user needs and best practices, and how can these be made generically applicable?*^[More formally, 
+the (null) hypothesis tested in this study is that it is *not* possible to develop software tools for generating mobility hub information displays that reflect best practices and are generally applicable to other sites.] 
+
+The methodological literature identifies 
+various considerations for undertaking case research that include: 
+the need to be seeking generalisable findings
+despite researching at depth within the case contexts; 
+a need to keep case numbers managable, 
+with typically no more than five to ten cases included; and
+a theoretically-driven approach to case selection to include those 
+that are leading, critical or usual examples, 
+or that might otherwise build new knowledge. 
+Here generalisability is addressed directly through the main research output 
+being software applicable to  mobility hubs in any location, 
+not just the cases (see @Eisenhardt:1989aa, @Stuart:2002aa, @Voss:2002aa,  @Eisenhardt:2007aa, @Denscombe:2007aa, @Barratt:2011aa, @Yin:2018ab and others).
+
+Cases were selected from a larger sample available at https://www.como.org.uk/mobility-hubs/built-andplanned-hubs, 
+with the main unit of analysis 
+being the locality. 
+Selection was somewhat constrained by logistics, 
+but included the leading examples of Bristol and Birmingham, 
+more representative examples in Camden, 
+and more basic implementations in Woodford and Wanstead, so as to provide cross-comparison to polar opposites.  
+Within each case (locality), 
+various mobility hubs were selected^[*Woodford*: South Woodford *Wanstead* High Street Wanstead; and in *Camden*: Charrington Street, Goldington Crescent, Werrington Street, Cranlegith Street, Brill Place, Doric Way and Chalton Street. *Bristol*: Abbey Wood, UWE Frenchay, Horfield Library and Gainsborough Square. *Birmingham*: Huntingtree Park and Andrew Road] as sub-units of analysis 
+to allow within-case comparisons. 
+Case study questions provided prompts 
+for field data collection about site conditions, 
+including the nature of information provided to users.  
+These and collected data are shown in the synthesis tables 
+included in the results section later in the paper, 
+which provided the mechanism for the within and cross-cass comparisons 
+that informed the research findings 
+and later *Definition*, *Development* and *Delivery* phases. 
+
+
+## Participants, Material and Instruments, Procedure and analysis
+The authors were the only participants 
+in the research reported in this paper, 
+working through the four Double Diamond phases 
+as both designers and (hypothetical) users. 
+Sites were visited by the lead author. 
+Further iterations are expected to involve 
+qualitative engagement with stakeholders, 
+co-design with users, 
+and quantitative testing of design outputs 
+to refine understandings 
+of the design problem 
+(i.e. user needs)
+that mobility hub information provision 
+should address, 
+and what designs might be most effective for doing so. 
+
+The methodological literature discusses the use of 
+formal case study questions and
+synthesis tables and other qualitative analysis tools 
+(see @Miles:1994aa and others cited above). 
+These approaches informed data collection 
+during the *Discovery* phase, 
+with synthesis tables 
+based around case study questions 
+providing the primary research instruments. 
+ 
+*Development* used the R programming language to first 
+replicate informational display styles discovered 
+at the leading cases (Bristol and Birmingham).  
+A combined version representing 'best practices' 
+was then generated based on the design problem identified in the *Definition* stage. Package development during the *Delivery* phase was guided by @wickham2023r.  
+
 
 # Results
 ## Discovery
+
+
+
+```{r synthesis_characteristics, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+tibble(Research_question = c(), 
+ SouthWoodford = c(),
+ HighStWanstead = c(), 
+ CharringtonSt , 
+ GoldingtonCres, 
+ WerringtonSt, 
+ CranlegithSt, 
+ BrillPl, 
+ DoricWy,
+ ChaltonSt, 
+ AbbeyWd, 
+ UWEFrenchay, 
+ HorfieldLib, 
+ GainsboroughSq, 
+ HuntingtreePk,
+ AndrewRd) %>% 
+  kable(
+    caption = "Hub characteristics. Source: Authors' assessment.") 
+  
+
+```
+
+
+
+
+
+
+
+
+
 
 Information panels, maps and other guides to facilities and services were present at
 some hubs, but notably not at those in London. This is likely because of existing maps
@@ -300,7 +512,7 @@ knitr::include_graphics("graphics/bristol_03.png")
 
 The site visits perhaps also highlighted the importance of maintenance, activity^[c.f. @Jacobs:1961aa "eyes on the street"] and updates to match changing circumstances that might give a hub a sense of ‘place’. Hubs in Bristol perhaps provide an example with litter, non-mobility-related signage, space requisitioned for other purposes, and some sites advertising dockless shared vehicles but without these present in sufficient numbers (or at all at the time of visiting Gainsborough Square) all providing indications of potential post-implementation challenges related to mobility hubs.
 
-# Definition
+## Definition
 
 Findings from the sites visits suggest a wide variety of modes, services and facilities might be provided as part of the hub itself, as well as further services and facilities identified as being ‘nearby’ as an extension of the hub offer. This might suggest adopting an open-ended and expansionist approach to mobility hub definition. The consistency of branding at the Bristol hubs, especially with respect to the iconographic green cubes drawing attention to hub elements, might highlight the importance of proximity and line-of-sight in defining a mobility hub^[Although mapping at most hubs provided information about services and facilities within up to around 15 minutes walking distance, hub elements appeared to generally be located within relatively confined areas, generally spanning less than 50 metres. The Andrew Road hub provides an example towards the upper end, with the entirety of the hub and the nearby Halesown Bus Station encompassed within a radius of approximately 70 metres, and spanning slightly less than 200 metres if traversed by foot. In contrast, the South Woodford hub takes up approximately 15 metres of kerb space and is less than 100 metres from the nearest tube station, while some in Camden use space equivalent to only a few car parking spots.]
 
@@ -309,7 +521,7 @@ bike repair facilitates, and bike parking and/or bike share docking [@CoMoUK:0ab
 
 The design problem here, therefore, appears be to allow creation of mobility hubs that: incorporate existing modes, facilities and services; minimise cost and timeframes, such that practitioners and tactical urbanists might build legitimacy through implementation (c.f. @Reynolds:2021ab) using minimal resources, incremental approaches that allow expansion one-hub-at-a-time, and that are scale-able; and allow for rapid iteration, revision or adjustment to account for changing circumstances.
 
-# Development
+## Development
 
 Both the Brimingham and Bristol mobility hubs feature pedestal-mounted signage that
 includes: the hub name; iconographic representations of hub facilities; directional
@@ -1233,8 +1445,9 @@ knitr::include_graphics("graphics/galway_map_small.png")
 
 ## Delivery
 
-The software developed in conjunction with this research is available online at <TO BE INCLUDED AFTER PEER REVIEW. CODE INCLUDED IN SUBMISSION>
+The delivered research outputs are available in two forms. An R markdown file containing the text of this paper, and the code used to generate tables, figures and undertake analysis is available at [https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd](https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd).  This is a static version of the tools as at the time of paper publication.  
 
+As discussed above, this paper is part of a larger program of research seeking to develop tools for practitioners and mobility hub implementers. A developmental version is available as an R package at [https://github.com/James-Reynolds/mobilityHubTools](https://github.com/James-Reynolds/mobilityHubTools). This is a non-static version, which is expected to continue to be modified as the program of research progresses.  
 
 # Discussion and conclusions
 
