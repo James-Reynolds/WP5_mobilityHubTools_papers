@@ -64,7 +64,7 @@ library(kableExtra)
 library(knitr)
 library(lattice)
 library(magrittr)
-library(mobilityHubTools)
+#library(mobilityHubTools)
 library(osmdata)
 library(osmplotr)
 library(scales)
@@ -133,10 +133,12 @@ Hubs were selected for inclusion as cases in the study on the basis of being par
 hub_locations_all <- list(
   abbey_wood = tibble(lat = 51.507374018425104, lon =  -2.557977642470572, name = "Abbey Wood", city = "Bristol", crs = 27700), 
   UWE_Frenchay = tibble(lat = 51.500103870678025, lon =  -2.546301107865488, name = "UWE Frenchay", city = "Bristol", crs = 27700), 
-  gainsborough_square = tibble(lat = 51.49007921451471, lon = -2.562807494900329, name = "Gainsborough Square", city = "Bristol", crs = 27700), 
+  gainsborough_square = tibble(lat = 51.490404, lon = -2.562682, name = "Gainsborough Square", city = "Bristol", crs = 27700), 
   horfield_library = tibble(lat = 51.494931138321185, lon = -2.5741801829392097, name = "Horfield Library", city = "Bristol", crs = 27700),
   andrew_road = tibble(lat = 52.448568212245036, lon = -2.053861046130594, name = "Andrew Road", city = "Brimingham", crs = 27700), 
   huntingtree_park = tibble(lat = 52.44756630128951, lon = -2.06866200462800, name = "Huntingtree Park", city = "Birmingham", crs = 27700))
+
+
 
 ```
 
@@ -431,7 +433,7 @@ bristol_building[[i]] <- bristol_building[[i]][!(bristol_building[[i]] %>% st_ge
 ```
 
 
-```{r bristol_local_maps_function, eval = TRUE, echo=FALSE}
+```{r bristol_maps_generation, eval = TRUE, echo=FALSE}
 
 i <- 1
 
@@ -539,14 +541,14 @@ icons_to_include_in_header <- list(
     system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
     system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
   gainsborough_square = list(
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"), 
+    system.file("extdata/bike_share.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bike_repair.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_escooter.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_ebike.png", package = "mobilityHubTools"), 
     system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_accessible_WC.png", package = "mobilityHubTools"), 
     system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
     system.file("extdata/bristol_blank.png", package = "mobilityHubTools"))
 
@@ -671,6 +673,7 @@ ggplot2::geom_sf(data = other_hubs_as_dataframe %>%
     stat = "sf_coordinates") 
 
 
+
 bristol_totem_pedestal(
   file_to_save_to = file_to_save_to[[i]],
   hub_name_text = hub_name_text[[i]],
@@ -686,7 +689,78 @@ bristol_totem_pedestal(
 
 ```  
  
+```{r synthesis_development, eval = TRUE, echo=FALSE}
+ 
+hub_features_test <- data.frame(
+  icon_filename = c(
+    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"),
+    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"),
+    system.file("extdata/bike_ebike.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_bike_repair.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_escooter.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
+    system.file("extdata/bristol_accessible_WC.png", package = "mobilityHubTools")), 
+  lat = c(
+    51.489995, 51.490125, 51.489914, 51.490055, 51.490108, 51.490123, 51.490187), 
+  lon = c(
+    -2.563052, -2.562910, -2.563001, -2.562996, -2.562840, -2.562558, -2.562422)) %>% st_as_sf(coords = c("lon", "lat"), crs = 4326)
 
+
+ 
+
+
+map_detail_test <- synthesis_detail_map(
+  amenity = bristol_amenity[[i]], 
+  building = bristol_building[[i]], 
+  highway = bristol_highway[[i]], 
+  leisure = bristol_leisure[[i]], 
+  landuse = bristol_landuse[[i]], 
+  natural = bristol_natural[[i]],  
+  railway = bristol_railway[[i]], 
+  waterway = bristol_waterway[[i]], 
+  hub_location = bristol_hub_location[[i]], 
+  highlight_building = highlight_building[[i]],
+  highlight_amenity = highlight_amenity[[i]], 
+  highlight_leisure = highlight_leisure[[i]],
+  highlight_landuse = highlight_landuse[[i]],
+  hub_features = hub_features_test)
+
+
+```
+
+
+```{r test_elide, eval = TRUE, echo=FALSE}
+
+
+CRS("+init=epsg:27700")
+
+data(meuse)
+coordinates(meuse) <- c("x", "y")
+proj4string(meuse) <- CRS("+init=epsg:28992")
+data(meuse.riv)
+river_polygon <- Polygons(list(Polygon(meuse.riv)), ID="meuse")
+rivers <- SpatialPolygons(list(river_polygon))
+proj4string(rivers) <- CRS("+init=epsg:28992")
+rivers1 <- elide(rivers, reflect=c(TRUE, TRUE), scale=TRUE, rotate = 90)
+meuse1 <- elide(meuse, bb=bbox(rivers), reflect=c(TRUE, TRUE), rotate = 90, scale=TRUE)
+opar <- par(mfrow=c(1,2))
+plot(rivers, axes=TRUE)
+plot(meuse, add=TRUE)
+plot(rivers1, axes=TRUE)
+plot(meuse1, add=TRUE)
+par(opar)
+meuse1 <- elide(meuse, shift=c(10000, -10000))
+bbox(meuse)
+bbox(meuse1)
+rivers1 <- elide(rivers, shift=c(10000, -10000))
+bbox(rivers)
+bbox(rivers1)
+meuse1 <- elide(meuse, rotate=-30, center=apply(bbox(meuse), 1, mean))
+bbox(meuse)
+bbox(meuse1)
+plot(meuse1, axes=TRUE)
+
+```
 
 
 
