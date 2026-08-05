@@ -44,7 +44,7 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={},
-            pdftitle={Do-It-Yourself hub creation with mobilityHubTools},
+            pdftitle={Do-It-Yourself information provision with mobilityHubTools},
             colorlinks=false,
             urlcolor=blue,
             linkcolor=magenta,
@@ -84,7 +84,7 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 
 \begin{frontmatter}
 
-  \title{Do-It-Yourself hub creation with mobilityHubTools}
+  \title{Do-It-Yourself information provision with mobilityHubTools}
     \author[]{James Reynolds%
   \corref{cor1}%
   \fnref{1}}
@@ -123,7 +123,20 @@ and Environmental Engineering, Trinity College Dublin, Ireland}
 Business School, University of Southampton, UK}
   
   \begin{abstract}
-  
+  Mobility hubs are an emerging approach that often involves colocating
+  shared bikes, scooters, cars and/or other services with transit.
+  Together these might to provide an attractive alternative to car
+  ownership, or otherwise support more sustainable travel behaviours. A
+  range of signage, information displays and branding appproaches have
+  already been developed by practitioners, but best practices are
+  unclear. As well, tools to help practitioners, tactical urbanists or
+  others define their own mobility hub out of existing co-located
+  services appear to be lacking. This paper reports the development
+  basic tools for creating maps and a informational poster, totem or
+  other display for mobility hubs in any location. Are there multiple
+  mobility offerings in close proximity in your community? These tools,
+  a printer and somewhere hang a poster might be all that is needed to
+  spread the word.
   \end{abstract}
     \begin{keyword}
     Mobility hubs, informational displays \sep 
@@ -134,137 +147,119 @@ Business School, University of Southampton, UK}
 
 \section{Introduction}\label{introduction}
 
-Shared cars, bikes, and electric bikes and scooters are now common in
-many urban locations.\\
-Consolidating these into `mobility hubs' is an emerging direction, which
-might help improve management, make transfers and access easier for
-users, and promote combined offerings that are more competitive with
-private car ownership.\\
-Electrification of mobility hubs might further help towards improving
-the sustainability of transport systems, and shifting travel behaviour
-away from petrol-driven mobility without the need for members of the
-public to pay the upfront costs of purchasing an electric vehicle.
+Mobility hubs might help in shifting towards more walking, cycling and
+transit-based travel through providing options for those, more
+occasional, trips that are otherwise difficult without a car. They often
+involve implementing facilities for shared cars, bikes and other
+micro-mobility vehicles in close proximity to transit and/or with
+consistent branding, informational signs and other measures.\\
+However, in many locations shared cars and micro-mobility services,
+transit and other facilities such as bike parking are already in close
+proximity. Such offerings may already be well known to users or
+surrounding communities, but might be convertable into a `mobility hub'
+with minimal signage and information.
 
-In many locations the initial building blocks needed for such mobility
-hubs are already present, be it a bike share dock close to transit or a
-public electric car charging station that could be expanded to offer
-shared e-cars as well.\\
-Converting such places into a 'mobility hub may be within reach with
-just some minimal physical interventions such as signage and
-advertising. However, tools for transforming such locations into
-`mobility hubs' do not yet appear to be readily available.
-
-Instead, individual agencies implementing mobility hubs appear to have
-been largely created signage, advertising and similar elements afresh
-and bespoke and on a site-by-site basis. Such creation might involve
-graphic design, mapping or similar technical tasks, and so limit the
-opportunities for trials, bottom-up implementation or other low-cost
-interventions by practitioners or through grassroots activism.
+As yet there does not appear to be a consistent approach to mobility hub
+branding and informational displays.\\
+Various implementation agencies appear to have created signs, maps and
+similar elements independently. What might represent best practices is
+unclear.\\
+As well, the graphic design, mapping and similar needed to develop such
+signs for each site may limit the ability for practitioners to keep
+information up to date, or for bottom-up implementation, trials or other
+low-cost mobility hub creation efforts.
 
 This paper reports findings from case and design-based research seeking
 to develop new tools to support low-cost mobility hub implementation.
-The research included site visits to a range of mobility hubs in the
-United Kingdom to explore and develop a synthesis of existing
-practices.\\
-A refined information panel design was then developed, together with
-software tools allowing publicly available and open source data to be
-used at applied the design to other suitable locations.
-
 The rest of this paper is structured as follows: the next section
-outlines the context for this research, including brief discussion of
-mobility hubs and implementation. The research methodology is then
+outlines the context for this study. The research methodology is then
 described, followed by presentation of the results. These are then
-briefly discussed in conjunction with a conclusion that identifies
+briefly discussed prior to a conclusion that includes identification of
 directions for future research.
 
 \section{Research context}\label{research-context}
 
-The plethora of independent private-sector transport offerings now
-available, including car-share and dockless bike/scooter systems, may
-have helped towards development of the mobility hub concept. Although
-driven largely by start-up, technology and communications, and related
-sectors, various governmental agencies have sought to both: regulate
-such offerings; and make them more than the sum of their parts. Defining
-dockless parking locations, allocating dedicated carshare parking
-spaces, installation of branding and informational signage and similar
-efforts may help to provide geo-spatial context and collectivisation. As
-well, there have been some emerging problems, including with respect to
-inappropriate parking of dockless bikes/scooters (i.e.~blocking
-footpaths), and risks and environmental impacts of recharging models
-that rely on batteries being collected and then charged elsewhere, often
-without the appropriate facilities to deal with electrical loads or
-battery fires \citep[\citet{Zhang:2022aa}]{Meigs:2023aa} Shared electric
-mobility hubs, such as those currently being trialled in Ireland as part
-of the ROBUST project \citep{ROBUST:2025aa}, may provide solutions to
-such problems by shifting the recharging of vehicles to be at a hub
-itself where appropriate parking, electrical connections and other
-equipment (importantly for fires involving lithium batteries) are
-outside and typically unenclosed.
+Shared bike, scooter and other micro-mobility systems have been widely
+introduced to transport systems over the last couple of decades. These
+may help to increase mobility and sustainability but have not been
+entirely without problems. Inappropriate parking of dockless vehicles,
+environmental and other impacts associated with rebalancing and battery
+swapping, the risk of fires at recharging facilities, safety challenges
+and other issues have been identified (see for example
+\citet{Meigs:2023aa}, \citet{Zhang:2022aa}, \citet{Bozzi:2021aa}).
 
-Other challenges for implementers and communities, however, may relate
-to the difficulty of developing mobility hubs, including the planning
-processes and funding acquisition necessary to build new facilities.
-Mobility hubs might tend to be located in public road reserves, within
-parking facilities or otherwise where there may be less clear authority
-and power to make changes without widespread public, institutional and
-government approvals or buy-in. These may also often require outside
-expertise and/or involve top-down policy-making in which those making
-decisions might be somewhat removed from the real mobility needs of
-individual communities, or who may adopt `one size fits all' approaches
-lacking responsiveness to local context. Research in public policy
-analysis has long been examining on such non-rational factors and how
-they might influence decision-making, but these tend to be overlooked in
-transport policy research \citep{Marsden:2017aa}. Instutionalism,
-political approaches, incrementalism and other public policy models,
-however, are clearly applicable to transport systems (see for example
-\citep{Reynolds:2017ah}). Important within these are the top-down,
-bottom-up and hybrid theories of implementation, which emphasise the
-influence that street-level bureaucrats can wield to obtain outcomes
-that respond to their local needs and context, including sometimes
-outcomes that might be in opposition to central policy directions (see
-\citet{Weible:2009aa} and others).
+The emerging `mobility hub' concept may help towards limiting such
+issues and integrating shared mobility services into transport
+systems.\\
+Mobility hubs were part of ``The Big Move'' transport plan in Toronto,
+where the aim was to intensify landuse, facilitate modal transfers and
+otherwise develop major regional transit stations
+\citep[\citet{Metrolinx:2008ab}, \citet{Salsberg:2010aa},
+\citet{Engel-Yan:2012aa}]{Metrolinx:2008aa}. \citet{Roukouni:2023aa},
+however, describes how the research literature has extended on this to
+define `shared mobility hubs' in terms of seamless integration of shared
+modes, sometimes including transit, and local facilities and
+services\footnote{ \emph{``A shared mobility hub is a place where
+  different transport modes are integrated seamlessly, promoting
+  efficient and sustainable urban mobility. Emphasis is given on shared
+  mobility options such as bikes, scooters and cars. Connection with
+  public transport (transit) is desirable but not necessary. The
+  integration between mobility suppliers is important to provide a
+  seamless, flexible connection at these transfer points. Ensuring an
+  enjoyable experience for travelers is a crucial part of the hub
+  concept as well, and therefore the hub should be considered not just
+  as a transfer node but as a place where a variety of services come
+  together, such as logistics services or restaurants''} (Roukouni et
+  al.~2023).}. Shared \emph{electric} mobility hubs, such as those
+currently being trialed in Ireland as part of the ROBUST project
+\citep{ROBUST:2025aa}, may represent a further development through
+providing power connections for vehicle recharging to dedicated on-site
+parking space, thereby eliminating the need for rebalancing or battery
+swapping.
 
-`Pop-ups' have helped legitimise bike and bus lanes, other changes to
-transport systems and urban environments, and are sometimes used by
-engineers, planners and other implementers to help build public and
-institutional support
-\citep{Fucoloro:2013aa, News:2019ab, TransitCenter:2018ab, Transportation-Studies:2019aa}.
-These might invovle tactical urbanism
-\citep{Lydon:2012aa, Lydon:2015aa, Davidson:2013aa, Blumgart:2016ab, Morhayim:2012aa, Longhurst:2015aa}
-or street-reclaiming {[}\citet{Dobson:2023ae}; \citet{Engwicht:1999aa};
-\citet{Fotel:2009aa}; \citet{Institute:2015aa}\} approaches, and appear
-similar to the invention of the first `woornef'
-\citep{Guttenberg:1982aa, Lydon:2015aa} More broadly, shifts in
-practices relating the Local Area Traffic Management
-\citep{Damen:2017aa}, `Movement and Place' and `Complete Streets'
-\citep{Delbosc:2018aa}, and similar are reconceptualising what road
-infrastruce is for,\\
-how it should be managed and who gets to make change
-\citep{Reynolds:2025aa}.
-
-Engineers, planners and others with road management agencies might
-already have legitimate authority change built environments. However,
-pop-ups, trials or bottom-up and incremental approaches may still be of
-use, or even necessary, for the successful implementation of new,
-unusual or controversial changes.\\
-\citet{Reynolds:2021ab} define these as three `pragmatic strategies for
-legitisation \emph{through} implementation' based on case research about
-how such approaches helped towards the success of Bus Rapid Transit in
-Curitiba, and transit prioritisation in Zurich, Melbourne and Toronto.
-
+Signage, branding, maps and other forms of public and user information
+at mobility hubs is likely to be of high importance for achieving the
+``integration'' and ``seamless, flexible connection'' when implementing
+mobility hubs.\\
 Basic signage, linemarking or similar would appear likely to be
 relatively easy for many practitioners to implement within their own
 institutional setting. What may be lacking, however, are tools and
 standarised approaches for mobility hub information provision based on
 current best practices that can be quickly and easily adapted to local
-contexts. Such tools might allow for the creation of a mobility hub out
-of already existing and geographically-proximate facilitates, enabling
-bottom-up action and the empowerment of communities to define and
-advertise their pre-existing services and facilities. The methods used
-in this research to discover existing mobility hub practices, define
-what such tools might do, develop solutions and deliver software package
-for practitioners and/or activists are therefore described in the
-following section.
+contexts. As well, there may be a need for information displays to be
+refreshed if further offers are added to a mobility hub, or as the
+surrounding urban environment changes over time. People, solutions and
+tools tend to move on once decisions emerge from a policy-making
+effort\footnote{c.f. the `Garbage Can' Model. See \citet{Lyles:1988aa},
+  \citet{Parsons:1995aa} and others}, which may lead to challenges for
+practitioners tasked with updates and maintenance.
+
+As well, political, public and institutional opposition can be
+challenging for implementing even small changes to urban environments.
+Bottom-up and incremental approaches, `pop-ups' and more formal trials
+have proven to be successful and pragmatic strategies for building
+legitimacy \emph{through} implementation \citep{Reynolds:2021ab}.
+However, these might rely on rapid prototyping, iterative co-design or
+other low-cost production of information displays and signage.\\
+Likewise, `Movement and Place' and `Complete Streets'
+\citep{Delbosc:2018aa}, and tactical urbanism approaches
+\citep{Lydon:2012aa, Lydon:2015aa, Davidson:2013aa, Blumgart:2016ab, Morhayim:2012aa, Longhurst:2015aa}
+suggest way to challenge prevailing naratives about road space
+allocation, give communities greater power over (their own) urban
+environments, and demonstrate the potential of change.\\
+For practitioners, tactical urbanists and others to adopt a `do it
+yourself' approach to mobility hub creation (especially when multiple
+services are already provided within close proximity, and a `mobility
+hub' might be made with no engingeering works), there may the need for
+generalised tools to support mapping, signage creation and other sources
+of information.\\
+As of yet, there does not appear to be a clear understanding of `best
+practices' in mobility hub signage and information provision, or tools
+to quickly and equlity produce, maps, analysis and interpretations that
+would support the definition of a place as a hub and communication of
+its existing mobility and other offerings. Therefore, in the next
+section this paper describes the case- and design-based methodology
+adopted in this study for the purposes of filling this gap.
 
 \section{Methodology}\label{methodology}
 
@@ -633,15 +628,6 @@ in blue. Another flexibility of this approach is that maps at other
 scales can be produced, including at small scales which might include
 individual hub elements (i.e.~the e-bikes or car share vehicles) so that
 users can locate the various services and facilities.
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.5\linewidth]{graphics/layout_test} 
-
-}
-
-\caption{Mockup of hub signage, produced using developed R code. Source: authors.}\label{fig:mock_up_layout_with_maps_grob_output}
-\end{figure}
 
 This represents an extension of the mapping approaches seen in the site
 visits, and might perhaps remove the need for signage or other physical

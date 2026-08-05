@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  31 JUL 2026 21:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  5 AUG 2026 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -720,39 +720,39 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-33.
+46.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-33.
+46.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-133.
+146.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-133.
+146.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 133.
+(Font)              <10> on input line 146.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 133.
+(Font)              <7> on input line 146.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 133.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 133
+(Font)              <5> on input line 146.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 146
 .
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 133
+LaTeX Font Info:    Trying to load font information for U+msb on input line 146
 .
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -760,11 +760,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 133.
+(Font)              <8> on input line 146.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 133.
+(Font)              <6> on input line 146.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-33.
+46.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -779,209 +779,191 @@ Overfull \hbox (2.22221pt too wide) has occurred while \output is active
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cnotenum' on input line 203.
+(hyperref)                removing `\cnotenum' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@corref' on input line 203.
+(hyperref)                removing `\@corref' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 203.
+(hyperref)                removing `\<let>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 203.
+(hyperref)                removing `\comma' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 203.
+(hyperref)                removing `\<def>-command' on input line 190.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 203.
+(hyperref)                removing `\@fnmark' on input line 190.
 
 [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 4/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3] [4]
-Overfull \hbox (1.66443pt too wide) in paragraph at lines 416--416
+Overfull \hbox (1.66443pt too wide) in paragraph at lines 411--411
  \T1/lmr/m/n/7 (-20) Wanstead| 
  []
 
 
-Overfull \hbox (6.96925pt too wide) in paragraph at lines 416--416
+Overfull \hbox (6.96925pt too wide) in paragraph at lines 411--411
  []|\T1/lmr/m/n/7 (-20) Goldington 
  []
 
 
-Overfull \hbox (4.92409pt too wide) in paragraph at lines 416--416
+Overfull \hbox (4.92409pt too wide) in paragraph at lines 411--411
  []|\T1/lmr/m/n/7 (-20) Gainsborough 
  []
 
 
-Overfull \hbox (32.56335pt too wide) in alignment at lines 411--457
+Overfull \hbox (32.56335pt too wide) in alignment at lines 406--452
  [] [] [] [] [] [] [] [] [] [] 
  []
 
-<graphics/south_woodford_placard.png, id=219, 808.01875pt x 480.79625pt>
+<graphics/south_woodford_placard.png, id=200, 808.01875pt x 480.79625pt>
 File: graphics/south_woodford_placard.png Graphic file (type png)
 <use graphics/south_woodford_placard.png>
 Package pdftex.def Info: graphics/south_woodford_placard.png  used on input lin
-e 462.
+e 457.
 (pdftex.def)             Requested size: 93.59857pt x 55.69023pt.
-<graphics/HighSt_placard.png, id=221, 305.14pt x 486.81876pt>
+<graphics/HighSt_placard.png, id=202, 305.14pt x 486.81876pt>
 File: graphics/HighSt_placard.png Graphic file (type png)
 <use graphics/HighSt_placard.png>
-Package pdftex.def Info: graphics/HighSt_placard.png  used on input line 471.
+Package pdftex.def Info: graphics/HighSt_placard.png  used on input line 466.
 (pdftex.def)             Requested size: 234.0pt x 373.33624pt.
-<graphics/doric_way_pedestal.png, id=222, 279.0425pt x 813.0375pt>
+<graphics/doric_way_pedestal.png, id=203, 279.0425pt x 813.0375pt>
 File: graphics/doric_way_pedestal.png Graphic file (type png)
 <use graphics/doric_way_pedestal.png>
-Package pdftex.def Info: graphics/doric_way_pedestal.png  used on input line 48
-0.
+Package pdftex.def Info: graphics/doric_way_pedestal.png  used on input line 47
+5.
 (pdftex.def)             Requested size: 234.0pt x 681.81792pt.
 
-LaTeX Warning: Float too large for page by 79.3179pt on input line 485.
+LaTeX Warning: Float too large for page by 79.3179pt on input line 480.
 
-<graphics/huntingtree_park.png, id=223, 717.68124pt x 777.90625pt>
+<graphics/huntingtree_park.png, id=204, 717.68124pt x 777.90625pt>
 File: graphics/huntingtree_park.png Graphic file (type png)
 <use graphics/huntingtree_park.png>
-Package pdftex.def Info: graphics/huntingtree_park.png  used on input line 489.
+Package pdftex.def Info: graphics/huntingtree_park.png  used on input line 484.
 
 (pdftex.def)             Requested size: 234.0pt x 253.63554pt.
-<graphics/bristol_03.png, id=224, 2469.225pt x 3159.805pt>
+<graphics/bristol_03.png, id=205, 2469.225pt x 3159.805pt>
 File: graphics/bristol_03.png Graphic file (type png)
 <use graphics/bristol_03.png>
-Package pdftex.def Info: graphics/bristol_03.png  used on input line 498.
+Package pdftex.def Info: graphics/bristol_03.png  used on input line 493.
 (pdftex.def)             Requested size: 468.0pt x 598.87454pt.
 [5 <./graphics/south_woodford_placard.png>] [6 <./graphics/HighSt_placard.png>]
 [7 <./graphics/doric_way_pedestal.png>] [8 <./graphics/huntingtree_park.png>] [
-9 <./graphics/bristol_03.png>]
-<graphics/layout_test.pdf, id=278, 867.24pt x 1734.48pt>
-File: graphics/layout_test.pdf Graphic file (type pdf)
-<use graphics/layout_test.pdf>
-Package pdftex.def Info: graphics/layout_test.pdf  used on input line 639.
-(pdftex.def)             Requested size: 234.0pt x 467.99828pt.
-[10] [11 <./graphics/layout_test.pdf>] (./ReynoldsEtAl2026_CERC.bbl
-Underfull \hbox (badness 1412) in paragraph at lines 66--69
-[]\T1/lmr/m/n/8 (+20) Charles Dob-son.  The cit-i-zen's hand-book; street re-cl
-aim-ing, un-dated.  URL []$\T1/lmtt/m/n/8 http : / / www . citizenshandbook . o
-rg /
- []
-
-[12]
-Underfull \hbox (badness 1014) in paragraph at lines 98--103
-[]\T1/lmr/m/n/8 (+20) Tom Fu-col-oro.  Guer-rilla road safety group 'po-litely'
- in-stalls il-le-gal bike lane pro-tec-tors on cherry street, 2013.
- []
-
-) [13] (./ReynoldsEtAl2026_CERC.aux)
+9 <./graphics/bristol_03.png>] [10] (./ReynoldsEtAl2026_CERC.bbl [11]) [12] (./
+ReynoldsEtAl2026_CERC.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -990,11 +972,11 @@ Package rerunfilecheck Info: File `ReynoldsEtAl2026_CERC.out' has not changed.
 (rerunfilecheck)             Checksum: 9AFFB3486EAC559A7FA3BFA6336BDE9B;1509.
  ) 
 Here is how much of TeX's memory you used:
- 17718 strings out of 474116
- 285184 string characters out of 5743682
+ 17690 strings out of 474116
+ 284392 string characters out of 5743682
  2002187 words of memory out of 5000000
- 39499 multiletter control sequences out of 15000+600000
- 614714 words of font info for 166 fonts, out of 8000000 for 9000
+ 39474 multiletter control sequences out of 15000+600000
+ 614843 words of font info for 167 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,10n,79p,1018b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
@@ -1008,10 +990,10 @@ cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf
 -dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/font
 s/type1/public/lm/lmtt8.pfb>
-Output written on ReynoldsEtAl2026_CERC.pdf (13 pages, 23265170 bytes).
+Output written on ReynoldsEtAl2026_CERC.pdf (12 pages, 21874034 bytes).
 PDF statistics:
- 427 PDF objects out of 1000 (max. 8388607)
- 360 compressed objects within 4 object streams
- 87 named destinations out of 1000 (max. 500000)
- 27767 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 327 compressed objects within 4 object streams
+ 82 named destinations out of 1000 (max. 500000)
+ 27762 words of extra memory for PDF output out of 29859 (max. 10000000)
 
