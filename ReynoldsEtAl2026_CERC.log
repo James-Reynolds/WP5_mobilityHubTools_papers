@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  5 AUG 2026 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  6 AUG 2026 09:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -910,55 +910,55 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
 4/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3] [4]
-Overfull \hbox (1.66443pt too wide) in paragraph at lines 411--411
+Overfull \hbox (1.66443pt too wide) in paragraph at lines 377--377
  \T1/lmr/m/n/7 (-20) Wanstead| 
  []
 
 
-Overfull \hbox (6.96925pt too wide) in paragraph at lines 411--411
+Overfull \hbox (6.96925pt too wide) in paragraph at lines 377--377
  []|\T1/lmr/m/n/7 (-20) Goldington 
  []
 
 
-Overfull \hbox (4.92409pt too wide) in paragraph at lines 411--411
+Overfull \hbox (4.92409pt too wide) in paragraph at lines 377--377
  []|\T1/lmr/m/n/7 (-20) Gainsborough 
  []
 
 
-Overfull \hbox (32.56335pt too wide) in alignment at lines 406--452
+Overfull \hbox (32.56335pt too wide) in alignment at lines 372--418
  [] [] [] [] [] [] [] [] [] [] 
  []
 
-<graphics/south_woodford_placard.png, id=200, 808.01875pt x 480.79625pt>
+<graphics/south_woodford_placard.png, id=199, 808.01875pt x 480.79625pt>
 File: graphics/south_woodford_placard.png Graphic file (type png)
 <use graphics/south_woodford_placard.png>
 Package pdftex.def Info: graphics/south_woodford_placard.png  used on input lin
-e 457.
+e 423.
 (pdftex.def)             Requested size: 93.59857pt x 55.69023pt.
-<graphics/HighSt_placard.png, id=202, 305.14pt x 486.81876pt>
+<graphics/HighSt_placard.png, id=201, 305.14pt x 486.81876pt>
 File: graphics/HighSt_placard.png Graphic file (type png)
 <use graphics/HighSt_placard.png>
-Package pdftex.def Info: graphics/HighSt_placard.png  used on input line 466.
+Package pdftex.def Info: graphics/HighSt_placard.png  used on input line 432.
 (pdftex.def)             Requested size: 234.0pt x 373.33624pt.
-<graphics/doric_way_pedestal.png, id=203, 279.0425pt x 813.0375pt>
+<graphics/doric_way_pedestal.png, id=202, 279.0425pt x 813.0375pt>
 File: graphics/doric_way_pedestal.png Graphic file (type png)
 <use graphics/doric_way_pedestal.png>
-Package pdftex.def Info: graphics/doric_way_pedestal.png  used on input line 47
-5.
+Package pdftex.def Info: graphics/doric_way_pedestal.png  used on input line 44
+1.
 (pdftex.def)             Requested size: 234.0pt x 681.81792pt.
 
-LaTeX Warning: Float too large for page by 79.3179pt on input line 480.
+LaTeX Warning: Float too large for page by 79.3179pt on input line 446.
 
-<graphics/huntingtree_park.png, id=204, 717.68124pt x 777.90625pt>
+<graphics/huntingtree_park.png, id=203, 717.68124pt x 777.90625pt>
 File: graphics/huntingtree_park.png Graphic file (type png)
 <use graphics/huntingtree_park.png>
-Package pdftex.def Info: graphics/huntingtree_park.png  used on input line 484.
+Package pdftex.def Info: graphics/huntingtree_park.png  used on input line 450.
 
 (pdftex.def)             Requested size: 234.0pt x 253.63554pt.
-<graphics/bristol_03.png, id=205, 2469.225pt x 3159.805pt>
+<graphics/bristol_03.png, id=204, 2469.225pt x 3159.805pt>
 File: graphics/bristol_03.png Graphic file (type png)
 <use graphics/bristol_03.png>
-Package pdftex.def Info: graphics/bristol_03.png  used on input line 493.
+Package pdftex.def Info: graphics/bristol_03.png  used on input line 459.
 (pdftex.def)             Requested size: 468.0pt x 598.87454pt.
 [5 <./graphics/south_woodford_placard.png>] [6 <./graphics/HighSt_placard.png>]
 [7 <./graphics/doric_way_pedestal.png>] [8 <./graphics/huntingtree_park.png>] [
@@ -972,11 +972,11 @@ Package rerunfilecheck Info: File `ReynoldsEtAl2026_CERC.out' has not changed.
 (rerunfilecheck)             Checksum: 9AFFB3486EAC559A7FA3BFA6336BDE9B;1509.
  ) 
 Here is how much of TeX's memory you used:
- 17690 strings out of 474116
- 284392 string characters out of 5743682
- 2002187 words of memory out of 5000000
+ 17699 strings out of 474116
+ 284496 string characters out of 5743682
+ 2001187 words of memory out of 5000000
  39474 multiletter control sequences out of 15000+600000
- 614843 words of font info for 167 fonts, out of 8000000 for 9000
+ 615316 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,10n,79p,1018b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
@@ -990,10 +990,10 @@ cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf
 -dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/font
 s/type1/public/lm/lmtt8.pfb>
-Output written on ReynoldsEtAl2026_CERC.pdf (12 pages, 21874034 bytes).
+Output written on ReynoldsEtAl2026_CERC.pdf (12 pages, 21872001 bytes).
 PDF statistics:
- 378 PDF objects out of 1000 (max. 8388607)
- 327 compressed objects within 4 object streams
- 82 named destinations out of 1000 (max. 500000)
+ 377 PDF objects out of 1000 (max. 8388607)
+ 326 compressed objects within 4 object streams
+ 83 named destinations out of 1000 (max. 500000)
  27762 words of extra memory for PDF output out of 29859 (max. 10000000)
 
