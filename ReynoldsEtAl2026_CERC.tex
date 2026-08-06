@@ -263,65 +263,107 @@ for the purposes of filling this gap.
 
 \section{Methodology}\label{methodology}
 
+This research aims to improve understanding of `best practices' in in
+mobility hub signage and information provision, and to develop tools to
+support mobility hub implementation. Research questions relate to:
+\emph{how} information is provided at and about mobility hubs?
+\emph{how} information at and about mobility hubs might ideally be
+provided? (i.e.~best practices) and \emph{how} can such best practices
+be made generally applicable?*\footnote{More formally, the (null)
+  hypothesis tested in this study is that it is \emph{not} possible to
+  develop software tools for generating mobility hub information
+  displays that reflect best practices and are generally applicable to
+  other sites.}
+
 \subsection{Study design}\label{study-design}
 
-This study is designed as per the Double Diamond design process
-\citep{UK-Design-Council:0aa}, which \citet{Coxon:2018aa,Coxon:2021ab}
-identify as a tool for design-based research seeking to influence travel
-behaviors, improve traveler experiences and/or develop solutions to
-mobility problems. The Double Diamond involves iteration across four
-phases (1. \emph{Discovery}, 2. \emph{Definition}, 3. \emph{Development}
-and 4. \emph{Delivery}), alternating between divergent (1\&3) and
-convergent (2\&4.) approaches.
+The study designed adopts the Double Diamond design process
+\citep{UK-Design-Council:0aa}. \citet{Coxon:2018aa} and
+\citet{Coxon:2021ab} identify this as a suitable tool for design-based
+research seeking to develop solutions to mobility problems. The Double
+Diamond process involves iteration across four phases: 1.
+\emph{Discovery}, 2. \emph{Definition}, 3. \emph{Development} and 4.
+\emph{Delivery}. These phases alternate between divergent (1 \& 3) and
+convergent (2 \& 4) approaches, although the overall process is
+iterative and may involve multiple passes through each phase.
 
 Here the \emph{Discovery} phase utilised a case research approach, which
 \citet{Denscombe:2007aa}, \citet{Yin:2018ab} and others identify as
 being especially effective for when: theory development is at an early
 stage; research questions relate to `how' or `why'; and when exploring
-phenomena within real-world contexts. The questions addressed in this
-research relate to: \emph{how} information is provided at and about
-mobility hubs? \emph{how} information at and about mobility hubs might
-ideally be provided? (i.e.~best practices) and \emph{how} can such best
-practices be made generally applicable?*\footnote{More formally, the
-  (null) hypothesis tested in this study is that it is \emph{not}
-  possible to develop software tools for generating mobility hub
-  information displays that reflect best practices and are generally
-  applicable to other sites.}
+phenomena within real-world contexts.
 
-Case selection\footnote{These were selected from the larger sample
-  available at
-  https://www.como.org.uk/mobility-hubs/built-andplanned-hubs} was
-somewhat constrained by logistics, but included the leading examples
-from the West of England Mayoral Combined Authority (WEMCA, Bristol) and
-Transport for West Midlands (Birmingham). More representative examples
-from Camden Council (London) and the London Borough of Redbridge
-(Woodford and Wanstead) were also included to provide polar opposites
-for cross-case comparison, in line with the case research methodological
-literature (see \citet{Eisenhardt:1989aa}, \citet{Stuart:2002aa},
-\citet{Voss:2002aa}, \citet{Eisenhardt:2007aa},
-\citet{Denscombe:2007aa}, \citet{Barratt:2011aa}, \citet{Yin:2018ab} and
-others). Within each case a small number of mobility hubs were visited
-to allow for within-case comparison\footnote{\emph{Redbridge}: South
-  Woodford and High Street, Wanstead; and in \emph{Camden}: Goldington
-  Crescent, and Doric Way; \emph{Bristol}: Abbey Wood, UWE Frenchay, and
-  Gainsborough Square. \emph{Birmingham}: Huntingtree Park and Andrew
-  Road}.
-
-\subsection{Participants, Material and Instruments, Procedure and
-analysis}\label{participants-material-and-instruments-procedure-and-analysis}
+\subsection{Participants, Material and
+Instruments}\label{participants-material-and-instruments}
 
 The authors were the only participants in the research reported in this
-paper, working through the four Double Diamond phases. Sites were
-visited by the lead author in the \emph{Discovery} phases. Synthesis
-tables (as per \citet{Miles:1994aa}) were used to make cross-case
-comparisons and as an input to the \emph{Definition} phase.\\
-\emph{Development} used the R programming language to first replicate
-informational display styles discovered at the leading cases (Bristol
-and Birmingham).\\
-Package development during the \emph{Delivery} phase was guided by
-\citet{wickham2023r}, and involved convergence on a synthesis
-informational display style based on industry practices and that
-responds to the problem developed in the \emph{Definition} phase.
+paper. As discussed in the conclusion to this paper further research as
+part of the ROBUST project is expected to involve mobility hub users,
+stakeholders and others in testing, co-design and continued iteration.
+These, however, are beyond the scope of this paper.
+
+Material for the study was drawn from: photos taken during sites visits
+made by the lead author in the \emph{Discovery} phase; and mapping,
+imagery and other online resources. Open Street Map datasets provided an
+input for the \emph{Development} phase.
+
+Instruments included synthesis tables for cross-case comparisons. These
+were developed as per \citet{Miles:1994aa}. \emph{Development} used the
+R programming language to replicate the informational display styles
+discovered at the leading cases (Bristol and Birmingham). Package
+development during the \emph{Delivery} phase was guided by
+\citet{wickham2023r}.
+
+\subsection{Procedure and analysis}\label{procedure-and-analysis}
+
+In the \emph{Discovery} phase cases were selected from the larger sample
+available at
+https://www.como.org.uk/mobility-hubs/built-andplanned-hubs. Inclusion
+was somewhat constrained by logistics, but guided by the case research
+methodological literature (see \citet{Eisenhardt:1989aa},
+\citet{Stuart:2002aa}, \citet{Voss:2002aa}, \citet{Eisenhardt:2007aa},
+\citet{Denscombe:2007aa}, \citet{Barratt:2011aa}, \citet{Yin:2018ab} and
+others). Selected cases included the leading examples of the mobility
+hubs developed by the West of England Mayoral Combined Authority (WEMCA,
+Bristol) and Transport for West Midlands (Birmingham). More
+representative examples from Camden Council (London) and the London
+Borough of Redbridge (Woodford and Wanstead) were also included to
+provide polar opposites for cross-case comparison. Within each case a
+small number of mobility hubs were visited to allow for within-case
+comparison\footnote{\emph{Redbridge}: South Woodford and High Street,
+  Wanstead; and in \emph{Camden}: Goldington Crescent, and Doric Way;
+  \emph{Bristol}: Abbey Wood, UWE Frenchay, and Gainsborough Square.
+  \emph{Birmingham}: Huntingtree Park and Andrew Road}.
+
+The \emph{Definition} phase involved synthesis of findings from the site
+visits and about each included case. As per
+\citet{UK-Design-Council:0aa}{]}, \citet{Coxon:2018aa} and
+\citet{Coxon:2021ab}, this provided the basis for defining the problem
+that needs to be addressed by the research outputs.
+
+The \emph{Development} phase involved iterative software coding to first
+replicate the Bristol and Birmingham style of information displays. This
+software was then applied to contexts of the ROBUST hubs in Galway,
+Letterkenny and Dundrum. Finally, a combined version that might be a
+step towards best practices was developed for the \emph{Delivery} phase.
+This final phase involved convergence on a combined display style based
+on the synthesis of industry practices and responding to the problem
+developed in the \emph{Definition} phase.\\
+As per \citet{UK-Design-Council:0aa}{]}, \citet{Coxon:2018aa} and
+\citet{Coxon:2021ab}, the research also included iteration through all
+four phases. These iterations were tracked using the Git version control
+system\footnote{Code used in the production of this paper is available
+  at
+  \url{https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd},
+  which includes the \emph{Delivered} software functions at the time of
+  final submission. The software package itself is available at
+  \url{https://github.com/James-Reynolds/mobilityHubTools}, but is
+  expected to be developed further, so may change in the future. The
+  last commit at the time of final submission is
+  \href{https://github.com/James-Reynolds/mobilityHubTools/commit/a4fbbbe21c5eb63640f3e9d3cc5b548237c14b19}{a4fbbbe},
+  dated August 6 2026.}. However, in the interests of clarity the next
+section presents the results in a linear format, stepping through each
+phase in turn.
 
 \section{Results}\label{results}
 
@@ -337,36 +379,10 @@ research\footnote{Table notes: 1. Case study questions (column 1) are of
   free standing information pedestal. 4. The totem / pedestal
   information display at the Doric Way mobility hub is specific to the
   Transport For London `Cycles' docked bike share facility. There is no
-  information provided specifically about the mobility hub.}.
-Information provided at the mobility hubs varied between small placard
-signs (Figures \ref{fig:south_woodford_placard} and
-\ref{fig:high_street_placard}) thorugh to totems (pedestals) and
-posters. Notably those in Camden lacked any form of hubs-specific
-information\footnote{While there is a wayfinding and branding sign,
-  secure bike parking, a bike repair station and other features included
-  in the Doric Way consultation plans (online
-  https://consultations.wearecamden.org/supporting-communities/greenmobilityhubsphase2),
-  these appear to have been dropped from the implementation. Likewise
-  the wayfinding branding sign, water fountain and various other
-  proposed features of the Goldington Crescent mobility hub shown in the
-  online consultation plans
-  (https://consultations.wearecamden.org/supporting-communities/greenmobilityhubsphase1/)
-  do not appear to have been implemented.}, although there was a
-standardised Transport For London ``Cycles'' totem at the Doric Way hub
-(Figure \textbackslash ref\{fig:doric\_way\_pedestal)). Only the
-Redbridge hubs were specifically labelled as ``Mobility Hub'', while
-those in Birmingham were instead called ``Local Travel Point''.
+  information provided specifically about the mobility hub.}. Figures
+\ref{fig:selected_images} and \ref{fig:bristol_images_panels} show
+selected images from various hubs.
 
-None of the hubs included a map of all of the hub facilities, although
-the Bristol hub totems included a listing (Figure
-\textbackslash ref\{fig:bristol\_images\_panels). Maps shown on totems
-were generally at two scales, showing the areas within around 5 and 15
-minutes walk of each hub respectively. Most hubs included linemarking of
-some hub elements, although those in Bristol also had cube-shaped
-markers on poles indicating the location of different hub components
-(Figure \textbackslash ref\{fig:bristol\_images\_panels, bottom right).
-
-\newpage
 \begingroup\fontsize{7}{9}\selectfont
 
 \begin{longtable}[t]{>{\raggedright\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{1.1cm}>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}>{\centering\arraybackslash}p{1.1cm}|>{\centering\arraybackslash}p{1.1cm}>{\centering\arraybackslash}p{1.1cm}>{\centering\arraybackslash}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}>{\centering\arraybackslash}p{1.5cm}|}
@@ -377,40 +393,36 @@ markers on poles indicating the location of different hub components
 Question? & South Woodford & High Street, Wanstead & Goldington Crescent & Doric Way & Abbey Wood & UWE Frenchay & Gainsborough Square & Huntingtree Park & Andrew Road\\
 \midrule
 Location & London & London & London & London & Bristol & Bristol & Bristol & Birmingham & Birmingham\\
+\midrule\\
 Information & Placard & Placard & None & Totem & Totem & Totem & Totem & Totem, poster & Totem, poster\\
 Name & Mobility hub & Mobility hub & None & None & None & None & None & Local Travel Point & Local Travel Point\\
 \midrule\\
-Hub map &  &  &  &  &  &  &  &  & \\
 Local map &  &  &  & X & X & X & X & X & X\\
-\addlinespace
 Surrounds map &  &  &  & X & X & X & X & X & X\\
+\addlinespace
 Linemarking & X & X & X & X & X & X & X &  & \\
 Indicators &  &  &  & X & X & X & X &  & \\
 \midrule\\
 Train & X &  &  & X & N & N & N &  & \\
 Bus & X & N &  & X & X & X & X & X & X\\
-\addlinespace
 Taxi & X &  &  & X &  &  &  &  & \\
 \midrule\\
+\addlinespace
 Car club &  &  &  & N & X &  &  &  & N\\
 E-car club & X &  & N &  &  &  &  &  & N\\
 Share bike &  &  & N & X &  &  &  & X & X\\
 E-bike &  &  & N & N & X & X & X &  & \\
-\addlinespace
-Cargobike &  &  &  &  &  &  &  &  & \\
 E-cargobike &  &  & N &  & X & X &  &  & \\
+\addlinespace
 E-scooter &  &  & N &  &  & X & X &  & \\
 \midrule\\
 Car charger & N & N & N &  &  &  &  &  & \\
 Bike parking & N & N & N, S & N, S & X, S & X, S & X & N, X & X, S\\
-\addlinespace
 Bike repair &  &  & N &  & X & X & X &  & \\
 Seating & X & N &  &  & X &  &  &  & \\
-Shelter &  &  &  &  &  &  &  &  & \\
+\addlinespace
 Phone charge &  &  &  &  & X & X & X &  & \\
 Wifi &  &  &  &  &  & X & X &  & \\
-\addlinespace
-Water &  &  &  &  &  &  &  &  & \\
 Toilets &  &  &  &  &  & X & X &  & \\
 Cafe & N &  &  &  & X & X &  &  & \\
 Food / shops &  &  &  &  & X & X &  & X & X\\
@@ -420,38 +432,11 @@ Food / shops &  &  &  &  & X & X &  & X & X\\
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.2\linewidth]{graphics/south_woodford_placard} 
+{\centering \includegraphics[width=1\linewidth]{graphics/selected_images} 
 
 }
 
-\caption{Small placard-style sign, South Woodford. Source: authors.}\label{fig:south_woodford_placard}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.5\linewidth]{graphics/HighSt_placard} 
-
-}
-
-\caption{Small placard-style sign, High Street. Source: authors.}\label{fig:high_street_placard}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.5\linewidth]{graphics/doric_way_pedestal} 
-
-}
-
-\caption{Small placard-style sign, High Street. Source: authors.}\label{fig:doric_way_pedestal}
-\end{figure}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.5\linewidth]{graphics/huntingtree_park} 
-
-}
-
-\caption{Huntingtree Park pedestal / totem and poster, Birmingham. Source: authors.}\label{fig:huntingtree_park_pedestal}
+\caption{Selected hub images, clockwise from top left: Doric Way totem, Andrew Road totem, Andrew Road poster, Wanstead placard, Wanstead branding, South Woodford placard. Source: authors.}\label{fig:selected_images}
 \end{figure}
 
 \begin{figure}
@@ -463,151 +448,98 @@ Food / shops &  &  &  &  & X & X &  & X & X\\
 \caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_images_panels}
 \end{figure}
 
-Information panels, maps and other guides to facilities and services
-were present at some hubs, but notably not at those in London. This is
-likely because of existing maps and other information at nearby tube
-stations, bus stops or otherwise, which may have lessened the need for
-mobility-hub-specific signage and mapping. Figure 1 (left) shows
-selected images of informational panels and signage found at the hubs in
-and Bristol, which shared some common design elements such as including
-both local and area- wide maps, iconographic representation of
-facilities, and directional information. Notably, the Bristol hubs
-included green cubes mounted overhead hub facilities, which appear
-likely to assist in finding hub elements in busy urban environments.
-Mapping and informational material, however, often appeared to include
-some that are not specifically `part' of a hub (e.g.~toilets within
-another facilities, shops, cafes). This highlights a potential question
-for implementers: what services and facilities to include as `part of
-the hub', versus those that are just `nearby'? In the case of the
-Transport for West Midlands hub at Andrew Road directional signage to,
-and information about, bus services at the nearby Halesowen Bus Station
-(approx 50m walking distance) is provided, but the hub has a different
-location-based name and branding identity. Some of the hubs included
-linemarked areas for shared e-bike, e-scooter or e- cargobike parking,
-bicycle parking and secure parking lockers, although the offered
-facilities and services varied by location. A lack of shade, weather
-protection and drinking water was also evident at most of the visited
-hubs, even though many of the parklet-type facilities included steel
-framing that might have accommodated open- sided roofing or similar. A
-containerised ``Library of Things'' appears to have been added later to
-one hub in Bristol, onto top of areas linemarked and sign-posted as for
-electric scooter hire. This may provide an indication of the
-possibilities of using modular components to expand, re-purpose or
-adjust mobility hubs as situations change (consistent with
-\citet{Stuart:2002aa}), but also a need for signs and maps to be easily
-adjustable to match, once the original graphic designers or implementers
-have moved on\footnote{See also \citet{Reynolds:2017ah} discussion of
-  `The Garbage Can Model'}.
+Information displays varied between the small placard signs in South
+Woodford and Wanstead (Redbridge, London) to the comprehensive totems /
+pedestals in Bristol and Birmingham. Mobility hubs in Camden lacked any
+information displays, although there was a nearby totem for the bike
+share docking system at Doric Way (Figure \ref{fig:selected_images}, top
+left.). The sites themselves were labelled as ``Mobility Hub'' and
+``Local Travel Point'' in Birmingham, but lacked any form of naming in
+Camden while the Bristol sites only showed the name of the locality
+(Figure \ref{fig:bristol_images_panels}).
 
-The site visits perhaps also highlighted the importance of maintenance,
-activity\footnote{c.f. \citet{Jacobs:1961aa} ``eyes on the street''} and
-updates to match changing circumstances that might give a hub a sense of
-`place'. Hubs in Bristol perhaps provide an example with litter,
-non-mobility-related signage, space requisitioned for other purposes,
-and some sites advertising dockless shared vehicles but without these
-present in sufficient numbers (or at all at the time of visiting
-Gainsborough Square) all providing indications of potential
-post-implementation challenges related to mobility hubs.
+Totems all included two maps: one at a local scale (within 5 minutes
+walk) and the second showing a large area (within 15 minutes). Hub
+facilities were typically explictly listed or described on the totems,
+but not included in mapping. Linemarking was commonly used to highlight
+some hub components. The Bristol hubs included cube shaped indicators
+mounted on poles above hub components (see Figure
+\ref{fig:bristol_images_panels}, bottom right).
+
+Where present, nearby transit services and facilities where typically
+detailed on the information displays although this was not always the
+case. Insecure bike parking (i.e.~locking hoops) was the most commonly
+provided feature, although some hubs in Camden, Bristol and Birmingham
+also included bicycle lockers or other limited-access facilities.
+Seating and nearby toilets were available as part of some hubs, but no
+hubs included comprehensive shelter or access to water. The Bristol hubs
+included USB connections for phone recharging, and wifi internet
+connectivity at some locations.
 
 \subsection{Definition}\label{definition}
 
-Findings from the sites visits suggest a wide variety of modes, services
-and facilities might be provided as part of the hub itself, as well as
-further services and facilities identified as being `nearby' as an
-extension of the hub offer. This might suggest adopting an open-ended
-and expansionist approach to mobility hub definition. The consistency of
-branding at the Bristol hubs, especially with respect to the
-iconographic green cubes drawing attention to hub elements, might
-highlight the importance of proximity and line-of-sight in defining a
-mobility hub\footnote{Although mapping at most hubs provided information
-  about services and facilities within up to around 15 minutes walking
-  distance, hub elements appeared to generally be located within
-  relatively confined areas, generally spanning less than 50 metres. The
-  Andrew Road hub provides an example towards the upper end, with the
-  entirety of the hub and the nearby Halesown Bus Station encompassed
-  within a radius of approximately 70 metres, and spanning slightly less
-  than 200 metres if traversed by foot. In contrast, the South Woodford
-  hub takes up approximately 15 metres of kerb space and is less than
-  100 metres from the nearest tube station, while some in Camden use
-  space equivalent to only a few car parking spots.}
+Findings during the \emph{Discovery} phase suggest that current
+practices relating to information displays at mobility hubs are
+inconsistent. The \emph{totems} in Birmingham, Birmingham and Doric Way
+perhaps demonstrate advantages of having maps and hub details displayed
+in large size. The small placard signs and the lack information at most
+hubs in Camden provide contrasting examples where it may be unclear what
+facilities are provided at the hubs or nearby.
 
-Definitions of the facilities, services and modes necessary to become a
-mobility hub appear likewise to be open-ended and inclusive, rather than
-some sort of minimum checklist that all sites must have\footnote{CoMoUK's
-  pop-up mobility hub offering provide an example, with the basic option
-  consisting of a 12 square metre parklet with bike repair facilitates,
-  and bike parking and/or bike share docking \citep{CoMoUK:0ab}}.
-\citet{CoMoUK:0ab} discuss six types of mobility hubs: ``large
-interchanges/city hubs; transport corridor, smaller interchanges or
-linking hubs; business park or new housing development hubs;
-suburb/mini-hubs; small market town/village hubs; and tourism hubs''
-along with suggested components for each. Further types might include
-the `shared' and `electric' forms of mobility hub, as in the ROBUST
-sites, wherein the offered modes are available for hire and electrically
-powered respectively. Guidance from \citet{CoMoUK:0ab} also suggests: a
-timeline of 12 to 15 months to step through consultation, design,
-stakeholder engagement, tendering and construction, although this
-appears to relate to either unpowered mobility hubs or replaceable
-batteries; budgets are in the vicinity of 250k to 650k pounds; and that
-``mobility hubs work best when part of a wider sustainable transport
-network that provides active travel, public transport and shared
-transport options'' \citep{CoMoUK:0ab}.
+The South Woodford placard (Figure \ref{fig:selected_images}, bottom
+left) provides an example of \emph{limited information about what is
+provided} or \emph{where it is} in relation to the hub. Only left or
+right direction indications are provided to nearby transit, taxis and
+shared cars. However, finding hub elements does not necessarily appear
+easy when maps are included on totems. Both the Bristol and Birmingham
+style of maps were at too large a scale for the precise location of all
+of the various hub offerings to be shown.
 
-The design problem here, therefore, appears be to allow creation of
-mobility hubs that: incorporate existing modes, facilities and services;
-minimise cost and timeframes, such that practitioners and tactical
-urbanists might build legitimacy through implementation (c.f.
-\citet{Reynolds:2021ab}) using minimal resources, incremental approaches
-that allow expansion one-hub-at-a-time, and that are scale-able; and
-allow for rapid iteration, revision or adjustment to account for
-changing circumstances.
+At some hubs space that had originally been allocated to shared
+micro-mobility had been taken over for other purposes. Changes to the
+facilities and nearby services over time also meant that the original
+hub information displays were out of date at some sites. Consistency and
+the need to update information displays to reflect changing
+circumstances would therefore appear to be challenges facing mobility
+hub implementers and maintainers.
+
+Therefore, overall the problem to be addressed in this design-based
+research is to develop tools that might allow practitioners to: 1)
+produce totem or poster-sized information displays; 2) that clearly show
+hub and surrounding facilities and services and their location; and 3)
+that can be generated rapidly, cheaply and otherwise updated over time
+to reflect changing circumstances.
 
 \subsection{Development}\label{development}
 
-Both the Brimingham and Bristol mobility hubs feature pedestal-mounted
-signage that includes: the hub name; iconographic representations of hub
-facilities; directional indications; and two maps. These maps are,
-respectively, of the local vicinity (a 5-10 minute walk) of the hub; and
-the surrounding area (a 15-20 minute walk). A starting point for
-developing software packages to support creation of further mobility
-hubs, therefore, would appear to be outputting similar maps of the local
-and surrounding areas, composited together into an image of similar size
-to the pedestal signage encountered during the site visits along with
-site naming and other information. Figure 2 shows the output of software
-developed during this research.
+The \emph{Development} phase started with creation of software tools to
+download Open Street Maps data, create local and regional scale maps,
+and combine these with hub inofmration into displays replicating the
+Bristol and Birmingham totems.
 
-Here the software has been used to create output for the Galway ROBUST
-e-mobility hub\footnote{Although as an example the `surrounding area
-  map' shown is for the Letterkenny ROBUST hub location so as to
-  demonstrate the generalisability of the research outcomes.}. Key
-features of the developed software include the ability to highlight
-points of interest\footnote{Various religious and medical buildings are
-  highlighted in purple, while the library is shown in blue and nearby
-  schools in orange.}, as per the maps found in site visits, but might
-allow considerable flexibility for practitioners in choosing between
-colours, iconography or other symbols. A powerful aspect of adopting the
-OSM datasets is that settings can be adjusted by the user and new maps
-generated within minutes. For example, the `surrounding area map' shown
-in Figure 3 a slightly different OSM tile option is selected, and
-buildings recorded as ``pubs'' (rather than public buildings) are shown
-in blue. Another flexibility of this approach is that maps at other
-scales can be produced, including at small scales which might include
-individual hub elements (i.e.~the e-bikes or car share vehicles) so that
-users can locate the various services and facilities.
+\begin{figure}
 
-This represents an extension of the mapping approaches seen in the site
-visits, and might perhaps remove the need for signage or other physical
-elements to mark the location of hub elements (e.g.~the green cubes in
-Bristol).
+{\centering \includegraphics[width=1\linewidth]{graphics/bristol_and_birmingham_output} 
+
+}
+
+\caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_and_birmingham_output}
+\end{figure}
+
+Figure \ref{fig:bristol_and_birmingham_output} shows example output of
+the software that produces hub totems in the style of Bristol (top left)
+and Birmingham (right). Each style includes user-adjustable hub names,
+facility icons and directional indicators at the top. Maps is generated
+for each hub at the local and regional scales, indicating the location
+of nearby transit stops and stations, and highlighting buildings and
+other features (see detail, bottom left). Icon and feature locations are
+drawn directly from the OSM datasets, although the user can select which
+are to be highlighted and labeled. Finally, space is allocated for
+facility description text and logos.
 
 \subsection{Delivery}\label{delivery}
 
-The delivered research outputs are available in two forms. An R markdown
-file containing the text of this paper, and the code used to generate
-tables, figures and undertake analysis is available at
-\url{https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd}.
-This is a static version of the tools as at the time of paper
-publication.
+BRIEF DESCRIPTION OF FUNCTIONS
 
 As discussed above, this paper is part of a larger program of research
 seeking to develop tools for practitioners and mobility hub
