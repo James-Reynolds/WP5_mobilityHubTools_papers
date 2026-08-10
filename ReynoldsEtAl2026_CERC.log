@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  6 AUG 2026 15:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  10 AUG 2026 14:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -967,13 +967,13 @@ Package rerunfilecheck Info: File `ReynoldsEtAl2026_CERC.out' has not changed.
 (rerunfilecheck)             Checksum: A816FBE4C7FAEA3E6271884860C260E2;1554.
  ) 
 Here is how much of TeX's memory you used:
- 17657 strings out of 474116
- 283439 string characters out of 5743682
+ 17661 strings out of 474116
+ 283481 string characters out of 5743682
  1991187 words of memory out of 5000000
  39443 multiletter control sequences out of 15000+600000
- 615631 words of font info for 172 fonts, out of 8000000 for 9000
+ 615844 words of font info for 174 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,79p,1018b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,10n,79p,1018b,621s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf
@@ -985,7 +985,7 @@ cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf
 -dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/font
 s/type1/public/lm/lmtt8.pfb>
-Output written on ReynoldsEtAl2026_CERC.pdf (10 pages, 30344468 bytes).
+Output written on ReynoldsEtAl2026_CERC.pdf (10 pages, 30344814 bytes).
 PDF statistics:
  350 PDF objects out of 1000 (max. 8388607)
  307 compressed objects within 4 object streams

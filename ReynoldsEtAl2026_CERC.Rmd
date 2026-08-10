@@ -524,40 +524,12 @@ The South Woodford placard (Figure \ref{fig:selected_images}, bottom left) provi
 
 At some hubs space that had originally been allocated to shared micro-mobility had been taken over for other purposes. Changes to the facilities and nearby services over time also meant that the original hub information displays were out of date at some sites. Consistency and the need to update information displays to reflect changing circumstances would therefore appear to be challenges facing mobility hub implementers and maintainers.    
 
-Therefore, overall the problem to be addressed in this design-based research is to develop tools that might allow practitioners to: 1) produce totem or poster-sized information displays; 2) that clearly show hub and surrounding facilities and services and their location; and 3) that can be generated rapidly, cheaply and otherwise updated over time to reflect changing circumstances.  
+Therefore, overall the problem to be addressed in this design-based research is to develop tools that might allow practitioners to: 1) produce totem or poster-sized information displays; 2) that clearly show hubs, surrounding facilities and services, and their location; and 3) that can be generated rapidly, cheaply and otherwise updated over time to reflect changing circumstances.   
 
 ## Development
 
-The *Development* phase started with creation of software tools to download Open Street Maps data, create local and regional scale maps, and combine these with hub inofmration into displays replicating the Bristol and Birmingham totems.  
-
-
 
 ```{r download_osm_data_function, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
-
-### Create hub locations
-hub_location <- list(
-  abbey_wood = tibble(lat = 51.507374018425104, lon =  -2.557977642470572, name = "Abbey Wood"), 
-  UWE_Frenchay = tibble(lat = 51.500103870678025, lon =  -2.546301107865488, name = "UWE Frenchay"), 
-  gainsborough_square = tibble(lat = 51.49007921451471, lon = -2.562807494900329, name = "Gainsborough Square"), 
-  horfield_library = tibble(lat = 51.494931138321185, lon = -2.5741801829392097, name = "Horfield Library"))
-
-
-hub_location <- lapply(hub_location, function(x) x %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>%
-  st_transform(crs = crs_local_metres) %>% 
-  st_cast("POINT"))
-
-place_sf <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 2000) %>%
-                    st_transform(crs = 4326) 
-                  )
-
-placebb <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 2000) %>%
-                    st_transform(crs = 4326) %>%
-                    st_bbox()
-                  )
 
 download_osm_data_by_category_function <- function(
     hub_location = hub_location, crs_local_metres = crs_local_metres, 
@@ -646,6 +618,50 @@ names(final) <- names(place_sf)
 return(final)
 }
 
+
+process_osm_list_function <- function(
+    list_to_load_and_process, 
+    list_to_save_to,
+    crs_local_metres){
+
+holding <- list.load(list_to_load_and_process)
+holding <- lapply(holding, function(x) 
+  bind_rows(x$osm_points, x$osm_lines, x$osm_polygons, x$osm_multilines, x$osm_multipolygons) %>% 
+  st_transform(crs = crs_local_metres)) %>% 
+  list.save(list_to_save_to)
+}
+```
+
+
+```{r download_and_process_bristol_data, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
+
+
+### Create hub locations
+hub_location <- list(
+  abbey_wood = tibble(lat = 51.507374018425104, lon =  -2.557977642470572, name = "Abbey Wood"), 
+  UWE_Frenchay = tibble(lat = 51.500103870678025, lon =  -2.546301107865488, name = "UWE Frenchay"), 
+  gainsborough_square = tibble(lat = 51.49007921451471, lon = -2.562807494900329, name = "Gainsborough Square"), 
+  horfield_library = tibble(lat = 51.494931138321185, lon = -2.5741801829392097, name = "Horfield Library"))
+crs_local_metres <- 27700
+
+hub_location <- lapply(hub_location, function(x) x %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>%
+  st_transform(crs = crs_local_metres) %>% 
+  st_cast("POINT"))
+
+place_sf <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) 
+                  )
+
+placebb <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) %>%
+                    st_bbox()
+                  )
+
+
 layers_to_download <- c("amenity", "building", "highway", "leisure", "landuse", "natural", "railway", "waterway")
 
 output <- list()
@@ -671,22 +687,8 @@ list.save(net, "data/bristol_net_260627.rdata")
 
 list.save(hub_location, "data/bristol_hub_location.rdata")
 
-```
 
 
-```{r extract_osm_data_ROBUST_hubs_bristol, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
-
-process_osm_list_function <- function(
-    list_to_load_and_process, 
-    list_to_save_to,
-    crs_local_metres){
-
-holding <- list.load(list_to_load_and_process)
-holding <- lapply(holding, function(x) 
-  bind_rows(x$osm_points, x$osm_lines, x$osm_polygons, x$osm_multilines, x$osm_multipolygons) %>% 
-  st_transform(crs = crs_local_metres)) %>% 
-  list.save(list_to_save_to)
-}
 
 process_osm_list_function(
   list_to_load_and_process = "data/bristol_amenity_260627.rdata", 
@@ -1760,19 +1762,6 @@ birmingham_totem_pedestal <- function(
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```{r bristol_maps_generation, eval = FALSE, echo=FALSE}
 
 i <- 1
@@ -2030,400 +2019,40 @@ bristol_totem_pedestal(
 ```  
  
 
-
-
 ```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
 
 ```
 
-Figure \ref{fig:bristol_and_birmingham_output} shows example output of the software that produces hub totems in the style of Bristol (top left) and Birmingham (right).  Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, bottom left). Icon and feature locations are drawn directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos.    
 
+The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos.
+
+Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition*.  by: 
+1) adopting an A0 poster size, so as to fit with typical plotter availability; 
+2) shifting to grey scale to reduce costs, which may assist in running trials, co-design or other developmental activities; 
+
+
+
+
+```{r load_test_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+test_amenity <- bristol_amenity["gainsborough_square"]
+test_building <- bristol_building["gainsborough_square"]
+test_highway <- bristol_highway["gainsborough_square"]
+test_railway <- bristol_railway["gainsborough_square"]
+test_hub_location <- bristol_hub_location["gainsborough_square"]
+
+
+
+```
 
 ```{r synthesis_poster, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
 
-
-synthesis_poster <- function(
-    file_to_save_to = "synthesis_poster.pdf",
-    hub_name_text = "Gainsborough Square",
-    icons_to_include_in_header = list(
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_charging.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
-    directions_image = system.file(
-      "extdata/bristol_greensborough_directions.png", package = "mobilityHubTools"),
-    map_local = map_local_test,
-    facilities_image =  system.file(
-      "extdata/bristol_facilities.png", package = "mobilityHubTools"),
-    map_regional = map_regional_test,
-    logo_image =  system.file(
-      "extdata/bristol_blank.png", package = "mobilityHubTools")
-    )
-{
-
-grid::grid.rect(gp = grid::gpar(lty = "dashed"))
-hub_name_viewport <- grid::viewport(x = 0, y = 11.5/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_name_viewport")
-hub_facilities_viewport <- grid::viewport(x = 0, y = 11/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_facilities_viewport")
-direction_information <- grid::viewport(x = 0, y = 10/12, w = 1, h = 1/12, just = c("left", "bottom"), name = "directional_information_viewport")
-local_map_viewport <- grid::viewport(x = 0, y = 5/12, w = 1, h = 5/12, just = c("left", "bottom"), name = "local_map_viewport")
-hub_facilities_viewport_details <- grid::viewport(x = 0, y = 3/12, w = 5/9, h = 2/12, just = c("left", "bottom"), name = "hub_facilities_viewport_details")
-regional_map_viewport <- grid::viewport(x = 5/9, y = 3/12, w = 4/9, h = 2/12, just = c("left", "bottom"), name = "regional_map_viewport")
-logos_viewport <- grid::viewport(x = 5/9, y = 2/12, w = 4/9, h = 1/12, just = c("left", "bottom"), name = "logos_viewport")
-
-grid::pushViewport(hub_name_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text(hub_name_text, y = 0.5)
-grid::upViewport()
-grid::pushViewport(hub_facilities_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Hub icons go here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(direction_information)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Direction information goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(local_map_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Local Map goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(hub_facilities_viewport_details)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Hub facility details", y = 0.5)
-grid::upViewport()
-grid::pushViewport(regional_map_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Area Map goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(logos_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("logos_viewport etc", y = 0.5)
-grid::popViewport()
+synthesis_poster()
 
 
 
-grid::grid.rect(gp = grid::gpar(lty = "blank"))
 
-r <- grid::rectGrob(gp=grid::gpar(fill="white"))
-
-#Define layout
-gs <- lapply(1:9, function(ii)
-  grid::grobTree(
-    grid::rectGrob(gp=grid::gpar(fill=ii, alpha=0.5)), grid::textGrob(ii)))
-gridExtra::grid.arrange(grobs=gs, ncol=9,
-             top="top label", bottom="bottom\nlabel",
-             left="left label", right="right label")
-grid::grid.rect(gp=grid::gpar(fill=NA))
-
-
-#Define hub name at top
-hub_name_viewport <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white")), grid::textGrob(hub_name_text, gp=grid::gpar(fontsize=60, col="white", fontface="bold", lty = "blank")))
-gs[[1]] <- gridExtra::grid.arrange(hub_name_viewport)
-
-
-#Wrangle icons below hub name
-image <- lapply(icons_to_include_in_header, function (x) grid::rasterGrob(magick::image_read(x)))
-grob_1 <- image[[1]]
-grob_2 <- image[[2]]
-grob_3 <- image[[3]]
-grob_4 <- image[[4]]
-grob_5 <- image[[5]]
-grob_6 <- image[[6]]
-grob_7 <- image[[7]]
-grob_8 <- image[[8]]
-grob_9 <- image[[9]]
-grob_10 <- image[[10]]
-
-gs[[2]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white", lty = 1)),
-                          gridExtra::grid.arrange(grob_1, grob_2, grob_3, grob_4, grob_5, grob_6,
-                                 grob_7, grob_8, grob_9, grob_10,
-                                 ncol = 10)
-                    )
-
-# Insert directions image below hub name and icons
-gs[[3]] <- grid::grobTree(grid::rectGrob(gp=gpar(fill="white", lty = 1)),
-                          gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                      directions_image)),
-                      ncol = 1)
-                    )
-
-gs[[4]] <- map_local
-# Insert facilities description image below hub name and icons
-gs[[5]] <- rasterGrob(magick::image_read(facilities_image))
-
-gs[[6]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white", lty = 1)))
-gs[[7]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white", lty = 1)))
-gs[[8]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white", lty = "blank")),
-                    gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                      logo_image)),
-                      ncol = 1)
-)
-gs[[9]] <- map_regional
-
-
-
-# 24 rows, each roughly 100mm high
-# 5 columns, each roughly 200mm wide
-lay <- rbind(c(1,1,1,1,1),
-             c(1,1,1,1,1),
-             c(2,2,2,2,2),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(6,6,7,8,8))
-gridExtra::grid.arrange(grobs = gs, layout_matrix = lay)
-grDevices::dev.copy2pdf(file = file_to_save_to, width = 33.1, height = 46.8, fonts = NULL)
-grDevices::dev.off()
-
-
-}
-
-
-
-```
-
-```{r synthesis_poster_test, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
-
-## test on Gainsborough Square, ROBUST Galway and ATU Galway
-# load Gainsborough Square into test list
-test_amenity <- bristol_amenity[["gainsborough_square"]]
-test_building <- bristol_building[["gainsborough_square"]]
-test_highway <- bristol_highway[["gainsborough_square"]]
-test_leisure <- bristol_leisure[["gainsborough_square"]]
-test_landuse <- bristol_landuse[["gainsborough_square"]]
-test_natural <- bristol_natural[["gainsborough_square"]]
-test_railway <- bristol_railway[["gainsborough_square"]]
-test_waterway <- bristol_waterway[["gainsborough_square"]]
-test_hub_location <- bristol_hub_location[["gainsborough_square"]]
-
-
-crs_local_metres = 2157
-### Obtain data for ROBUST Galway and Eyre Square 
-hub_location <- list(
-  westside_library = tibble(lat = 53.277338, lon =  -9.073328, name = "Westside Library"), 
-  eyre_square = tibble(lat = 53.274230, lon = -9.048279, name = "Eyre Square")) 
-
-hub_location <- lapply(hub_location, function(x) x %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>%
-  st_transform(crs = crs_local_metres) %>% 
-  st_cast("POINT"))
-
-place_sf <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 1500) %>%
-                    st_transform(crs = 4326) 
-                  )
-
-placebb <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 1500) %>%
-                    st_transform(crs = 4326) %>%
-                    st_bbox()
-                  )
-
-download_osm_data_by_category_function <- function(
-    hub_location = hub_location, crs_local_metres = crs_local_metres, 
-    key = key)
-{
-### Create hub locations
-hub_location <- lapply(hub_location, function(x) x %>% 
-  st_as_sf(coords = c("lon", "lat"), 
-           crs = 4326) %>%
-  st_transform(crs = crs_local_metres) %>% 
-  st_cast("POINT"))
-
-place_sf <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 1500) %>%
-                    st_transform(crs = 4326) 
-                  )
-
-placebb <- lapply(hub_location, function(x) x %>% 
-                    st_buffer(dist = 1500) %>%
-                    st_transform(crs = 4326) %>%
-                    st_bbox()
-                  )
-### based on https://github.com/ropensci/osmdata/blob/main/vignettes/query-split.Rmd
-
-split_bbox <- function (bbox, grid = 2, eps = 0.05) {
-    xmin <- bbox ["x", "min"]
-    ymin <- bbox ["y", "min"]
-    dx <- (bbox ["x", "max"] - bbox ["x", "min"]) / grid
-    dy <- (bbox ["y", "max"] - bbox ["y", "min"]) / grid
-
-    bboxl <- list ()
-
-    for (i in 1:grid) {
-        for (j in 1:grid) {
-            b <- matrix (c (
-                xmin + ((i - 1 - eps) * dx),
-                ymin + ((j - 1 - eps) * dy),
-                xmin + ((i + eps) * dx),
-                ymin + ((j + eps) * dy)
-            ),
-            nrow = 2,
-            dimnames = dimnames (bbox)
-            )
-
-            bboxl <- append (bboxl, list (b))
-        }
-    }
-    bboxl
-}
-
-final <- list()
-
-for(i in seq_along(place_sf)){
-
-bb_vector <- place_sf[[i]] %>% st_bbox() %>% as.numeric()
-bb <- data.frame(min = bb_vector[1:2], max = bb_vector[3:4])
-rownames(bb) <- c("x", "y")               
-                 
-queue <- split_bbox (bb)
-result <- list ()
-
-while (length (queue) > 0) {
-
-    print (queue [[1]])
-
-    opres <- NULL
-    opres <- try ({
-        opq (bbox = queue [[1]], timeout = 25) |>
-            add_osm_feature (key = key) |>
-            osmdata_sf ()
-    })
-
-    if (class (opres) [1] != "try-error") {
-        result <- append (result, list (opres))
-        queue <- queue [-1]
-    } else {
-        bboxnew <- split_bbox (queue [[1]])
-        queue <- append (bboxnew, queue [-1])
-    }
-}
-final[[i]] <- do.call (c, result)
-}
-
-names(final) <- names(place_sf)
-
-return(final)
-}
-
-layers_to_download <- c("amenity", "building", "highway", "leisure", "landuse", "natural", "railway", "waterway")
-
-output <- list()
-
-
-for(i in seq_along(layers_to_download)){
-o1 <- list()
- q1 <- c("download_osm_data_by_category_function(hub_location = hub_location, crs_local_metres = crs_local_metres, key = '", layers_to_download[i], "')")
-  q1 <- paste(q1,collapse="")
-o1 <-  str2expression(q1) %>% eval()
-output[[i]] <- o1  
-  
-  q1 <- c("list.save(output[[i]], ", "'data/galway_", layers_to_download[i], "_260706.rdata')")
-  q1 <- paste(q1,collapse="")
-  str2expression(q1) %>% eval()  
-  
-  
-}
-
-net <- list()
-net <- lapply(placebb, function(x) dodgr::dodgr_streetnet(x))
-list.save(net, "data/galway_net_260706.rdata")
-
-list.save(hub_location, "data/galway_hub_location.rdata")
-
-process_osm_list_function <- function(
-    list_to_load_and_process, 
-    list_to_save_to,
-    crs_local_metres){
-
-holding <- list.load(list_to_load_and_process)
-holding <- lapply(holding, function(x) 
-  bind_rows(x$osm_points, x$osm_lines, x$osm_polygons, x$osm_multilines, x$osm_multipolygons) %>% 
-  st_transform(crs = crs_local_metres)) %>% 
-  list.save(list_to_save_to)
-}
-
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_amenity_260706.rdata", 
-  list_to_save_to = "data/galway_amenity.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_building_260706.rdata", 
-  list_to_save_to = "data/galway_building.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_highway_260706.rdata", 
-  list_to_save_to = "data/galway_highway.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_leisure_260706.rdata", 
-  list_to_save_to = "data/galway_leisure.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_landuse_260706.rdata", 
-  list_to_save_to = "data/galway_landuse.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_natural_260706.rdata", 
-  list_to_save_to = "data/galway_natural.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_railway_260706.rdata", 
-  list_to_save_to = "data/galway_railway.rdata", 
-  crs_local_metres = crs_local_metres)
-process_osm_list_function(
-  list_to_load_and_process = "data/galway_waterway_260706.rdata", 
-  list_to_save_to = "data/galway_waterway.rdata", 
-  crs_local_metres = crs_local_metres)
-
-galway_amenity <- list.load("data/galway_amenity.rdata")
-galway_building <- list.load("data/galway_building.rdata")
-galway_highway <- list.load("data/galway_highway.rdata")
-galway_leisure <- list.load("data/galway_leisure.rdata")
-galway_landuse <- list.load("data/galway_landuse.rdata")
-galway_natural <- list.load("data/galway_natural.rdata")
-galway_railway <- list.load("data/galway_railway.rdata")
-galway_waterway <- list.load("data/galway_waterway.rdata")
-galway_hub_location <- list.load("data/galway_hub_location.rdata")
-
-#drop points from building layers
-for (i in seq(galway_building %>% names())){
-galway_building[[i]] <- galway_building[[i]][!(galway_building[[i]] %>% st_geometry_type() == "POINT"),]
-}
-
-test_amenity <- test_amenity %>% append(galway_amenity)
-test_building <- test_building %>% append(galway_building)
-test_highway <- test_highway %>% append(galway_highway)
-test_leisure <- test_leisure %>% append(galway_leisure)
-test_landuse <- test_landuse %>% append(galway_landuse)
-test_natural <- test_natural %>% append(galway_natural)
-test_railway <- test_railway %>% append(galway_railway)
-test_waterway <- test_waterway %>% append(galway_waterway)
-test_hub_location <- test_hub_location %>% append(galway_hub_location)
 
 
 
@@ -2432,22 +2061,6 @@ test_hub_location <- test_hub_location %>% append(galway_hub_location)
 ```
 
 
-
-
-```
-
-
-
-
-
-
-
-Figure <INSERT FIGURE REFERENCE HERE> shows the mobility hub information display. 
-It adapts industry practices found in the *Discovery* phase 
-and *Developed* into a software tool above. 
-It also responds to the problem *Definition* by: 
-1) adopting an A0 poster size, so as to fit with typical plotter availability; 
-2) shifting to grey scale to reduce costs, which may assist in running trials, co-design or other developmental activities; 
 
 
 
@@ -2461,6 +2074,10 @@ It also responds to the problem *Definition* by:
 BRIEF DESCRIPTION OF FUNCTIONS
 
 As discussed above, this paper is part of a larger program of research seeking to develop tools for practitioners and mobility hub implementers. A developmental version is available as an R package at [https://github.com/James-Reynolds/mobilityHubTools](https://github.com/James-Reynolds/mobilityHubTools). This is a non-static version, which is expected to continue to be modified as the program of research progresses.  
+
+
+APPLICATION TO THE GALWAY ROBUST HUB
+
 
 # Discussion and conclusions
 
