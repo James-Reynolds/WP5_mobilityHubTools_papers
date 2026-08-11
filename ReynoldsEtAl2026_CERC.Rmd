@@ -390,7 +390,7 @@ CERC_synthesis[c(-1,-5,-17, -24, -27),1:10] %>%
 ```
 
 
-```{r selected_images, out.width = "100%", fig.align = "center", fig.cap = "Selected hub images, clockwise from top left: Doric Way totem, Andrew Road totem, Andrew Road poster, Wanstead placard, Wanstead branding, South Woodford placard. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+```{r selected_images, out.width = "100%", fig.align = "center", fig.cap = "Selected hub images, clockwise from top left: Doric Way totem (Camden), Andrew Road totem and Andrew Road poster (TWM), Wanstead placard and branding (Redbridge) and South Woodford placard (Redbridge). Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
 knitr::include_graphics("graphics/selected_images.png") 
 
 ```
@@ -524,7 +524,60 @@ The South Woodford placard (Figure \ref{fig:selected_images}, bottom left) provi
 
 At some hubs space that had originally been allocated to shared micro-mobility had been taken over for other purposes. Changes to the facilities and nearby services over time also meant that the original hub information displays were out of date at some sites. Consistency and the need to update information displays to reflect changing circumstances would therefore appear to be challenges facing mobility hub implementers and maintainers.    
 
-Therefore, overall the problem to be addressed in this design-based research is to develop tools that might allow practitioners to: 1) produce totem or poster-sized information displays; 2) that clearly show hubs, surrounding facilities and services, and their location; and 3) that can be generated rapidly, cheaply and otherwise updated over time to reflect changing circumstances.   
+Therefore, overall the problem to be addressed in this design-based research is to develop tools that might allow practitioners to: 1) produce totem or poster-sized information displays; 2) that clearly show hubs, surrounding facilities and services, and their location; and 3) that can be generated rapidly, cheaply and otherwise updated over time to reflect changing circumstances. Table \ref{tab:definition_details} shows five areas mobility hub information displays need to address, which have be identified based on the cases examined in the *Discovery* phase. 
+
+```{r definition_details, eval = TRUE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+tibble(Question = c("1. What is this?", 
+                    "2. Where is it?", 
+                    "3. What is here?", 
+                    "4. What is nearby?", 
+                    "5. How can you travel from here?"),
+       Purpose = c("Define current location as a mobility hub", 
+                   "Identify current location", 
+                   "Identify hub elements", 
+                   "Identify nearby services/facilities", 
+                   "Identify spatial network context"), 
+       Redbridge = c("Mobility or village hub, or 'Public Space'", 
+                     "Place name", 
+                     "Limited", 
+                     "Limited", 
+                     "Not answered"), 
+       Camden = c("Not answered", 
+                  "Not answered", 
+                  "Not answered", 
+                  "Not answered", 
+                  "Not answered"), 
+       WEMCA = c("Not explictly answered", 
+                 "Place name", 
+                 "Icons, cube markers, description", 
+                 "Local and regional maps, description, direction arrows", 
+                 "Description of bus/bike, bike routes on area map"), 
+       TWM = c("Local Travel Point", 
+               "Place name", 
+               "Icons, description", 
+               "Local and regional maps, description, direction arrows", 
+               "Description of bus routes only")) %>% 
+  kable(align = "lllll",
+    caption = "Defining the design problems. Authors' concept.", 
+    col.names = c("Question", "Purpose", "Redbridge London", "Camden London", "WEMCA Bristol", "TWM Birmingham"))  %>% 
+  kable_styling(font_size = 7) %>% 
+  column_spec(1, width = "2.25cm", border_right = TRUE) %>%
+  column_spec(2, width = "2.8cm", border_right = TRUE) %>%
+  column_spec(3, width = "2.8cm", border_right = TRUE) %>%
+  column_spec(4, width = "1.75cm", border_right = TRUE) %>%
+  column_spec(5, width = "2.75cm", border_right = TRUE) %>%
+  column_spec(6, width = "2.75cm", border_right = TRUE) %>%
+  add_header_above(c("Problem" = 2, 
+                     "Answers from cases" = 4)) 
+
+```
+
+The first question shown in Table \ref{tab:definition_details} relates to identifying a mobility hub as something in and of itself. Various terms were used in practice (Village Hub, Public Space, Local Travel Point), except in Camden (no information display) and Bristol (place name only). For the second question, the only descriptions of location are provided by place names (Redbridge, Bristol and Birmingham), while for the third question industry practices appear to be identify hub elements through text descriptions, icons and (in Bristol) the cube markers. Notably, hub elements were not always shown on maps (question 4), although both the Bristol and Birmingham information displays included these at two scales (local and larger area). Answers to the final question shown in Table \ref{tab:definition_details}(how can you travel from here?) were similarly limited, with information displays in Bristol and Birmingham in walking, cycling and bus route descriptions, while the nearby bike routes were also shown in Bristol.  
+
+
+
+
 
 ## Development
 
@@ -2019,17 +2072,14 @@ bristol_totem_pedestal(
 ```  
  
 
-```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "WEMCA (Bristol) hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
 
 ```
 
 
-The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos.
+The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos. 
 
-Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition*.  by: 
-1) adopting an A0 poster size, so as to fit with typical plotter availability; 
-2) shifting to grey scale to reduce costs, which may assist in running trials, co-design or other developmental activities; 
 
 
 
@@ -2060,6 +2110,23 @@ synthesis_poster()
 
 ```
 
+
+
+Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition* by: 1) adopting an A0 poster size, so as to fit with typical plotter availability; 2) shifting to grey scale to reduce costs, which may assist in running trials, co-design or other developmental activities; and 3) explictly answering the five questions identified in the design problem *Definition* phase.  Figure \ref{fig:synthesis_poster} shows an example of the synthesis totem design generated for the Greensborough Square (Bristol).  ALSO INCLUDE AN EXAMPLE FOR ROBUST GALWAY?
+
+The synthesis totem design has eleven elements. These in turn: answer the five design problem questions at large size that might be visible at distance (elements 1 to 5, counting top to bottom); answer the five questions again in detail and at small scale, for when standing close to the totem (elements 6 to 10); and space in the bottom right for branding or agency logos (element 11). Element 1 explicitly calls the facility a "Mobility Hub / Local Travel Point", while Element 2 includes the specific place name and details of the address, including the postal code, such that a user might be able to tell someone else (e.g. on the phone) where they are. This and further details are also shown in Element 6.   
+
+
+1. What is this --- MOBILTY HUB / LOCAL TRAVEL POINT / SHARED TRANSPORT STATION
+2. Where is this --- NAME, 3 WORDS. POSTAL CODE. STREET ADDRESS
+3. What is here and where is it --- MAP OF THE HUB FACILITIES
+4. What is nearby and how can you get there --- REGIONAL MAP
+5. How else can you get around --- BIKE ROUTES, TRANSIT MAP
+
+Locating yourself: INCLUDE WHAT 3 WORDS. POSTAL CODE. STREET ADDRESS
+Locating the hub facilities: 
+Undertanding the surroundings ----- people have mobile phones now ---do we really need a regional map?
+TRANSIT MAP
 
 
 

@@ -506,16 +506,54 @@ hub implementers and maintainers.
 Therefore, overall the problem to be addressed in this design-based
 research is to develop tools that might allow practitioners to: 1)
 produce totem or poster-sized information displays; 2) that clearly show
-hub and surrounding facilities and services and their location; and 3)
+hubs, surrounding facilities and services, and their location; and 3)
 that can be generated rapidly, cheaply and otherwise updated over time
 to reflect changing circumstances.
 
-\subsection{Development}\label{development}
+Based on the cases visited during the \emph{Discovery} phase there
+appears to be five areas mobility hub information displays need to
+address. Firstly, there is a need to identify what it is (e.g.~Mobility
+Hub, Local Travel Point, Public Space). Secondly,
 
-The \emph{Development} phase started with creation of software tools to
-download Open Street Maps data, create local and regional scale maps,
-and combine these with hub inofmration into displays replicating the
-Bristol and Birmingham totems.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is this --- MOBILTY HUB / LOCAL TRAVEL POINT / SHARED TRANSPORT
+  STATION
+\item
+  Where is this --- NAME, 3 WORDS. POSTAL CODE. STREET ADDRESS
+\item
+  What is here and where is it --- MAP OF THE HUB FACILITIES
+\item
+  What is nearby and how can you get there --- REGIONAL MAP
+\item
+  How else can you get around --- BIKE ROUTES, TRANSIT MAP
+\end{enumerate}
+
+Locating yourself: INCLUDE WHAT 3 WORDS. POSTAL CODE. STREET ADDRESS
+Locating the hub facilities: Undertanding the surroundings ----- people
+have mobile phones now ---do we really need a regional map? TRANSIT MAP
+
+\begingroup\fontsize{7}{9}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{1.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|}
+\caption{\label{tab:definition_details}Defining the design problems. Authors' concept.}\\
+\toprule
+\multicolumn{2}{c}{Problem} & \multicolumn{4}{c}{Answers from cases} \\
+\cmidrule(l{3pt}r{3pt}){1-2} \cmidrule(l{3pt}r{3pt}){3-6}
+Question & Purpose & Redbridge & Camden & WEMCA & TWM\\
+\midrule
+What is this? & Define current location as a mobility hub & Mobility or village hub, 'Public Space' & Not answered & Not explictly answered & Local Travel Point\\
+Where is it? & Identify location & Limited & Not answered & Place name & Place name\\
+What is here? & Identify hub elements & Limited & Not answered & Icons, cube markers, description & Icons, description\\
+What is nearby? & Identify nearby services/facilities & Limited & Not answered & Local and regional maps, description & Local and regional maps, description\\
+How can you travel from here? & Identify spatial network context & Not answered & Not answered & Description of bike and bus routes & Description of bus routes\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\subsection{Development}\label{development}
 
 \begin{figure}
 
@@ -526,21 +564,22 @@ Bristol and Birmingham totems.
 \caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_and_birmingham_output}
 \end{figure}
 
-Figure \ref{fig:bristol_and_birmingham_output} shows example output of
-the software that produces hub totems in the style of Bristol (top left)
-and Birmingham (right). Each style includes user-adjustable hub names,
-facility icons and directional indicators at the top. Maps is generated
-for each hub at the local and regional scales, indicating the location
-of nearby transit stops and stations, and highlighting buildings and
-other features (see detail, bottom left). Icon and feature locations are
-drawn directly from the OSM datasets, although the user can select which
-are to be highlighted and labeled. Finally, space is allocated for
-facility description text and logos.
+The \emph{Development} phase started with creation of software tools to
+download Open Street Maps data and use it to replicate the Bristol and
+Birmingham totems, as shown in Figure
+\ref{fig:bristol_and_birmingham_output}. Each style includes
+user-adjustable hub names, facility icons and directional indicators at
+the top. Maps is generated for each hub at the local and regional
+scales, indicating the location of nearby transit stops and stations,
+and highlighting buildings and other features (see detail, Figure
+\ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature
+locations are generated directly from the OSM datasets, although the
+user can select which are to be highlighted and labeled. Finally, space
+is allocated for facility description text and logos.
 
-Figure shows the mobility hub information display. It adapts industry
-practices found in the \emph{Discovery} phase and \emph{Developed} into
-a software tool above. It also responds to the problem \emph{Definition}
-by: 1) adopting an A0 poster size, so as to fit with typical plotter
+Further \emph{Development} involved creation of a \emph{synthesis}
+display format, which responds to the problem \emph{Definition}. by: 1)
+adopting an A0 poster size, so as to fit with typical plotter
 availability; 2) shifting to grey scale to reduce costs, which may
 assist in running trials, co-design or other developmental activities;
 
@@ -554,6 +593,8 @@ implementers. A developmental version is available as an R package at
 \url{https://github.com/James-Reynolds/mobilityHubTools}. This is a
 non-static version, which is expected to continue to be modified as the
 program of research progresses.
+
+APPLICATION TO THE GALWAY ROBUST HUB
 
 \section{Discussion and conclusions}\label{discussion-and-conclusions}
 
