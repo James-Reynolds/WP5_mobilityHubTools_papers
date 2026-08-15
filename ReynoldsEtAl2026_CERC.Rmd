@@ -803,1318 +803,146 @@ bristol_building[[i]] <- bristol_building[[i]][!(bristol_building[[i]] %>% st_ge
 ```
 
 
-```{r mobilityHubTools_package_at_time_of_final_submission, eval = FALSE, echo=FALSE}
-#' Build the base layers of maps as per the Bristol mobility hub example.
-#'
-#' @param amenity osm layers as sf, with crs set to local metres.
-#' @param building osm layers as sf, with crs set to local metres.
-#' @param highway osm layers as sf, with crs set to local metres.
-#' @param leisure osm layers as sf, with crs set to local metres.
-#' @param landuse osm layers as sf, with crs set to local metres.
-#' @param natural osm layers as sf, with crs set to local metres.
-#' @param railway osm layers as sf, with crs set to local metres.
-#' @param waterway osm layers as sf, with crs set to local metres.
-#' @param hub_location sf point with name of mobility hub and location, with crs set to local metres.
-#' @param map_limits a numeric value setting the extents of the map
-#' @param crs_local_metres the crs to use to calculate distances in metres
-#'
-#' @returns a map in the style of the Bristol mobility hubs
-#' @export
-#'
-#' @examples
-bristol_map_base <- function(
-    amenity = rlist::list.load(system.file(
-      "data/greensborough_amenity.rdata", package = "mobilityHubTools")),
-    building = rlist::list.load(system.file(
-      "data/greensborough_building.rdata", package = "mobilityHubTools")),
-    highway = rlist::list.load(system.file(
-      "data/greensborough_highway.rdata", package = "mobilityHubTools")),
-    leisure = rlist::list.load(system.file(
-      "data/greensborough_leisure.rdata", package = "mobilityHubTools")),
-    landuse = rlist::list.load(system.file(
-      "data/greensborough_landuse.rdata", package = "mobilityHubTools")),
-    natural = rlist::list.load(system.file(
-      "data/greensborough_natural.rdata", package = "mobilityHubTools")),
-    railway = rlist::list.load(system.file(
-      "data/greensborough_railway.rdata", package = "mobilityHubTools")),
-    waterway = rlist::list.load(system.file("data/greensborough_waterway.rdata", package = "mobilityHubTools")),
-    hub_location = rlist::list.load(system.file(
-      "data/greensborough_hub_location.rdata", package = "mobilityHubTools")),
-    map_limits = 500,
-    crs_local_metres = 27700
-){
-  map_base <-
-    ggplot2::ggplot() +
-    # white building outlines
-    ggplot2::geom_sf(data = building %>%
-              sf::st_transform(crs = crs_local_metres) %>%
-              sf::st_make_valid() %>%
-              sf::st_crop(hub_location %>%
-                        sf::st_transform(crs = crs_local_metres) %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ),
-            mapping = ggplot2::aes(), fill = "white") +
+The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos. 
 
-    # parks and grassland
-    ggplot2::geom_sf(data = leisure %>%
-              filter(leisure %in% c("garden", "pitch", "park", "dog_park")) %>%
-              sf::st_transform(crs = crs_local_metres) %>%
-              sf::st_make_valid() %>%
-              sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "lightgreen") +
-    ggplot2::geom_sf(data = landuse %>%
-              filter(landuse %in% c("grass", "meadow", "farmyard", "vineyard")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "lightgreen") +
-    ggplot2::geom_sf(data = natural %>%
-                filter(natural %in% c("grassland")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "lightgreen") +
-    ggplot2::geom_sf(data = leisure %>%
-                filter(leisure %in% c("nature_reserve", "golf_course")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "darkgreen") +
-    ggplot2::geom_sf(data = landuse %>%
-              filter(landuse %in% c("forest", "orchard")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "darkgreen") +
-    ggplot2::geom_sf(data = natural %>%
-                filter(natural %in% c("heath", "moor", "scrub", "shrubbery", "wood")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "darkgreen") +
-    ggplot2::geom_sf(data = natural %>%
-                filter(natural %in% c("beach", "dune", "sand")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "yellow") +
-    # waterways
-    ggplot2::geom_sf(data = waterway %>%
-              filter(waterway %in% c("river", "stream", "tidal_channel", "flowline", "canal", "drain", "ditch", "link", "fairway", "dam")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill = "blue") +
-    ggplot2::geom_sf(data = natural %>%
-              filter(natural %in% c("bay", "shoal", "strait", "water", "wetland")) %>%
-              sf::st_make_valid() %>%
-              sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), fill =  "blue")  +
 
-    # roads, trails and railways
-    ggplot2::geom_sf(data = highway %>%
-              filter(highway %in% c("living_street", "motorway", "motorway_link",
-                                    "primary", "primary_link", "residential",
-                                    "secondary", "secondary_link", "service",
-                                    "tertiary", "tertiary_link",
-                                    "trunk", "trunk_link")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), colour = "black") +
-    ggplot2::geom_sf(data = highway %>%
-              filter(highway %in% c("cycleway", "bridleway", "steps", "path")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), colour = "purple") +
-
-    ggplot2::geom_sf(data = railway %>%
-              filter(railway %in% c("rail", "tram")) %>%
-                sf::st_transform(crs = crs_local_metres) %>%
-                sf::st_make_valid() %>%
-                sf::st_crop(hub_location %>%
-                        sf::st_buffer(dist = map_limits) %>%
-                        sf::st_bbox()
-              ), mapping = ggplot2::aes(), colour = "black", linetype = "dashed") +
-    theme(
-      axis.title = element_blank(),
-      axis.text.x=element_blank(), #remove x axis labels
-      axis.ticks.x=element_blank(), #remove x axis ticks
-      axis.text.y=element_blank(),  #remove y axis labels
-      axis.ticks.y=element_blank(), #remove y axis ticks
-      legend.position="none",
-      legend.text = element_text(size = 8),
-      legend.title = element_blank(),
-      legend.key.size = unit(0.5, 'in'),
-    )   +
-    ggspatial::annotation_scale(location = 'br') +
-    ggspatial::annotation_north_arrow()
-
-  return(map_base)
-}
-
-
-#' Build the larger scale local map as per the Bristol mobility hub example.
-#'
-#' @param amenity osm layers as sf, with crs set to local metres.
-#' @param building osm layers as sf, with crs set to local metres.
-#' @param highway osm layers as sf, with crs set to local metres.
-#' @param leisure osm layers as sf, with crs set to local metres.
-#' @param landuse osm layers as sf, with crs set to local metres.
-#' @param natural osm layers as sf, with crs set to local metres.
-#' @param railway osm layers as sf, with crs set to local metres.
-#' @param waterway osm layers as sf, with crs set to local metres.
-#' @param hub_location sf point with name of mobility hub and location, with crs set to local metres.
-#' @param map_limits a numeric value setting the extents of the map
-#' @param crs_local_metres the numeric value representing the crs for local metres
-#' @param highlight_building character values of the names of buildings to be highlighted and labelled on the map
-#' @param highlight_amenity character values of the names of amenities to be labelled on the map
-#' @param highlight_leisure character values of the names of leisure facilities to be labelled on the map
-#'
-#' @returns a ggplot object of a map in the style of the Bristol mobility hubs
-#' @export
-#'
-#' @examples
-bristol_local_map <- function(
-    amenity = rlist::list.load(system.file(
-      "data/greensborough_amenity.rdata", package = "mobilityHubTools")),
-    building = rlist::list.load(system.file(
-      "data/greensborough_building.rdata", package = "mobilityHubTools")),
-    highway = rlist::list.load(system.file(
-      "data/greensborough_highway.rdata", package = "mobilityHubTools")),
-    leisure = rlist::list.load(system.file(
-      "data/greensborough_leisure.rdata", package = "mobilityHubTools")),
-    landuse = rlist::list.load(system.file(
-      "data/greensborough_landuse.rdata", package = "mobilityHubTools")),
-    natural = rlist::list.load(system.file(
-      "data/greensborough_natural.rdata", package = "mobilityHubTools")),
-    railway = rlist::list.load(system.file(
-      "data/greensborough_railway.rdata", package = "mobilityHubTools")),
-    waterway = rlist::list.load(system.file("data/greensborough_waterway.rdata", package = "mobilityHubTools")),
-    hub_location = rlist::list.load(system.file(
-      "data/greensborough_hub_location.rdata", package = "mobilityHubTools")),
-    map_limits = 500,
-    crs_local_metres = 27700,
-    highlight_building = c("North Bristol Advice Centre", "The Hub"),
-    highlight_amenity = c("Stoke Park Primary School",
-                          "Saint Mary Magdalen and Saint Francis Lockleaze",
-                          "St James Church"),
-    highlight_leisure = c("Lockleaze Youth And Play Space",
-                           "Gainsborough Square"),
-    highlight_landuse = c("Bonnington Walk Playing Fields")
-){
-
-
-# wrangle label information
-labels <- hub_location
-labels$name <- "You are here"
-
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(building %>%
-                     select(name) %>%
-                     filter(name %in% highlight_building) %>%
-                     sf::st_centroid()))
-
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(amenity %>%
-                     select(name) %>%
-                     filter(name %in% highlight_amenity) %>%
-                     sf::st_centroid()))
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(leisure %>%
-                     select(name) %>%
-                     filter(name %in% highlight_leisure) %>%
-                     sf::st_centroid()))
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(landuse %>%
-                     select(name) %>%
-                     filter(name %in% highlight_landuse) %>%
-                     sf::st_centroid()))
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(railway %>%
-                     dplyr::filter(railway == "station") %>%
-                     select(name) %>%
-                     sf::st_centroid()))
-
-#build base layers
-map_local <-
-    bristol_map_base(amenity = amenity, building = building, highway = highway,
-                     leisure = leisure, landuse = landuse, natural = natural,
-                     railway = railway, waterway = waterway,
-                     hub_location = hub_location,
-                     map_limits = map_limits, crs_local_metres = crs_local_metres)
-
-
-## build dataframe with transit stops and other locations to be represented by an icon
-# hub location
-icon_locations <- hub_location %>%
-  sf::st_coordinates() %>%
-  as.data.frame()
-icon_locations$icon_filename <- system.file(
-  "extdata/hub_location.png", package = "mobilityHubTools")
-
-# bus stops
-holding <- data.frame(
-  highway[(highway %>% sf::st_geometry_type() == "POINT"),] %>%
-    filter(highway %in% c("bus_stop")) %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_bus.png", package = "mobilityHubTools"))
-) else icon_locations
-# railway stations
-holding <- data.frame(
-  railway %>% filter(railway %in% c("station")) %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_railway.png", package = "mobilityHubTools"))
-) else icon_locations
-# groceries
-holding <- data.frame(
-  building %>% filter(shop %in% c("convenience", "supermarket")) %>%
-    sf::st_centroid() %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_supermarket.png", package = "mobilityHubTools"))
-) else icon_locations
-# food
-holding <- data.frame(
-  amenity %>% filter(amenity %in% c("fast_food", "cafe", "food_court", "restaurant")) %>%
-    sf::st_centroid() %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_food.png", package = "mobilityHubTools"))
-) else icon_locations
-
-## Puting it all together
-# combine base layers with additional layers
-map_local <- map_local +
-
-# Highlight buildings
-ggplot2::geom_sf(data = building %>%
-                   filter(name %in% highlight_building) %>%
-                     sf::st_transform(crs = crs_local_metres) %>%
-                     sf::st_make_valid() %>%
-                     sf::st_crop(hub_location %>%
-                                   sf::st_buffer(dist = map_limits) %>%
-                                   sf::st_bbox()
-                     ),
-                   mapping = ggplot2::aes(), fill = "purple") +
-
-
-#add bus stops, railway stations and other icons
-  ggimage::geom_image(data = icon_locations,
-                      mapping = ggplot2::aes(
-                        x = X, y = Y,
-                        image = icon_filename),
-                      size = 0.01) +
-
-# Hub walking radius
-ggplot2::geom_sf(data = hub_location %>% st_buffer(dist=400), fill = NA, colour = "white", size = 2) +
-
-# hub marker
-ggplot2::geom_sf(data = hub_location, ggplot2::aes(), fill = "red", size = 5) +
-
-
-# Add 5 minute walk radius text
-  ggplot2::geom_sf_label(data = data.frame(
-  x = hub_location %>% sf::st_coordinates() %>% as.data.frame() %>%
-    dplyr::select(X) %>% as.numeric() - 268.7,
-  y =  hub_location %>% sf::st_coordinates() %>% as.data.frame() %>%
-    dplyr::select(Y) %>% as.numeric() + 288.7) %>%
-  sf::st_as_sf(coords = c("x", "y"), crs = crs_local_metres) %>%
-  sf::st_as_sfc(), ggplot2::aes(), label = "5 minute walk", colour = "black", angle = 45) +
-
-  # Add hub location and other text
-  ggrepel::geom_label_repel(
-    data = labels %>%
-      sf::st_transform(crs = crs_local_metres) %>%
-      sf::st_make_valid() %>%
-      sf::st_crop(hub_location %>%
-                    sf::st_buffer(dist = map_limits) %>%
-                    sf::st_bbox()),
-    mapping = ggplot2::aes(label = name, geometry = geometry),
-    stat = "sf_coordinates")
-
-
-
-  return(map_local)
-}
-
-
-#' Build the smaller scale regional map as per the Bristol mobility hub example.
-#'
-#' @param amenity osm layers as sf, with crs set to local metres.
-#' @param building osm layers as sf, with crs set to local metres.
-#' @param highway osm layers as sf, with crs set to local metres.
-#' @param leisure osm layers as sf, with crs set to local metres.
-#' @param landuse osm layers as sf, with crs set to local metres.
-#' @param natural osm layers as sf, with crs set to local metres.
-#' @param railway osm layers as sf, with crs set to local metres.
-#' @param waterway osm layers as sf, with crs set to local metres.
-#' @param hub_location sf point with name of mobility hub and location, with crs set to local metres.
-#' @param map_limits a numeric value setting the extents of the map
-#' @param crs_local_metres the numeric value representing the crs for local metres
-#' @param highlight_building_regional character values of the names of buildings to be highlighted and labelled on the map
-#' @param highlight_amenity_regional character values of the names of amenities to be labelled on the map
-#' @param highlight_leisure_regional character values of the names of leisure facilities to be labelled on the map
-#'
-#' @returns a ggplot object of a map in the style of the Bristol mobility hubs
-#' @export
-#'
-#' @examples
-
-
-bristol_regional_map <- function(
-    amenity = rlist::list.load(system.file(
-      "data/greensborough_amenity.rdata", package = "mobilityHubTools")),
-    building = rlist::list.load(system.file(
-      "data/greensborough_building.rdata", package = "mobilityHubTools")),
-    highway = rlist::list.load(system.file(
-      "data/greensborough_highway.rdata", package = "mobilityHubTools")),
-    leisure = rlist::list.load(system.file(
-      "data/greensborough_leisure.rdata", package = "mobilityHubTools")),
-    landuse = rlist::list.load(system.file(
-      "data/greensborough_landuse.rdata", package = "mobilityHubTools")),
-    natural = rlist::list.load(system.file(
-      "data/greensborough_natural.rdata", package = "mobilityHubTools")),
-    railway = rlist::list.load(system.file(
-      "data/greensborough_railway.rdata", package = "mobilityHubTools")),
-    waterway = rlist::list.load(system.file("data/greensborough_waterway.rdata", package = "mobilityHubTools")),
-    hub_location = rlist::list.load(system.file(
-      "data/greensborough_hub_location.rdata", package = "mobilityHubTools")),
-    map_limits = 1500,
-    crs_local_metres = 27700,
-    highlight_building_regional = c("Horfield Library", "Horfield Health Centre"),
-    highlight_amenity_regional = c("nill"),
-    highlight_leisure_regional = c("Bristol County Ground"),
-    highlight_landuse_regional = c("Bonnington Walk Playing Fields"))
-  {
-
-
-# wrangle label information
-
-labels <- hub_location
-labels$name <- "You are here"
-
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(building %>%
-                     select(name) %>%
-                     filter(name %in% highlight_building_regional) %>%
-                     sf::st_centroid()))
-
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(amenity %>%
-                     select(name) %>%
-                     filter(name %in% highlight_amenity_regional) %>%
-                     sf::st_centroid()))
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(leisure %>%
-                     select(name) %>%
-                     filter(name %in% highlight_leisure_regional) %>%
-                     sf::st_centroid()))
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(landuse %>%
-                     select(name) %>%
-                     filter(name %in% highlight_landuse_regional) %>%
-                     sf::st_centroid()))
-
-labels <- labels %>%
-  tibble::add_row(
-    tibble::tibble(railway %>%
-                     dplyr::filter(railway == "station") %>%
-                     select(name) %>%
-                     sf::st_centroid()))
-
-
-### OPTION TO Add cycleway names, but only one in every 20 so as to limit density
-### Still might be a bit messy and probably better to add this text to the regional map manually
-#labels <- labels %>%
-#  tibble::add_row(
-#    tibble::tibble(highway %>%
-#                     filter(highway == "cycleway") %>%
-#                     select(name)  %>%
-#                     filter(!is.na(name)) %>%
-#                     sf::st_centroid())[1:nrow(
-#                       highway %>%
-#                         filter(highway == "cycleway") %>%
-#                         select(name)  %>%
-#                         filter(!is.na(name))
-#                       )%%20!=0,]
-#)
-
-
-
-## build dataframe with transit stops and other locations to be represented by an icon
-# hub location
-icon_locations <- hub_location %>%
-  sf::st_coordinates() %>%
-  as.data.frame()
-icon_locations$icon_filename <- system.file(
-  "extdata/hub_location.png", package = "mobilityHubTools")
-
-# railway stations
-holding <- data.frame(
-  railway %>% filter(railway %in% c("station")) %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_railway.png", package = "mobilityHubTools"))
-) else icon_locations
-# groceries
-holding <- data.frame(
-  building %>% filter(shop %in% c("convenience", "supermarket")) %>%
-    sf::st_centroid() %>%
-    sf::st_transform(crs = crs_local_metres) %>%
-    sf::st_make_valid() %>%
-    sf::st_crop(hub_location %>%
-                  sf::st_buffer(dist = map_limits) %>%
-                  sf::st_bbox()) %>%
-    st_coordinates())
-icon_locations <- if(nrow(holding) > 0) icon_locations %>% tibble::add_row(
-  holding %>% tibble::add_column(
-    icon_filename = system.file("extdata/bristol_supermarket.png", package = "mobilityHubTools"))
-) else icon_locations
-
-
-
-#build base layers - but only include highlighted buildings and
-# cycle routes, and exclude smaller roads
-map_regional <-
-    bristol_map_base(amenity = amenity,
-                     building = building %>%
-                       dplyr::arrange(name) %>%
-                       filter(name %in% highlight_building_regional),
-                     highway = highway %>%
-                       filter(highway %in% c(
-                         "motorway", "motorway_link",
-                         "primary", "primary_link",
-                         "residential",
-                         "secondary", "secondary_link",
-                         "tertiary",
-                         "tertiary_link",
-                         "trunk", "trunk_link")) ,
-                     leisure = leisure, landuse = landuse, natural = natural,
-                     railway = railway, waterway = waterway,
-                     hub_location = hub_location,
-                     map_limits = 1500, crs_local_metres = crs_local_metres)
-
-# combine base layers with additional layers
-map_regional <- map_regional +
-
-# add named cycleways
-ggplot2::geom_sf(data = highway %>%
-                   filter(highway == "cycleway") %>%
-                   filter(!is.na(name))  %>%
-                   sf::st_transform(crs = crs_local_metres) %>%
-                   sf::st_make_valid() %>%
-                   sf::st_crop(hub_location %>%
-                                 sf::st_buffer(dist = map_limits) %>%
-                                 sf::st_bbox()
-                   ),
-                 mapping = ggplot2::aes(), linetype = 2) +
-
-# Highlight buildings
-ggplot2::geom_sf(data = amenity %>% filter(name %in% highlight_amenity_regional) %>%
-                     sf::st_transform(crs = crs_local_metres) %>%
-                     sf::st_make_valid() %>%
-                     sf::st_crop(hub_location %>%
-                                   sf::st_buffer(dist = map_limits) %>%
-                                   sf::st_bbox()
-                     ),
-                   mapping = ggplot2::aes(), fill = "purple") +
-
-  ggplot2::geom_sf(data = building %>% filter(name %in% highlight_building_regional) %>%
-                     sf::st_transform(crs = crs_local_metres) %>%
-                     sf::st_make_valid() %>%
-                     sf::st_crop(hub_location %>%
-                                   sf::st_buffer(dist = map_limits) %>%
-                                   sf::st_bbox()
-                     ),
-                   mapping = ggplot2::aes(), fill = "purple") +
-
-
-
-#add railway stations and other icons
-  ggimage::geom_image(data = icon_locations,
-                      mapping = ggplot2::aes(
-                        x = X, y = Y,
-                        image = icon_filename),
-                      size = 0.03) +
-
-
-# Hub walking radius
-ggplot2::geom_sf(data = hub_location %>% st_buffer(dist=1500), fill = NA, colour = "white", size = 2) +
-
-# hub marker
-ggplot2::geom_sf(data = hub_location, ggplot2::aes(), fill = "red", size = 5) +
-
-
-  # Add hub location and other text
-  ggrepel::geom_label_repel(
-    data = labels %>%
-      sf::st_transform(crs = crs_local_metres) %>%
-      sf::st_make_valid() %>%
-      sf::st_crop(hub_location %>%
-                    sf::st_buffer(dist = map_limits) %>%
-                    sf::st_bbox()),
-    mapping = ggplot2::aes(label = stringr::str_wrap(name, 20),
-                           geometry = geometry),
-    nudge_y = 50,
-    size = 2,
-    stat = "sf_coordinates") +
-
-
-# Add 15 minute walk radius text
-ggplot2::geom_sf_label(data = data.frame(
-  x = hub_location %>% sf::st_coordinates() %>% as.data.frame() %>%
-    dplyr::select(X) %>% as.numeric() - 1100,
-  y =  hub_location %>% sf::st_coordinates() %>% as.data.frame() %>%
-    dplyr::select(Y) %>% as.numeric() + 1100) %>%
-    sf::st_as_sf(coords = c("x", "y"), crs = crs_local_metres) %>%
-    sf::st_as_sfc(), ggplot2::aes(), label = "15 minute walk", colour = "black", angle = 45)
-
-
-  return(map_regional)
-}
-
-#' Builds a totem pedestral sign in the style of Bristol mobility hubs
-#'
-#' @param file_to_save_to a character string of the file to save the png to
-#' @param hub_name_text the name of the hub
-#' @param icons_to_include_in_header a list of 10 strings of the location of the icons to include in the header, including blanks
-#' @param directions_image a character string of the location of an image showing directions
-#' @param map_local the output of the bristol_map_local function
-#' @param facilities_image a character string of the location of an image showing details of the hub facilities
-#' @param map_regional the output of the bristol_map_regional function
-#' @param logo_image a character string of the location of an image showing agency logos
-#' @returns nothing, but outputs a png to the named file
-#' @export
-#'
-#' @examples
-bristol_totem_pedestal <- function(
-    file_to_save_to = "layout_test.pdf",
-    hub_name_text = "Gainsborough Square",
-    icons_to_include_in_header = list(
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_charging.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-      system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
-    directions_image = system.file(
-      "extdata/bristol_greensborough_directions.png", package = "mobilityHubTools"),
-    map_local = map_local_test,
-    facilities_image =  system.file(
-      "extdata/bristol_facilities.png", package = "mobilityHubTools"),
-    map_regional = map_regional_test,
-    logo_image =  system.file(
-      "extdata/bristol_blank.png", package = "mobilityHubTools")
-    )
-{
-
-grid::grid.rect(gp = grid::gpar(lty = "dashed"))
-hub_name_viewport <- grid::viewport(x = 0, y = 11.5/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_name_viewport")
-hub_facilities_viewport <- grid::viewport(x = 0, y = 11/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_facilities_viewport")
-direction_information <- grid::viewport(x = 0, y = 10/12, w = 1, h = 1/12, just = c("left", "bottom"), name = "directional_information_viewport")
-local_map_viewport <- grid::viewport(x = 0, y = 5/12, w = 1, h = 5/12, just = c("left", "bottom"), name = "local_map_viewport")
-hub_facilities_viewport_details <- grid::viewport(x = 0, y = 3/12, w = 5/9, h = 2/12, just = c("left", "bottom"), name = "hub_facilities_viewport_details")
-regional_map_viewport <- grid::viewport(x = 5/9, y = 3/12, w = 4/9, h = 2/12, just = c("left", "bottom"), name = "regional_map_viewport")
-logos_viewport <- grid::viewport(x = 5/9, y = 2/12, w = 4/9, h = 1/12, just = c("left", "bottom"), name = "logos_viewport")
-
-grid::pushViewport(hub_name_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text(hub_name_text, y = 0.5)
-grid::upViewport()
-grid::pushViewport(hub_facilities_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Hub icons go here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(direction_information)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Direction information goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(local_map_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Local Map goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(hub_facilities_viewport_details)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Hub facility details", y = 0.5)
-grid::upViewport()
-grid::pushViewport(regional_map_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("Area Map goes here", y = 0.5)
-grid::upViewport()
-grid::pushViewport(logos_viewport)
-grid::grid.rect(gp = grid::gpar(col = "grey"))
-grid::grid.text("logos_viewport etc", y = 0.5)
-grid::popViewport()
-
-
-
-grid::grid.rect(gp = grid::gpar(lty = "blank"))
-
-r <- grid::rectGrob(gp=grid::gpar(fill="darkgreen"))
-
-#Define layout
-gs <- lapply(1:9, function(ii)
-  grid::grobTree(
-    grid::rectGrob(gp=grid::gpar(fill=ii, alpha=0.5)), grid::textGrob(ii)))
-gridExtra::grid.arrange(grobs=gs, ncol=9,
-             top="top label", bottom="bottom\nlabel",
-             left="left label", right="right label")
-grid::grid.rect(gp=grid::gpar(fill=NA))
-
-
-#Define hub name at top
-hub_name_viewport <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="darkgreen")), grid::textGrob(hub_name_text, gp=grid::gpar(fontsize=60, col="white", fontface="bold", lty = "blank")))
-gs[[1]] <- gridExtra::grid.arrange(hub_name_viewport)
-
-
-#Wrangle icons below hub name
-image <- lapply(icons_to_include_in_header, function (x) grid::rasterGrob(magick::image_read(x)))
-grob_1 <- image[[1]]
-grob_2 <- image[[2]]
-grob_3 <- image[[3]]
-grob_4 <- image[[4]]
-grob_5 <- image[[5]]
-grob_6 <- image[[6]]
-grob_7 <- image[[7]]
-grob_8 <- image[[8]]
-grob_9 <- image[[9]]
-grob_10 <- image[[10]]
-
-gs[[2]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="darkgreen", lty = 1)),
-                          gridExtra::grid.arrange(grob_1, grob_2, grob_3, grob_4, grob_5, grob_6,
-                                 grob_7, grob_8, grob_9, grob_10,
-                                 ncol = 10)
-                    )
-
-# Insert directions image below hub name and icons
-gs[[3]] <- grid::grobTree(grid::rectGrob(gp=gpar(fill="darkgreen", lty = 1)),
-                          gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                      directions_image)),
-                      ncol = 1)
-                    )
-
-gs[[4]] <- map_local
-# Insert facilities description image below hub name and icons
-gs[[5]] <- rasterGrob(magick::image_read(facilities_image))
-
-gs[[6]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="darkgreen", lty = 1)))
-gs[[7]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="darkgreen", lty = 1)))
-gs[[8]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="darkgreen", lty = "blank")),
-                    gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                      logo_image)),
-                      ncol = 1)
-)
-gs[[9]] <- map_regional
-
-
-
-# 24 rows, each roughly 100mm high
-# 5 columns, each roughly 200mm wide
-lay <- rbind(c(1,1,1,1,1),
-             c(1,1,1,1,1),
-             c(2,2,2,2,2),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(3,3,3,3,3),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(4,4,4,4,4),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(5,5,5,9,9),
-             c(6,6,7,8,8))
-gridExtra::grid.arrange(grobs = gs, layout_matrix = lay)
-grDevices::dev.copy2pdf(file = file_to_save_to, width = 17, height = 40.8, fonts = NULL)
-grDevices::dev.off()
-
-
-}
-
-
-#' Builds a totem pedestral sign in the style of Birmingham Local Travel Point
-#'
-#' @param file_to_save_to a character string of the file to save the png to
-#' @param hub_name_text the name of the hub
-#' @param icons_to_include_in_header a list of 5 strings of the location of the icons to include in the header, including blanks
-#' @param directions_image a character string of the location of an image showing directions
-#' @param map_local ggplot of the local map to include
-#' @param points_of_interest_image a character string of the location of an image showing points of interest
-#' @param map_regional ggplot of the regional map to include
-#' @param logo_image a character string of the location of an image showing agency logos
-#' @returns nothing, but outputs a png to the named file
-#' @export
-#'
-#' @examples
-birmingham_totem_pedestal <- function(
-    file_to_save_to = "layout_test.pdf",
-    hub_name_text = "Andrew Road",
-    icons_to_include_in_header = list(
-      system.file(
-      "extdata/birmingham_icon_hub.png", package = "mobilityHubTools"),
-      system.file(
-        "extdata/birmingham_icon_bike.png", package = "mobilityHubTools"),
-      system.file(
-        "extdata/birmingham_icon_bus.png", package = "mobilityHubTools"),
-      system.file(
-        "extdata/birmingham_icon_blank.png", package = "mobilityHubTools"),
-      system.file(
-      "extdata/birmingham_icon_blank.png", package = "mobilityHubTools")),
-    directions_image = system.file(
-      "extdata/birmingham_directions.png", package = "mobilityHubTools"),
-    map_local = map_local_test,
-    points_of_interest_image =  system.file(
-      "extdata/bristol_facilities.png", package = "mobilityHubTools"),
-    map_regional = map_regional_test,
-    logo_image =  system.file(
-      "extdata/bristol_blank.png", package = "mobilityHubTools")
-)
-{
-
-  grid::grid.rect(gp = grid::gpar(lty = "dashed"))
-  hub_name_viewport <- grid::viewport(x = 0, y = 11.5/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_name_viewport")
-  hub_facilities_viewport <- grid::viewport(x = 0, y = 11/12, w = 1, h = 0.5/12, just = c("left", "bottom"), name = "hub_facilities_viewport")
-  direction_information <- grid::viewport(x = 0, y = 10/12, w = 1, h = 1/12, just = c("left", "bottom"), name = "directional_information_viewport")
-  local_map_viewport <- grid::viewport(x = 0, y = 5/12, w = 1, h = 5/12, just = c("left", "bottom"), name = "local_map_viewport")
-  hub_facilities_viewport_details <- grid::viewport(x = 0, y = 3/12, w = 5/9, h = 2/12, just = c("left", "bottom"), name = "hub_facilities_viewport_details")
-  regional_map_viewport <- grid::viewport(x = 5/9, y = 3/12, w = 4/9, h = 2/12, just = c("left", "bottom"), name = "regional_map_viewport")
-  logos_viewport <- grid::viewport(x = 5/9, y = 2/12, w = 4/9, h = 1/12, just = c("left", "bottom"), name = "logos_viewport")
-
-  grid::pushViewport(hub_name_viewport)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text(hub_name_text, y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(hub_facilities_viewport)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("Hub icons go here", y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(direction_information)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("Direction information goes here", y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(local_map_viewport)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("Local Map goes here", y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(hub_facilities_viewport_details)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("Hub facility details", y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(regional_map_viewport)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("Area Map goes here", y = 0.5)
-  grid::upViewport()
-  grid::pushViewport(logos_viewport)
-  grid::grid.rect(gp = grid::gpar(col = "white"))
-  grid::grid.text("logos_viewport etc", y = 0.5)
-  grid::popViewport()
-
-
-
-  grid::grid.rect(gp = grid::gpar(lty = "blank"))
-
-  r <- grid::rectGrob(gp=grid::gpar(fill="white"))
-
-  #Define layout
-  gs <- lapply(1:8, function(ii)
-    grid::grobTree(
-      grid::rectGrob(gp=grid::gpar(fill=ii, alpha=0.5)), grid::textGrob(ii)))
-  gridExtra::grid.arrange(grobs=gs, ncol=9,
-                          top="top label", bottom="bottom\nlabel",
-                          left="left label", right="right label")
-  grid::grid.rect(gp=grid::gpar(fill=NA))
-
-
-  #Wrangle icons above hub name
-  image <- lapply(icons_to_include_in_header, function (x) grid::rasterGrob(magick::image_read(x)))
-  grob_1 <- image[[1]]
-  grob_2 <- image[[2]]
-  grob_3 <- image[[3]]
-  grob_4 <- image[[4]]
-  grob_5 <- image[[5]]
-
-  gs[[1]] <- grid::grobTree(
-    grid::rectGrob(gp=grid::gpar(fill="white", lty = 1)),
-    gridExtra::grid.arrange(
-      grob_1, grob_2, grob_3, grob_4, grob_5,
-      ncol = 5)
-  )
-
-  #Insert Local Travel Point branding
-  hub_name_viewport <- grid::grobTree(
-    grid::rectGrob(
-      gp=grid::gpar(fill="white")),
-    grid::textGrob(
-      "Local Travel Point",
-      ,
-      gp=grid::gpar(
-        fontsize=50, col = "black", fontface="bold", lty = "blank")))
-  gs[[2]] <- gridExtra::grid.arrange(hub_name_viewport)
-
-
-
-
-  #Define hub name
-  hub_name_viewport <- grid::grobTree(
-    grid::rectGrob(
-      gp=grid::gpar(fill="white")),
-    grid::textGrob(
-      hub_name_text,
-      gp=grid::gpar(
-        fontsize=70, col = "black", fontface="bold", lty = "blank")))
-  gs[[3]] <- gridExtra::grid.arrange(hub_name_viewport)
-
-
-
-  # Insert directions image below hub name and icons
-  gs[[4]] <- grid::grobTree(grid::rectGrob(gp=gpar(fill="white", lty = 1)),
-                            gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                              directions_image)),
-                              ncol = 1))
-
-  gs[[5]] <- map_local
-  # Insert facilities description image below hub name and icons
-  gs[[6]] <- map_regional
-  gs[[7]] <- rasterGrob(magick::image_read(points_of_interest_image))
-  gs[[8]] <- grid::grobTree(grid::rectGrob(gp=grid::gpar(fill="white", lty = "blank")),
-                            gridExtra::grid.arrange(rasterGrob(magick::image_read(
-                              logo_image)),
-                              ncol = 1)
-  )
-
-
-
-
-  # 24 rows, each roughly 100mm high
-  # 5 columns, each roughly 200mm wide
-  lay <- rbind(c(1,1,1,1,1),
-               c(1,1,1,1,1),
-               c(2,2,2,2,2),
-               c(3,3,3,3,3),
-               c(4,4,4,4,4),
-               c(4,4,4,4,4),
-               c(4,4,4,4,4),
-               c(4,4,4,4,4),
-               c(4,4,4,4,4),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(5,5,5,5,5),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(6,6,6,6,6),
-               c(7,7,7,7,7),
-               c(7,7,7,7,7),
-               c(7,7,7,7,7),
-               c(7,7,7,7,7),
-               c(7,7,7,7,7),
-               c(8,8,8,8,8),
-               c(8,8,8,8,8))
-  gridExtra::grid.arrange(grobs = gs, layout_matrix = lay)
-  grDevices::dev.copy2pdf(file = file_to_save_to, width = 11, height = 40.8, fonts = NULL)
-  grDevices::dev.off()
-
-
-}
-
-
-
-```
-
-```{r bristol_maps_generation, eval = FALSE, echo=FALSE}
-
-i <- 1
-
-highlight_building <- list(
-  abbey_wood = c("Asda", "Travelodge", "Sainsbury's", "Aldi", "Premier Inn", "Holiday Inn Express"), 
-  UWE_Frenchay = c("	Hewlett Packard Enterprise", "Bristol Robotics Laboratory (T)", "Centre for Sport", "Bristol Business School (X)", "School of Engineering (Z)", "Halley Nursery", "Exhibition and Conference Centre", "Students' Union 2", "Students' Union", "Northavon House"),
-  horfield_library = c("Horfield Library", "Horfield Leisure Centre"),
-  gainsborough_square = c("North Bristol Advice Centre", "The Hub")
-)
-highlight_amenity <- list(
-  abbey_wood = c("SGS College (WISE Campus)", "City of Bristol College (Parkway Centre)"),
-  UWE_Frenchay = c("Bristol Business Park", "Filton Cemetery", "Frenchay Campus Library"),
-  horfield_library = c("nill"),
-  gainsborough_square = c("Stoke Park Primary School",
-                          "Saint Mary Magdalen and Saint Francis Lockleaze",
-                          "St James Church")
-)
-highlight_leisure <- list(
-  abbey_wood = c("Stoke Gifford Stadium"),
-  UWE_Frenchay = c("nill"),
-  horfield_library = c("nill"),
-  gainsborough_square = c("Lockleaze Youth And Play Space",
-                           "Gainsborough Square")
-)
-highlight_landuse <- list(
-  abbey_wood = c("Abbey Wood Shopping Park"), 
-  UWE_Frenchay = c("Filton Cemetery"),
-  horfield_library = c("nill"),
-  gainsborough_square = c("nill")
-)
-
-highlight_building_regional <- list(
-  abbey_wood = c("Elm Park Leisure Centre"), 
-  UWE_Frenchay = c("Centre for Sport", "Bristol Golf Centre"),
-  horfield_library = c("Horfield Health Centre", "Horfield Library"),
-  gainsborough_square = c("Horfield Library", "Horfield Health Centre")
-)
-highlight_amenity_regional <- list(
-  abbey_wood = c("SGS College (WISE Campus)", "City of Bristol College (Parkway Centre)", "SGS College (Filton Campus)", "University of the West of England (Frenchay Campus)"),
-  UWE_Frenchay = c("Abbey Wood Shopping Park", "SGS College (WISE Campus)", 	"University of the West of England (Frenchay Campus)", "University of the West of England"),
-  horfield_library = c("nill"),
-  gainsborough_square = c("nill")
-)
-highlight_leisure_regional <- list(
-  abbey_wood = c("Northville Millennium Green"),
-  UWE_Frenchay = c("nill"),
-  horfield_library = c("Southmead Hospital"),
-  gainsborough_square = c("Bristol County Ground")
-)
-highlight_landuse_regional <- list(
-  abbey_wood = c("Abbey Wood Shopping Park"), 
-  UWE_Frenchay = c("nill"),
-  horfield_library = c("nill"),
-  gainsborough_square = c("nill")
-)
-
-
-file_to_save_to <- list(
-  abbey_wood = "results/abbey_wood.pdf", 
-  UWE_Frenchay = "results/UWE_Frenchay.pdf",
-  horfield_library = "results/horfield_library.pdf",
-  gainsborough_square = "results/gainsborough_square.pdf"
-  )
-
-
-hub_name_text <- list(
-  abbey_wood = "Abbey Wood Shopping Park", 
-  UWE_Frenchay = "UWE Frenchay",
-  horfield_library = "Horfield Library",
-  gainsborough_square = "Gainsborough Square"
-  )
-
-icons_to_include_in_header <- list(
-  abbey_wood = list(
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
-  UWE_Frenchay = list(
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
-  horfield_library = list(
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_share_car.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_charging.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools")),
-  gainsborough_square = list(
-    system.file("extdata/bristol_bus.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_bike_parking.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_bike_repair.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_escooter.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_ebike.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_toilets.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_accessible_WC.png", package = "mobilityHubTools"), 
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-    system.file("extdata/bristol_blank.png", package = "mobilityHubTools"))
-
-)
-
-
-directions_image = list(
-  abbey_wood = system.file("extdata/bristol_greensborough_directions.png", package
-    = "mobilityHubTools"),
-  UWE_Frenchay = system.file("extdata/bristol_greensborough_directions.png", package
-    = "mobilityHubTools"),
-  horfield_library = system.file("extdata/bristol_greensborough_directions.png", package
-    = "mobilityHubTools"),
-  gainsborough_square = system.file("extdata/bristol_greensborough_directions.png", package
-    = "mobilityHubTools"))
-  
-facilities_image = list(
-  abbey_wood = system.file("extdata/bristol_facilities.png", package =
-    "mobilityHubTools"),
-  UWE_Frenchay = system.file("extdata/bristol_facilities.png", package =
-    "mobilityHubTools"),
-  horfield_library = system.file("extdata/bristol_facilities.png", package =
-    "mobilityHubTools"),
-  gainsborough_square = system.file("extdata/bristol_facilities.png", package =
-    "mobilityHubTools"))
-  
-logo_image = list(
-  abbey_wood = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-  UWE_Frenchay = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-  horfield_library = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"),
-  gainsborough_square = system.file("extdata/bristol_blank.png", package = "mobilityHubTools"))
-
-
-for(i in seq(1:length(bristol_hub_location))){
-
-# create dataframe with other hubs   
-  other_hubs_as_dataframe <- bristol_hub_location[[i]] 
-other_hubs_as_dataframe[1,] <- NA
-  for(j in seq(1:length(bristol_hub_location))){
-    if (j != i) other_hubs_as_dataframe <- other_hubs_as_dataframe %>%
-        add_row(bristol_hub_location[[j]])
-  }
-other_hubs_as_dataframe <- other_hubs_as_dataframe %>% 
-  drop_na()
-  
-map_local_test <- bristol_local_map(
-  amenity = bristol_amenity[[i]], 
-  building = bristol_building[[i]], 
-  highway = bristol_highway[[i]], 
-  leisure = bristol_leisure[[i]], 
-  landuse = bristol_landuse[[i]], 
-  natural = bristol_natural[[i]],  
-  railway = bristol_railway[[i]], 
-  waterway = bristol_waterway[[i]], 
-  hub_location = bristol_hub_location[[i]], 
-  highlight_building = highlight_building[[i]],
-  highlight_amenity = highlight_amenity[[i]], 
-  highlight_leisure = highlight_leisure[[i]],
-  highlight_landuse = highlight_landuse[[i]]) 
-
-#Add any of the other hubs that are close enough to be in the map
-hub_location = bristol_hub_location[[i]]
-map_local_test <- map_local_test +
-ggplot2::geom_sf(data = other_hubs_as_dataframe %>%
-                   sf::st_transform(crs = crs_local_metres) %>%
-                   sf::st_make_valid() %>%
-                   sf::st_crop(hub_location %>%
-                                 sf::st_buffer(dist = 500) %>%
-                                 sf::st_bbox()
-                   ),
-                 mapping = ggplot2::aes()) +
-  ggrepel::geom_label_repel(
-    data = other_hubs_as_dataframe %>%
-      sf::st_transform(crs = crs_local_metres) %>%
-      sf::st_make_valid() %>%
-      sf::st_crop(hub_location %>%
-                    sf::st_buffer(dist = 500) %>%
-                    sf::st_bbox()),
-    mapping = ggplot2::aes(label = stringr::str_wrap(name, 20),
-                           geometry = geometry),
-    nudge_y = 50,
-    size = 2,
-    stat = "sf_coordinates") 
-
-
-map_regional_test <- bristol_regional_map(
-  amenity = bristol_amenity[[i]], 
-  building = bristol_building[[i]], 
-  highway = bristol_highway[[i]], 
-  leisure = bristol_leisure[[i]], 
-  landuse = bristol_landuse[[i]], 
-  natural = bristol_natural[[i]],  
-  railway = bristol_railway[[i]], 
-  waterway = bristol_waterway[[i]], 
-  hub_location = bristol_hub_location[[i]],
-  highlight_building_regional = highlight_building_regional[[i]],
-  highlight_amenity_regional = highlight_amenity_regional[[i]], 
-  highlight_leisure_regional = highlight_leisure_regional[[i]], 
-  highlight_landuse_regional = highlight_landuse_regional[[i]]) 
-
-
-map_regional_test <- map_regional_test +
-ggplot2::geom_sf(data = other_hubs_as_dataframe %>%
-                   sf::st_transform(crs = crs_local_metres) %>%
-                   sf::st_make_valid() %>%
-                   sf::st_crop(hub_location %>%
-                                 sf::st_buffer(dist = 1500) %>%
-                                 sf::st_bbox()
-                   ),
-                 mapping = ggplot2::aes()) +
-  ggrepel::geom_label_repel(
-    data = other_hubs_as_dataframe %>%
-      sf::st_transform(crs = crs_local_metres) %>%
-      sf::st_make_valid() %>%
-      sf::st_crop(hub_location %>%
-                    sf::st_buffer(dist = 1500) %>%
-                    sf::st_bbox()),
-    mapping = ggplot2::aes(label = stringr::str_wrap(name, 20),
-                           geometry = geometry),
-    nudge_y = 50,
-    size = 2,
-    stat = "sf_coordinates") 
-
-
-
-bristol_totem_pedestal(
-  file_to_save_to = file_to_save_to[[i]],
-  hub_name_text = hub_name_text[[i]],
-  icons_to_include_in_header = icons_to_include_in_header[[i]],
-  directions_image = directions_image[[i]],
-  map_local = map_local_test,
-  facilities_image = facilities_image[[i]],
-  map_regional = map_regional_test,
-  logo_image = logo_image[[i]]
-)
-}
-
-
-```  
- 
-
-```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "WEMCA (Bristol) hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
 knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
 
 ```
 
 
-The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos. 
-
-
-
-
 
 ```{r load_test_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
 
-test_amenity <- bristol_amenity["gainsborough_square"]
-test_building <- bristol_building["gainsborough_square"]
-test_highway <- bristol_highway["gainsborough_square"]
-test_railway <- bristol_railway["gainsborough_square"]
-test_hub_location <- bristol_hub_location["gainsborough_square"]
+synthesis_totem()
 
+```
+
+```{r synthesis_totem_galway, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+synthesis_totem(
+    file_to_save_to = "galway_layout_test.pdf",
+    element1_what_is_this_top_text = "Mobility Hub / Local Travel Point",
+    element2_where_is_it_top_text = "Westside",
+    element2_where_is_it_top_text_detail = "Seamus Quirke Road, H91 C1KX",
+
+       element3_what_is_here_top = list(
+      system.file(
+        "extdata/bus_stop.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle_parking.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/rental_bicycle.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle-electric-2.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/shared-car-14.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/charging_station.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/toilets.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools")),
+
+    element4_up_what_is_nearby = "",
+    element4_left_what_is_nearby = "\U2190 Westide Resource Centre \n\U2190 Westside Public Library",
+    element4_right_what_is_nearby = "\U2192 Buses: Routes 405, 411 and 412 ",
+    element4_layout_matrix = rbind(c(1,1,1,1,1),
+                                   c(2,2,2,2,2),
+                                   c(3,3,3,3,3)),
+    element5_regional_map = synthesis_regional_map(
+      building = rlist::list.load(
+        "~/WP5_mobilityHubTools_papers/data/buildings.rdata")$galway, 
+      amenity = rlist::list.load(system.file(
+      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    highway = rlist::list.load(system.file(
+      "data/greensborough_highway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    leisure = rlist::list.load(system.file(
+      "data/greensborough_leisure.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    landuse = rlist::list.load(system.file(
+      "data/greensborough_landuse.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    natural = rlist::list.load(system.file(
+      "data/greensborough_natural.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    waterway = rlist::list.load(system.file(
+      "data/greensborough_waterway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+    railway = rlist::list.load(system.file(
+      "data/greensborough_railway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
+      hub_location = tibble::tibble(
+        lat = c(53.277352),
+        lon = c(-9.073269),
+        name = c("Westside")) %>% 
+        sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+      sf::st_transform(crs =  2157) %>%
+      sf::st_cast("POINT"), 
+      map_limits = 1500, 
+      crs_local_metres = 2157, 
+      annotation_map_tile_type = "osm", 
+      annotation_map_zoom = 14,
+      highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius", "Old Fever Hospital"), 
+      highlight_amenity_regional = c("Galway Cathedral"), 
+      highlight_leisure_regional = c(NA), 
+      highlight_landuse_regional = c(NA)),
+    element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point,\n a location where shared mobility and other services\n offer a range of options to support sustainable travel. \n\nWhat is here: (see left)\nThis mobility hub includes nearby bus stops,\n bicycle parking and a repair station, \n shared scooters and electric bikes, and toilets (in the Hub).",
+    element7_hub_elements_map = synthesis_hub_elements_map(),
+    element8_what_is_this_bottom_text = "How can you travel from here: (see maps below) \nBuses 24, 77 northbound leave from Gainsborough Square Stop A (left and across the square),\nBuses 24, 72 and 73 eastbound leave from Gainsbourough Square Stop B (in front of you).\n Buses 24, 72 westbound leave from a stop in Cameron Walk (to your right)  \n Ashley Down and Filton Abbey Wd Railway Stations are around a 15 minute walk away (see map below centre).\n The Frome Valley Greenway and Concorde Way are also nearby (see map below right).",
+    element9_hub_surrounds_map = synthesis_hub_surrounds_map(),
+    element10_what_is_this_bottom_text = "What is nearby: (see maps above)\nThe Hub is accross the street behind you.  \nThe North Bristol Advice Centre is across Gainsborough Square to your left.\nShops, food and services are also across Gainborough Square.\nTo get to St James Church go right along Cameron Walk\n until you get to Romney Avenue.
+\n \nWhere am I:\n Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and the longitude is -2.5627.\nwhat3words.com calls this location hero.blend.sock\n\n ",
+
+    element11_transport_map_small = synthesis_hub_surrounds_map(
+  map_limits = 100,
+  annotation_map_zoom = 17,
+  annotation_map_type = "osmtransport",
+  highlight_building = ""),
+
+    element12_transport_map_large = synthesis_hub_surrounds_map(
+  map_limits = 2000,
+  annotation_map_zoom = 13,
+  annotation_map_type = "osmtransport",
+  highlight_building = ""),
+
+    element13_cycle_map = synthesis_hub_surrounds_map(
+  map_limits = 2000,
+  annotation_map_zoom = 13,
+  annotation_map_type = "opencycle",
+  highlight_building = ""),
+
+    element14_acknowledgements_text = "Map data from OpenStreetMap, available under the Open Database License. \n © OpenStreetMap contributors. See openstreetmap.org/copyright \n \n Map tiles from: OSM standard layer © OpenStreetMap contributors.; \n and Thunderforest Open CycleMap and Transport layers by Andy Allan, https://www.thunderforest.com/"
+)
 
 
 ```
 
-```{r synthesis_poster, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
-
-synthesis_poster()
 
 
-
-
-
-
-
-
+```{r synthesis_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
 
 ```
 
 
 
-Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition* by: 1) adopting an A0 poster size, so as to fit with typical plotter availability; 2) shifting to grey scale to reduce costs, which may assist in running trials, co-design or other developmental activities; and 3) explictly answering the five questions identified in the design problem *Definition* phase.  Figure \ref{fig:synthesis_poster} shows an example of the synthesis totem design generated for the Greensborough Square (Bristol).  ALSO INCLUDE AN EXAMPLE FOR ROBUST GALWAY?
+Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition* by: 1) adopting an A0 paper size, so as to fit with typical plotter availability; 2) leveraging Open Street Maps mapping tiles for nearby features, transit and ; and 3) explictly answering the five questions identified in the design problem *Definition* phase.  Figure \ref{fig:synthesis_poster} shows an example of the synthesis totem design generated for the Greensborough Square (Bristol).  ALSO INCLUDE AN EXAMPLE FOR ROBUST GALWAY?
 
 The synthesis totem design has eleven elements. These in turn: answer the five design problem questions at large size that might be visible at distance (elements 1 to 5, counting top to bottom); answer the five questions again in detail and at small scale, for when standing close to the totem (elements 6 to 10); and space in the bottom right for branding or agency logos (element 11). Element 1 explicitly calls the facility a "Mobility Hub / Local Travel Point", while Element 2 includes the specific place name and details of the address, including the postal code, such that a user might be able to tell someone else (e.g. on the phone) where they are. This and further details are also shown in Element 6.   
+
+Element 5 includes a large scale map, using the "Transport Map" tiles used by Open Street Maps from @Allan:0aa, but with additional.  
+
 
 
 1. What is this --- MOBILTY HUB / LOCAL TRAVEL POINT / SHARED TRANSPORT STATION
