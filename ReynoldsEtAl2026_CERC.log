@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  11 AUG 2026 11:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  14 AUG 2026 13:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -947,37 +947,53 @@ File: graphics/bristol_03.png Graphic file (type png)
 <use graphics/bristol_03.png>
 Package pdftex.def Info: graphics/bristol_03.png  used on input line 444.
 (pdftex.def)             Requested size: 468.0pt x 598.87454pt.
-[5] [6 <./graphics/selected_images.png>] [7 <./graphics/bristol_03.png>]
-Overfull \hbox (36.03671pt too wide) in alignment at lines 540--553
+
+Overfull \hbox (36.03671pt too wide) in alignment at lines 518--531
  [] [] [] [] [] [] 
  []
 
-<graphics/bristol_and_birmingham_output.png, id=240, 2489.3pt x 3521.155pt>
+[5] [6 <./graphics/selected_images.png>] [7 <./graphics/bristol_03.png>]
+<graphics/bristol_and_birmingham_output.png, id=246, 2489.3pt x 3521.155pt>
 File: graphics/bristol_and_birmingham_output.png Graphic file (type png)
 <use graphics/bristol_and_birmingham_output.png>
 Package pdftex.def Info: graphics/bristol_and_birmingham_output.png  used on in
-put line 560.
+put line 567.
 (pdftex.def)             Requested size: 468.0pt x 661.98799pt.
 
-LaTeX Warning: Float too large for page by 59.48798pt on input line 565.
+LaTeX Warning: Float too large for page by 59.48798pt on input line 572.
 
-[8] [9 <./graphics/bristol_and_birmingham_output.png>] (./ReynoldsEtAl2026_CERC
-.bbl [10]) [11] (./ReynoldsEtAl2026_CERC.aux)
+File: graphics/bristol_and_birmingham_output.png Graphic file (type png)
+<use graphics/bristol_and_birmingham_output.png>
+Package pdftex.def Info: graphics/bristol_and_birmingham_output.png  used on in
+put line 576.
+(pdftex.def)             Requested size: 468.0pt x 661.98799pt.
+
+LaTeX Warning: Float too large for page by 59.48798pt on input line 581.
+
+
+LaTeX Warning: Reference `fig:synthesis_poster' on page 8 undefined on input li
+ne 589.
+
+[8] [9 <./graphics/bristol_and_birmingham_output.png>] [10] (./ReynoldsEtAl2026
+_CERC.bbl [11]) [12] (./ReynoldsEtAl2026_CERC.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `ReynoldsEtAl2026_CERC.out' has not changed.
 (rerunfilecheck)             Checksum: A816FBE4C7FAEA3E6271884860C260E2;1554.
  ) 
 Here is how much of TeX's memory you used:
- 17668 strings out of 474116
- 283572 string characters out of 5743682
+ 17686 strings out of 474116
+ 283812 string characters out of 5743682
  1991187 words of memory out of 5000000
- 39447 multiletter control sequences out of 15000+600000
- 615631 words of font info for 172 fonts, out of 8000000 for 9000
+ 39452 multiletter control sequences out of 15000+600000
+ 616094 words of font info for 177 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,79p,1018b,651s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,10n,79p,1018b,623s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
 cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf
@@ -989,10 +1005,10 @@ cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf
 -dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/font
 s/type1/public/lm/lmtt8.pfb>
-Output written on ReynoldsEtAl2026_CERC.pdf (11 pages, 30347653 bytes).
+Output written on ReynoldsEtAl2026_CERC.pdf (12 pages, 30350829 bytes).
 PDF statistics:
- 363 PDF objects out of 1000 (max. 8388607)
- 319 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 331 compressed objects within 4 object streams
+ 80 named destinations out of 1000 (max. 500000)
  27760 words of extra memory for PDF output out of 29859 (max. 10000000)
 

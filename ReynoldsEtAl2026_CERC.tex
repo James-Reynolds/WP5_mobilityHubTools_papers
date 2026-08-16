@@ -436,7 +436,7 @@ Food / shops &  &  &  &  & X & X &  & X & X\\
 
 }
 
-\caption{Selected hub images, clockwise from top left: Doric Way totem, Andrew Road totem, Andrew Road poster, Wanstead placard, Wanstead branding, South Woodford placard. Source: authors.}\label{fig:selected_images}
+\caption{Selected hub images, clockwise from top left: Doric Way totem (Camden), Andrew Road totem and Andrew Road poster (TWM), Wanstead placard and branding (Redbridge) and South Woodford placard (Redbridge). Source: authors.}\label{fig:selected_images}
 \end{figure}
 
 \begin{figure}
@@ -508,12 +508,102 @@ research is to develop tools that might allow practitioners to: 1)
 produce totem or poster-sized information displays; 2) that clearly show
 hubs, surrounding facilities and services, and their location; and 3)
 that can be generated rapidly, cheaply and otherwise updated over time
-to reflect changing circumstances.
+to reflect changing circumstances. Table \ref{tab:definition_details}
+shows five areas mobility hub information displays need to address,
+which have be identified based on the cases examined in the
+\emph{Discovery} phase.
 
-Based on the cases visited during the \emph{Discovery} phase there
-appears to be five areas mobility hub information displays need to
-address. Firstly, there is a need to identify what it is (e.g.~Mobility
-Hub, Local Travel Point, Public Space). Secondly,
+\begingroup\fontsize{7}{9}\selectfont
+
+\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{1.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|}
+\caption{\label{tab:definition_details}Defining the design problems. Authors' concept.}\\
+\toprule
+\multicolumn{2}{c}{Problem} & \multicolumn{4}{c}{Answers from cases} \\
+\cmidrule(l{3pt}r{3pt}){1-2} \cmidrule(l{3pt}r{3pt}){3-6}
+Question & Purpose & Redbridge London & Camden London & WEMCA Bristol & TWM Birmingham\\
+\midrule
+1. What is this? & Define current location as a mobility hub & Mobility or village hub, or 'Public Space' & Not answered & Not explictly answered & Local Travel Point\\
+2. Where is it? & Identify current location & Place name & Not answered & Place name & Place name\\
+3. What is here? & Identify hub elements & Limited & Not answered & Icons, cube markers, description & Icons, description\\
+4. What is nearby? & Identify nearby services/facilities & Limited & Not answered & Local and regional maps, description, direction arrows & Local and regional maps, description, direction arrows\\
+5. How can you travel from here? & Identify spatial network context & Not answered & Not answered & Description of bus/bike, bike routes on area map & Description of bus routes only\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+The first question shown in Table \ref{tab:definition_details} relates
+to identifying a mobility hub as something in and of itself. Various
+terms were used in practice (Village Hub, Public Space, Local Travel
+Point), except in Camden (no information display) and Bristol (place
+name only). For the second question, the only descriptions of location
+are provided by place names (Redbridge, Bristol and Birmingham), while
+for the third question industry practices appear to be identify hub
+elements through text descriptions, icons and (in Bristol) the cube
+markers. Notably, hub elements were not always shown on maps (question
+4), although both the Bristol and Birmingham information displays
+included these at two scales (local and larger area). Answers to the
+final question shown in Table \ref{tab:definition_details}(how can you
+travel from here?) were similarly limited, with information displays in
+Bristol and Birmingham in walking, cycling and bus route descriptions,
+while the nearby bike routes were also shown in Bristol.
+
+\subsection{Development}\label{development}
+
+The \emph{Development} phase started with creation of software tools to
+download Open Street Maps data and use it to replicate the Bristol and
+Birmingham totems, as shown in Figure
+\ref{fig:bristol_and_birmingham_output}. Each style includes
+user-adjustable hub names, facility icons and directional indicators at
+the top. Maps is generated for each hub at the local and regional
+scales, indicating the location of nearby transit stops and stations,
+and highlighting buildings and other features (see detail, Figure
+\ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature
+locations are generated directly from the OSM datasets, although the
+user can select which are to be highlighted and labeled. Finally, space
+is allocated for facility description text and logos.
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{graphics/bristol_and_birmingham_output} 
+
+}
+
+\caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_and_birmingham_output}
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{graphics/bristol_and_birmingham_output} 
+
+}
+
+\caption{Bristol hubs, selected images. Source: authors.}\label{fig:synthesis_output}
+\end{figure}
+
+Further \emph{Development} involved creation of a \emph{synthesis}
+display format, which responds to the problem \emph{Definition} by: 1)
+adopting an A0 paper size, so as to fit with typical plotter
+availability; 2) leveraging Open Street Maps mapping tiles for nearby
+features, transit and ; and 3) explictly answering the five questions
+identified in the design problem \emph{Definition} phase. Figure
+\ref{fig:synthesis_poster} shows an example of the synthesis totem
+design generated for the Greensborough Square (Bristol). ALSO INCLUDE AN
+EXAMPLE FOR ROBUST GALWAY?
+
+The synthesis totem design has eleven elements. These in turn: answer
+the five design problem questions at large size that might be visible at
+distance (elements 1 to 5, counting top to bottom); answer the five
+questions again in detail and at small scale, for when standing close to
+the totem (elements 6 to 10); and space in the bottom right for branding
+or agency logos (element 11). Element 1 explicitly calls the facility a
+``Mobility Hub / Local Travel Point'', while Element 2 includes the
+specific place name and details of the address, including the postal
+code, such that a user might be able to tell someone else (e.g.~on the
+phone) where they are. This and further details are also shown in
+Element 6.
+
+Element 5 includes a large scale map, using the ``Transport Map'' tiles
+used by Open Street Maps from \citet{Allan:0aa}, but with additional.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -534,54 +624,6 @@ Hub, Local Travel Point, Public Space). Secondly,
 Locating yourself: INCLUDE WHAT 3 WORDS. POSTAL CODE. STREET ADDRESS
 Locating the hub facilities: Undertanding the surroundings ----- people
 have mobile phones now ---do we really need a regional map? TRANSIT MAP
-
-\begingroup\fontsize{7}{9}\selectfont
-
-\begin{longtable}[t]{>{\raggedright\arraybackslash}p{2.25cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{1.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|>{\raggedright\arraybackslash}p{2.75cm}|}
-\caption{\label{tab:definition_details}Defining the design problems. Authors' concept.}\\
-\toprule
-\multicolumn{2}{c}{Problem} & \multicolumn{4}{c}{Answers from cases} \\
-\cmidrule(l{3pt}r{3pt}){1-2} \cmidrule(l{3pt}r{3pt}){3-6}
-Question & Purpose & Redbridge & Camden & WEMCA & TWM\\
-\midrule
-What is this? & Define current location as a mobility hub & Mobility or village hub, 'Public Space' & Not answered & Not explictly answered & Local Travel Point\\
-Where is it? & Identify location & Limited & Not answered & Place name & Place name\\
-What is here? & Identify hub elements & Limited & Not answered & Icons, cube markers, description & Icons, description\\
-What is nearby? & Identify nearby services/facilities & Limited & Not answered & Local and regional maps, description & Local and regional maps, description\\
-How can you travel from here? & Identify spatial network context & Not answered & Not answered & Description of bike and bus routes & Description of bus routes\\
-\bottomrule
-\end{longtable}
-\endgroup{}
-
-\subsection{Development}\label{development}
-
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{graphics/bristol_and_birmingham_output} 
-
-}
-
-\caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_and_birmingham_output}
-\end{figure}
-
-The \emph{Development} phase started with creation of software tools to
-download Open Street Maps data and use it to replicate the Bristol and
-Birmingham totems, as shown in Figure
-\ref{fig:bristol_and_birmingham_output}. Each style includes
-user-adjustable hub names, facility icons and directional indicators at
-the top. Maps is generated for each hub at the local and regional
-scales, indicating the location of nearby transit stops and stations,
-and highlighting buildings and other features (see detail, Figure
-\ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature
-locations are generated directly from the OSM datasets, although the
-user can select which are to be highlighted and labeled. Finally, space
-is allocated for facility description text and logos.
-
-Further \emph{Development} involved creation of a \emph{synthesis}
-display format, which responds to the problem \emph{Definition}. by: 1)
-adopting an A0 poster size, so as to fit with typical plotter
-availability; 2) shifting to grey scale to reduce costs, which may
-assist in running trials, co-design or other developmental activities;
 
 \subsection{Delivery}\label{delivery}
 

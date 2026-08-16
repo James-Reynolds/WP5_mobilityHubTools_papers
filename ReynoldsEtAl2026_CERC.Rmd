@@ -813,18 +813,137 @@ knitr::include_graphics("graphics/bristol_and_birmingham_output.png")
 
 
 
-```{r load_test_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+```{r synthesis_totem_gainsborough, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
 
 synthesis_totem()
 
 ```
 
+
+
+
+```{r download_galway_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+
+crs_local_metres_galway <- 2157
+
+### Create hub locations
+hub_location_galway <- tibble::tibble(
+        lat = c(53.277352),
+        lon = c(-9.073269),
+        name = c("Westside")) %>% 
+        sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT")
+
+
+amenity_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "amenity"
+)
+
+highway_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "highway"
+)
+
+lesiure_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "lesiure"
+)
+
+landuse_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "landuse"
+)
+
+natural_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "natural"
+)
+
+railway_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "railway"
+)
+
+waterway_galway_260816 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "waterway"
+)
+
+
+
+```
+
+
 ```{r synthesis_totem_galway, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+crs_local_metres_galway <- 2157
+
+building_galway <- rlist::list.load(
+        "~/WP5_mobilityHubTools_papers/data/buildings.rdata")$galway 
+amenity_galway <- rlist::list.load(system.file(
+      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+highway_galway <- rlist::list.load(system.file(
+      "data/greensborough_highway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+leisure_galway <- rlist::list.load(system.file(
+      "data/greensborough_leisure.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+landuse_galway = rlist::list.load(system.file(
+      "data/greensborough_landuse.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+natural_galway <- rlist::list.load(system.file(
+      "data/greensborough_natural.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+waterway_galway <- rlist::list.load(system.file(
+      "data/greensborough_waterway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+railway_galway <- rlist::list.load(system.file(
+      "data/greensborough_railway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway)
+
+
+hub_location_galway <- tibble::tibble(
+        lat = c(53.277352),
+        lon = c(-9.073269),
+        name = c("Westside")) %>% 
+        sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT")
+
+hub_element_locations_galway <- tibble::tibble(
+        lat = c(
+53.277383, 53.277274, 
+53.277290, 53.2775510, 53.2775246, 53.2776891, 53.2764677, 53.2763627, 53.277497
+        ),
+        lon = c(-9.073430, -9.073200,  -9.0733580, -9.0740109, -9.0727321, -9.0721421, -9.0734703, -9.0741458, -9.074286),
+        name = c("ROBUST e-cars", "ROBUST e-bikes and e-cargobike", NA, NA, NA, "Newcastle Resource Centre bus stop", "Westside Retail bus stop", "TFI shared bikes", NA),
+        icon_filename = c(
+          system.file("extdata/shared-car-14.svg", package = "mobilityHubTools"), 
+          system.file("extdata/bicycle-electric-2.svg", package = "mobilityHubTools"), 
+          system.file("extdata/charging_station.svg", package = "mobilityHubTools"), 
+          system.file("extdata/bicycle_parking.svg", package = "mobilityHubTools"), 
+          system.file("extdata/bicycle_parking.svg", package = "mobilityHubTools"), 
+          system.file("extdata/bus_stop.svg", package = "mobilityHubTools"), 
+          system.file("extdata/bus_stop.svg", package = "mobilityHubTools"), 
+          system.file("extdata/rental_bicycle.svg", package = "mobilityHubTools"), 
+          system.file("extdata/toilets.svg", package = "mobilityHubTools"))
+        ) %>% sf::st_as_sf(coords = c("lon", "lat"),
+                            crs = 4326) %>%
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT")
+
+
+
+
 
 synthesis_totem(
     file_to_save_to = "galway_layout_test.pdf",
     element1_what_is_this_top_text = "Mobility Hub / Local Travel Point",
-    element2_where_is_it_top_text = "Westside",
+    element2_where_is_it_top_text = "Westside ROBUST E-Mobility Hub",
     element2_where_is_it_top_text_detail = "Seamus Quirke Road, H91 C1KX",
 
        element3_what_is_here_top = list(
@@ -866,58 +985,110 @@ synthesis_totem(
                                    c(2,2,2,2,2),
                                    c(3,3,3,3,3)),
     element5_regional_map = synthesis_regional_map(
-      building = rlist::list.load(
+      amenity = amenity_galway,
+      building = building_galway,
+    highway = highway_galway,
+    leisure = leisure_galway,
+    landuse = landuse_galway,
+    natural = natural_galway,
+    waterway = waterway_galway,
+    railway = railway_galway,
+      hub_location = hub_location_galway, 
+      map_limits = 1500, 
+      crs_local_metres = crs_local_metres_galway, 
+      annotation_map_tile_type = "osm", 
+      annotation_map_zoom = 14,
+      highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius"), 
+      highlight_amenity_regional = c("Galway Cathedral"), 
+      highlight_leisure_regional = c(NA), 
+      highlight_landuse_regional = c(NA)),
+    element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point,\n a location where shared mobility and other services\n offer a range of options to support sustainable travel. \n\nWhat is here: (see left)\nThis mobility hub includes nearby bus stops,\n shared e-bikes and bikes, bicycle parking,\n shared e-cars,  an electric car charger and toilets.",
+ 
+    
+    
+       element7_hub_elements_map = synthesis_hub_elements_map(
+          amenity = amenity_galway,
+    building = building_galway,
+    highway = highway_galway,
+    leisure = leisure_galway,
+    landuse = landuse_galway,
+    natural = natural_galway,
+    waterway = waterway_galway,
+    railway = railway_galway,
+    hub_location = hub_location_galway,
+    map_limits = 100,
+    crs_local_metres = crs_local_metres_galway,
+    hub_element_locations = hub_element_locations_galway
+    ),
+    element8_what_is_this_bottom_text = "How can you travel from here: (see maps below) \nBuses 405, 411 and 412 eastbound leave from Newcastle Resource Centre stop\n Buses 405, 411 and 412 westbound leave from the Westside Retail stop \n Galway Railway Station is 2km to the east - take an eastbound bus to Eyre Square (see map below centre).\n The EuroVelo 1 (EV1) and other bike routes are nearby (see map below right).",
+    element9_hub_surrounds_map = synthesis_hub_surrounds_map(
+      amenity = amenity_galway,
+    building = building_galway,
+    map_limits = 100,
+    crs_local_metres = crs_local_metres_galway,
+    annotation_map_zoom = 18,
+    annotation_map_type = "osm",
+    highlight_building = c("Westside Public Library", "Westside Resource Centre"),
+    hub_location = hub_location_galway),
+    element10_what_is_this_bottom_text = "What is nearby: (see maps above)\n The Westside Public Library is to your left.\n.
+\n \nWhere am I:\n The Westside ROBUST E-Mobility Hub on Seamus Quirke Rd, Newcastle H91 C1KX.\n The latitude is 53.2773 and the longitude is -9.0732.\n what3words.com calls this location whites.likes.door\n ",
+
+
+
+
+
+
+
+    element11_transport_map_small = synthesis_hub_surrounds_map(
+building = rlist::list.load(
         "~/WP5_mobilityHubTools_papers/data/buildings.rdata")$galway, 
       amenity = rlist::list.load(system.file(
-      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    highway = rlist::list.load(system.file(
-      "data/greensborough_highway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    leisure = rlist::list.load(system.file(
-      "data/greensborough_leisure.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    landuse = rlist::list.load(system.file(
-      "data/greensborough_landuse.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    natural = rlist::list.load(system.file(
-      "data/greensborough_natural.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    waterway = rlist::list.load(system.file(
-      "data/greensborough_waterway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-    railway = rlist::list.load(system.file(
-      "data/greensborough_railway.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  2157),
-      hub_location = tibble::tibble(
+      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway),
+    crs_local_metres = crs_local_metres_galway,
+    highlight_building = c(""),
+    hub_location = tibble::tibble(
         lat = c(53.277352),
         lon = c(-9.073269),
         name = c("Westside")) %>% 
         sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
-      sf::st_transform(crs =  2157) %>%
-      sf::st_cast("POINT"), 
-      map_limits = 1500, 
-      crs_local_metres = 2157, 
-      annotation_map_tile_type = "osm", 
-      annotation_map_zoom = 14,
-      highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius", "Old Fever Hospital"), 
-      highlight_amenity_regional = c("Galway Cathedral"), 
-      highlight_leisure_regional = c(NA), 
-      highlight_landuse_regional = c(NA)),
-    element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point,\n a location where shared mobility and other services\n offer a range of options to support sustainable travel. \n\nWhat is here: (see left)\nThis mobility hub includes nearby bus stops,\n bicycle parking and a repair station, \n shared scooters and electric bikes, and toilets (in the Hub).",
-    element7_hub_elements_map = synthesis_hub_elements_map(),
-    element8_what_is_this_bottom_text = "How can you travel from here: (see maps below) \nBuses 24, 77 northbound leave from Gainsborough Square Stop A (left and across the square),\nBuses 24, 72 and 73 eastbound leave from Gainsbourough Square Stop B (in front of you).\n Buses 24, 72 westbound leave from a stop in Cameron Walk (to your right)  \n Ashley Down and Filton Abbey Wd Railway Stations are around a 15 minute walk away (see map below centre).\n The Frome Valley Greenway and Concorde Way are also nearby (see map below right).",
-    element9_hub_surrounds_map = synthesis_hub_surrounds_map(),
-    element10_what_is_this_bottom_text = "What is nearby: (see maps above)\nThe Hub is accross the street behind you.  \nThe North Bristol Advice Centre is across Gainsborough Square to your left.\nShops, food and services are also across Gainborough Square.\nTo get to St James Church go right along Cameron Walk\n until you get to Romney Avenue.
-\n \nWhere am I:\n Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and the longitude is -2.5627.\nwhat3words.com calls this location hero.blend.sock\n\n ",
-
-    element11_transport_map_small = synthesis_hub_surrounds_map(
-  map_limits = 100,
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT"),
+        map_limits = 100,
   annotation_map_zoom = 17,
-  annotation_map_type = "osmtransport",
-  highlight_building = ""),
+  annotation_map_type = "osmtransport"),
 
     element12_transport_map_large = synthesis_hub_surrounds_map(
-  map_limits = 2000,
+building = rlist::list.load(
+        "~/WP5_mobilityHubTools_papers/data/buildings.rdata")$galway, 
+      amenity = rlist::list.load(system.file(
+      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway),
+    crs_local_metres = crs_local_metres_galway,
+    hub_location = tibble::tibble(
+        lat = c(53.277352),
+        lon = c(-9.073269),
+        name = c("Westside")) %>% 
+        sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT"),
+     map_limits = 2000,
   annotation_map_zoom = 13,
   annotation_map_type = "osmtransport",
   highlight_building = ""),
 
     element13_cycle_map = synthesis_hub_surrounds_map(
-  map_limits = 2000,
+building = rlist::list.load(
+        "~/WP5_mobilityHubTools_papers/data/buildings.rdata")$galway, 
+      amenity = rlist::list.load(system.file(
+      "data/greensborough_amenity.rdata", package = "mobilityHubTools")) %>% sf::st_transform(crs =  crs_local_metres_galway),
+    crs_local_metres = crs_local_metres_galway,
+    hub_location = tibble::tibble(
+        lat = c(53.277352),
+        lon = c(-9.073269),
+        name = c("Westside")) %>% 
+        sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
+      sf::st_transform(crs =  crs_local_metres_galway) %>%
+      sf::st_cast("POINT"),
+map_limits = 2000,
   annotation_map_zoom = 13,
   annotation_map_type = "opencycle",
   highlight_building = ""),
