@@ -123,151 +123,130 @@ and Environmental Engineering, Trinity College Dublin, Ireland}
 Business School, University of Southampton, UK}
   
   \begin{abstract}
-  Mobility hubs are an emerging approach that often involves colocating
-  shared bikes, scooters, cars and/or other services with transit.
-  Together these might to provide an attractive alternative to car
-  ownership, or otherwise support more sustainable travel behaviours. A
-  range of signage, information displays and branding appproaches have
+  Mobility hubs involve co-locating shared bikes/e-bikes, cars,
+  e-scooters or similar modes. They are often close to transit and other
+  facilities, such as charging stations or parcel lockers, with the aim
+  being to provide alternatives to (petrol-driven) car ownership and
+  support more sustainable travel behaviours. A range of signage,
+  information displays and branding appproaches for mobility hubs have
   already been developed by practitioners, but best practices are
-  unclear. As well, tools to help practitioners, tactical urbanists or
-  others define their own mobility hub out of existing co-located
-  services appear to be lacking. This paper reports the development
-  basic tools for creating maps and a informational poster, totem or
-  other display for mobility hubs in any location. Are there multiple
-  mobility offerings in close proximity in your community? These tools,
-  a printer and somewhere hang a poster might be all that is needed to
-  spread the word.
+  unclear. As well, tools to help create mobility hubs out of existing
+  (and already co-located) services appear to be lacking. This paper
+  reports a synthesis of existing practices, and development of software
+  tools for creating maps and informational displays for mobility hubs
+  in any location. Are there multiple mobility offerings in close
+  proximity in your community? These tools, a printer and somewhere hang
+  a poster might be all that is needed to spread the word.
   \end{abstract}
     \begin{keyword}
-    Mobility hubs, informational displays \sep 
-    Mobility hubs, informational displays
+    Mobility hub, informational displays, shared modes, electric
+mobility \sep 
+    Mobility hub, informational displays, shared modes, electric
+mobility
   \end{keyword}
   
  \end{frontmatter}
 
 \section{Introduction}\label{introduction}
 
-Mobility hubs might help in shifting towards more walking, cycling and
-transit-based travel through providing options for those, more
-occasional, trips that are otherwise difficult without a car. They often
-involve implementing facilities for shared cars, bikes and other
-micro-mobility vehicles in close proximity to transit and/or with
-consistent branding, informational signs and other measures.\\
-However, in many locations shared cars and micro-mobility services,
-transit and other facilities such as bike parking are already in close
-proximity. Such offerings may already be well known to users or
-surrounding communities, but might be convertable into a `mobility hub'
-with minimal signage and information.
+Shared mobility hubs are places where a range of modes and sometimes
+other facilities are provided to support more sustainable travel. They
+often include shared electric cars, bikes, cargobikes, e-bikes,
+e-scooters or other micro-mobility services. Together, these might help
+support shifts towards more walking and cycling, transit use, and
+otherwise improve the sustainability of transport systems through
+providing options for those (more occasional) trips that are difficult
+without a private car.
 
-As yet there does not appear to be a consistent approach to mobility hub
-branding and informational displays.\\
-Various implementation agencies appear to have created signs, maps and
-similar elements independently. What might represent best practices is
-unclear.\\
-As well, the graphic design, mapping and similar needed to develop such
-signs for each site may limit the ability for practitioners to keep
-information up to date, or for bottom-up implementation, trials or other
-low-cost mobility hub creation efforts.
+Many mobility hubs have already been implemented, but with signage, maps
+and other informational material created by individual agencies on a
+site-by-site basis. Current and best practices are unclear. As well, the
+graphic design, mapping and similar effort needed to develop such signs
+for each site may limit the ability for practitioners to keep
+information up to date, trial new hubs, or use bottom-up implementation
+approaches to create hubs where shared or other modes are already in
+close proximity.
 
-This paper reports findings from case and design-based research seeking
-to develop new tools to support low-cost mobility hub implementation.
-The rest of this paper is structured as follows: the next section
-outlines the context for this study. The research methodology is then
-described, followed by presentation of the results. These are then
-briefly discussed prior to a conclusion that includes identification of
-directions for future research.
+This paper aims to explore and better understand mobility hub
+information provision, and to develop tools to support practitioners. It
+reports findings from case research examining existing practices at a
+selection of mobility hubs. Also reported are findings from design-based
+research that develops software tools for producing maps and information
+displays for mobility hubs, based on both replication and synthesis of
+industry practices. The rest of this paper is structured as follows: the
+next section outlines the context for this study. The research
+methodology is then described, followed by presentation of the results.
+These are then briefly discussed prior to a conclusion that includes
+identification of directions for future research.
 
 \section{Research context}\label{research-context}
 
-Shared bike, scooter and other micro-mobility systems have been widely
-introduced to transport systems over the last couple of decades. These
-may help to increase mobility and sustainability but have not been
-entirely without problems. Inappropriate parking of dockless vehicles,
+An early version of the mobility hub concept was developed in Toronto's
+``Big Move'' transport plan \citep{Metrolinx:2008aa} in the late 2000s,
+which used to the term\\
+to denote selected major regional transit stations around which landuses
+would be intensified and where intermodal transfers would be facilitated
+\citep[\citet{Engel-Yan:2012aa}]{Salsberg:2010aa}. In the intervening
+years there has been rapid developments in shared micro-mobility and
+vehicle electrification, such that shared bike, e-bike and e-scooter
+systems are common. Various problems have emerged, however, including
+inappropriate parking of dockless vehicles blocking footpath; the
 environmental and other impacts associated with rebalancing and battery
-swapping, the risk of fires at recharging facilities, safety challenges
-and other issues have been identified (see for example
-\citet{Meigs:2023aa}, \citet{Zhang:2022aa}, \citet{Bozzi:2021aa}).
+swapping; the risk of fires at recharging facilities; and safety
+challenges associated with user behaviour (see for example,
+\citet{Meigs:2023aa}, \citet{Zhang:2022aa} and \citet{Bozzi:2021aa}).
+Consolidating shared and micro-mobility services into mobility hubs may
+help to resolve some of these challenges.\\
+Shared \emph{electric} mobility hubs where each shared e-car, e-bike or
+other vehicle has its own powered parking space might eliminate the need
+for rebalancing or battery swapping entirely, as is the case at sites in
+Galway and other parts of Ireland that are part of the current ongoing
+Electric shaRed mOBility hUbS Trial (ROBUST) \citep{ROBUST:2025aa}.
 
-The emerging `mobility hub' concept may help towards limiting such
-issues and integrating shared mobility services into transport
-systems.\\
-Mobility hubs were part of ``The Big Move'' transport plan in Toronto,
-where the aim was to intensify landuse, facilitate modal transfers and
-otherwise develop major regional transit stations
-\citep[\citet{Metrolinx:2008ab}, \citet{Salsberg:2010aa},
-\citet{Engel-Yan:2012aa}]{Metrolinx:2008aa}. \citet{Roukouni:2023aa},
-however, describes how the research literature has extended on this to
-define `shared mobility hubs' in terms of seamless integration of shared
-modes, sometimes including transit, and local facilities and
-services\footnote{ \emph{``A shared mobility hub is a place where
-  different transport modes are integrated seamlessly, promoting
-  efficient and sustainable urban mobility. Emphasis is given on shared
-  mobility options such as bikes, scooters and cars. Connection with
-  public transport (transit) is desirable but not necessary. The
-  integration between mobility suppliers is important to provide a
-  seamless, flexible connection at these transfer points. Ensuring an
-  enjoyable experience for travelers is a crucial part of the hub
-  concept as well, and therefore the hub should be considered not just
-  as a transfer node but as a place where a variety of services come
-  together, such as logistics services or restaurants''} (Roukouni et
-  al.~2023).}. Shared \emph{electric} mobility hubs, such as those
-currently being trialed in Ireland as part of the ROBUST project
-\citep{ROBUST:2025aa}, may represent a further development through
-providing power connections for vehicle recharging to dedicated on-site
-parking space, thereby eliminating the need for rebalancing or battery
-swapping.
+Mobility hubs, however, appear likely to continue to come in many forms,
+and incorporate a wide range of vehicles, facilities and other services.
+Some guidance is provided by a definition recently developed from a
+review of the literature, that highlights the need for ``integration'',
+``seamless, flexible connection'' and ``\ldots an enjoyable experience
+for travelers'' \citep{Roukouni:2023aa}. How such integration, user
+experience and seamlessness might be achieved, implemented and
+maintained by practitioners appears unclear.
 
-Signage, branding, maps and other forms of public and user information
-at mobility hubs is likely to be of high importance for achieving the
-``integration'' and ``seamless, flexible connection'' when implementing
-mobility hubs.\\
-Basic signage, linemarking or similar would appear likely to be
-relatively easy for many practitioners to implement within their own
-institutional setting. What may be lacking, however, are tools and
-standarised approaches for mobility hub information provision based on
-current best practices that can be quickly and easily adapted to local
-contexts. As well, there may be a need for information displays to be
-refreshed if further offers are added to a mobility hub, or as the
-surrounding urban environment changes over time. People, solutions and
-tools tend to move on once decisions emerge from a policy-making
-effort\footnote{c.f. the `Garbage Can' Model. See \citet{Lyles:1988aa},
-  \citet{Parsons:1995aa} and others}, which may lead to challenges for
-practitioners tasked with updates and maintenance.
-
-As well, political, public and institutional opposition can be
-challenging for implementing even small changes to urban environments.
-Bottom-up and incremental approaches, `pop-ups' and more formal trials
-have proven to be successful and pragmatic strategies for building
-legitimacy \emph{through} implementation \citep{Reynolds:2021ab}.
-However, these might rely on rapid prototyping, iterative co-design or
-other low-cost production of information displays and signage.\\
-Likewise, `Movement and Place' and `Complete Streets'
+Signs, maps and information displays would seem to be and important
+consideration when creating a new mobility hub (whatever its form). More
+broadly, `Movement and Place' and `Complete Streets'
 \citep{Delbosc:2018aa}, and tactical urbanism approaches
-\citep{Lydon:2012aa, Lydon:2015aa, Davidson:2013aa, Blumgart:2016ab, Morhayim:2012aa, Longhurst:2015aa}
+{[}\citet{Lydon:2012aa}; \citet{Lydon:2015aa}; \citet{Davidson:2013aa};
+\citet{Blumgart:2016ab}; \citet{Morhayim:2012aa}; Longhurst:2015aa{]}
 suggest way to challenge prevailing naratives about road space
 allocation, give communities greater power over (their own) urban
-environments, and demonstrate the potential of change.\\
-For practitioners, tactical urbanists and others to adopt a `do it
-yourself' approach to mobility hub creation (especially when multiple
-services are already provided within close proximity, and a `mobility
-hub' might be made with no engingeering works), there may the need for
-generalised tools to support mapping, signage creation and other sources
-of information.\\
-As of yet, there does not appear to be a clear understanding of `best
-practices' in mobility hub signage and information provision, or tools
-to quickly and easily produce, maps, analysis and interpretations that
-would support the definition of a place as a hub and communication of
-its existing mobility and other offerings. The next section, therefore
-describes the case- and design-based methodology adopted in this study
-for the purposes of filling this gap.
+environments, and demonstrate the potential of change. Bottom-up and
+incremental approaches, `pop-ups' and more formal trials have also been
+found to be pragmatic strategies for building legitimacy \emph{through}
+implementation \citep{Reynolds:2021ab}.\\
+In the context of mobility hubs, however, these might rely on rapid
+prototyping, iterative co-design or other approaches for which
+practitioners, tactical urbanists and others might to need adopt a\\
+`do it yourself' attitude when it comes to developing information
+displays and supporting maps. As of yet, there does not appear to be
+standarised approaches for providing such information, or a clear
+understanding of best practices. Nor are there tools that might allow\\
+such best practices to be quickly and easily adapted to local contexts,
+and for updates to be made as a mobility hub or its surrounding urban
+environment changes over time. The next section, therefore describes the
+case- and design-based research methodology adopted in this study to (at
+least start) filling this gap in knowledge.
 
 \section{Methodology}\label{methodology}
 
-This research aims to improve understanding of `best practices' in in
-mobility hub signage and information provision, and to develop tools to
-support mobility hub implementation. Research questions relate to:
-\emph{how} information is provided at and about mobility hubs?
-\emph{how} information at and about mobility hubs might ideally be
+The research described in this paper is part of the larger ROBUST
+project on shared electric mobility hubs, which was briefly discussed
+above.\\
+This component of the project aims to improve understanding of `best
+practices' in in mobility hub signage and information provision, and to
+develop tools to support mobility hub implementation. Research questions
+relate to: \emph{how} information is provided at and about mobility
+hubs? \emph{how} information at and about mobility hubs might ideally be
 provided? (i.e.~best practices) and \emph{how} can such best practices
 be made generally applicable?*\footnote{More formally, the (null)
   hypothesis tested in this study is that it is \emph{not} possible to
@@ -287,11 +266,11 @@ Diamond process involves iteration across four phases: 1.
 convergent (2 \& 4) approaches, although the overall process is
 iterative and may involve multiple passes through each phase.
 
-Here the \emph{Discovery} phase utilised a case research approach, which
-\citet{Denscombe:2007aa}, \citet{Yin:2018ab} and others identify as
-being especially effective for when: theory development is at an early
-stage; research questions relate to `how' or `why'; and when exploring
-phenomena within real-world contexts.
+Here the \emph{Discovery} and \emph{Development} phases utilised a case
+research approach, which \citet{Denscombe:2007aa}, \citet{Yin:2018ab}
+and others identify as being especially effective for when: theory
+development is at an early stage; research questions relate to `how' or
+`why'; and when exploring phenomena within real-world contexts.
 
 \subsection{Participants, Material and
 Instruments}\label{participants-material-and-instruments}
@@ -343,27 +322,24 @@ that needs to be addressed by the research outputs.
 
 The \emph{Development} phase involved iterative software coding to first
 replicate the Bristol and Birmingham style of information displays. This
-software was then applied to contexts of the ROBUST hubs in Galway,
-Letterkenny and Dundrum. Finally, a combined version that might be a
-step towards best practices was developed for the \emph{Delivery} phase.
-This final phase involved convergence on a combined display style based
-on the synthesis of industry practices and responding to the problem
-developed in the \emph{Definition} phase.\\
-As per \citet{UK-Design-Council:0aa}{]}, \citet{Coxon:2018aa} and
+replication was first undertaken for cases included in the
+\emph{Discovery}, and then repeated to test the software on the contexts
+of the ROBUST hubs in Galway, Letterkenny and Dundrum. Finally, a
+combined display style was developed based on the synthesis of industry
+practices undertaken during the \emph{Discovery} phase and responding to
+the problem developed in the \emph{Definition} phase. As per
+\citet{UK-Design-Council:0aa}{]}, \citet{Coxon:2018aa} and
 \citet{Coxon:2021ab}, the research also included iteration through all
-four phases. These iterations were tracked using the Git version control
-system\footnote{Code used in the production of this paper is available
-  at
-  \url{https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd},
-  which includes the \emph{Delivered} software functions at the time of
-  final submission. The software package itself is available at
-  \url{https://github.com/James-Reynolds/mobilityHubTools}, but is
-  expected to be developed further, so may change in the future. The
-  last commit at the time of final submission is
-  \href{https://github.com/James-Reynolds/mobilityHubTools/commit/a4fbbbe21c5eb63640f3e9d3cc5b548237c14b19}{a4fbbbe},
-  dated August 6 2026.}. However, in the interests of clarity the next
-section presents the results in a linear format, stepping through each
-phase in turn.
+four phases\footnote{ These iterations were tracked using the Git
+  version control system, and code used in the production of this paper
+  is available at
+  \url{https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd}.
+  The software package itself is available at
+  \url{https://github.com/James-Reynolds/mobilityHubTools}, and is
+  expected to be developed further during later parts of the ROBUST
+  project}. However, in the interests of clarity the next section
+presents the results in a linear format, stepping through each phase in
+turn.
 
 \section{Results}\label{results}
 
@@ -379,9 +355,9 @@ research\footnote{Table notes: 1. Case study questions (column 1) are of
   free standing information pedestal. 4. The totem / pedestal
   information display at the Doric Way mobility hub is specific to the
   Transport For London `Cycles' docked bike share facility. There is no
-  information provided specifically about the mobility hub.}. Figures
-\ref{fig:selected_images} and \ref{fig:bristol_images_panels} show
-selected images from various hubs.
+  information provided specifically about the mobility hub at Doric Way.}.
+Figures \ref{fig:selected_images} and \ref{fig:bristol_images_panels}
+show selected images from various hubs.
 
 \begingroup\fontsize{7}{9}\selectfont
 
@@ -448,70 +424,49 @@ Food / shops &  &  &  &  & X & X &  & X & X\\
 \caption{Bristol hubs, selected images. Source: authors.}\label{fig:bristol_images_panels}
 \end{figure}
 
-Information displays varied between the small placard signs in South
-Woodford and Wanstead (Redbridge, London) to the comprehensive totems /
-pedestals in Bristol and Birmingham. Mobility hubs in Camden lacked any
-information displays, although there was a nearby totem for the bike
-share docking system at Doric Way (Figure \ref{fig:selected_images}, top
-left.). The sites themselves were labelled as ``Mobility Hub'' and
-``Local Travel Point'' in Birmingham, but lacked any form of naming in
-Camden while the Bristol sites only showed the name of the locality
-(Figure \ref{fig:bristol_images_panels}).
+Information displays ranged from small placard signs (South Woodford and
+Wanstead) to comprehensive totems / pedestal displays and posters
+(Bristol and Birmingham). Mobility hubs in Camden lacked any information
+signs. Sites were labelled as ``Mobility Hub'' or ``Village Hub'' (South
+Woodford and Wanstead) and ``Local Travel Point'' in Birmingham.
 
-Totems all included two maps: one at a local scale (within 5 minutes
-walk) and the second showing a large area (within 15 minutes). Hub
-facilities were typically explictly listed or described on the totems,
-but not included in mapping. Linemarking was commonly used to highlight
-some hub components. The Bristol hubs included cube shaped indicators
-mounted on poles above hub components (see Figure
+Where present, totems / pedestals all included two maps: one at a local
+scale (within 5 minutes walk) and a second showing a larger area (within
+15 minutes). These generally showed nearby transit, cafes, shops and
+other points of interest.\\
+Text descriptions of local walking and cycling routes, hub facilities
+and transit services were also included in the information displays in
+Bristol and Birmingham.
+
+Many of the sites had linemarking that highlighted some hub components.
+The Bristol hubs also included cube shaped indicators mounted on poles\\
+to help with finding hub components. (see Figure
 \ref{fig:bristol_images_panels}, bottom right).
 
-Where present, nearby transit services and facilities where typically
-detailed on the information displays although this was not always the
-case. Insecure bike parking (i.e.~locking hoops) was the most commonly
-provided feature, although some hubs in Camden, Bristol and Birmingham
-also included bicycle lockers or other limited-access facilities.
-Seating and nearby toilets were available as part of some hubs, but no
-hubs included comprehensive shelter or access to water. The Bristol hubs
-included USB connections for phone recharging, and wifi internet
-connectivity at some locations.
+Bicycle parking hoops were the most commonly provided feature. Some hubs
+in Camden, Bristol and Birmingham also included bicycle lockers or
+similar higher security parking. Seating and nearby toilets were
+available as part of some hubs, but no hubs included comprehensive
+shelter or access to water. The Bristol hubs included USB connections
+for phone recharging, and wifi internet connectivity at some locations.
+
+Overall, findings during the \emph{Discovery} phase suggest that current
+practices relating to information displays at mobility hubs are
+inconsistent. Best practices appear to be represented by the totems /
+pedestal displays in Bristol and Birmingham. These are generally
+similiar to other such displays, notably the Transport For London Cycles
+display that is close to, but not part of, the mobility hub in Doric
+Way, Camden (Figure \ref{fig:selected_images}, top left).
 
 \subsection{Definition}\label{definition}
 
-Findings during the \emph{Discovery} phase suggest that current
-practices relating to information displays at mobility hubs are
-inconsistent. The \emph{totems} in Birmingham, Birmingham and Doric Way
-perhaps demonstrate advantages of having maps and hub details displayed
-in large size. The small placard signs and the lack information at most
-hubs in Camden provide contrasting examples where it may be unclear what
-facilities are provided at the hubs or nearby.
-
-The South Woodford placard (Figure \ref{fig:selected_images}, bottom
-left) provides an example of \emph{limited information about what is
-provided} or \emph{where it is} in relation to the hub. Only left or
-right direction indications are provided to nearby transit, taxis and
-shared cars. However, finding hub elements does not necessarily appear
-easy when maps are included on totems. Both the Bristol and Birmingham
-style of maps were at too large a scale for the precise location of all
-of the various hub offerings to be shown.
-
-At some hubs space that had originally been allocated to shared
-micro-mobility had been taken over for other purposes. Changes to the
-facilities and nearby services over time also meant that the original
-hub information displays were out of date at some sites. Consistency and
-the need to update information displays to reflect changing
-circumstances would therefore appear to be challenges facing mobility
-hub implementers and maintainers.
-
-Therefore, overall the problem to be addressed in this design-based
-research is to develop tools that might allow practitioners to: 1)
-produce totem or poster-sized information displays; 2) that clearly show
-hubs, surrounding facilities and services, and their location; and 3)
-that can be generated rapidly, cheaply and otherwise updated over time
-to reflect changing circumstances. Table \ref{tab:definition_details}
-shows five areas mobility hub information displays need to address,
-which have be identified based on the cases examined in the
-\emph{Discovery} phase.
+Findings from the case research, iteration through the Double Diamond
+phases and synthesis resulted led to the expression of the design
+problem to be addressed in this research in the form of: \emph{five
+questions a mobility hub information display needs answer}. These are
+shown in Table \ref{tab:definition_details}.\\
+Also shown is an assessment of how each of the cases does (or does not)
+respond to each.
 
 \begingroup\fontsize{7}{9}\selectfont
 
@@ -535,17 +490,30 @@ The first question shown in Table \ref{tab:definition_details} relates
 to identifying a mobility hub as something in and of itself. Various
 terms were used in practice (Village Hub, Public Space, Local Travel
 Point), except in Camden (no information display) and Bristol (place
-name only). For the second question, the only descriptions of location
-are provided by place names (Redbridge, Bristol and Birmingham), while
-for the third question industry practices appear to be identify hub
-elements through text descriptions, icons and (in Bristol) the cube
-markers. Notably, hub elements were not always shown on maps (question
-4), although both the Bristol and Birmingham information displays
-included these at two scales (local and larger area). Answers to the
-final question shown in Table \ref{tab:definition_details}(how can you
-travel from here?) were similarly limited, with information displays in
-Bristol and Birmingham in walking, cycling and bus route descriptions,
-while the nearby bike routes were also shown in Bristol.
+name only).
+
+The second question (\emph{Where am I?}) was answered in the cases
+either by place names (Redbridge, Bristol and Birmingham) or not at all
+(Camden). For the third question (\emph{What is here?}) the best
+industry practices appear to be identify hub elements through text
+descriptions, icons, linemarking and cube markers. Notably, hub elements
+were not always shown on the maps answering the fourth question
+(\emph{what else is nearby?}). Answers to the final question shown in
+Table \ref{tab:definition_details}(\emph{How can you travel from here?})
+were similarly limited, although some information displays included text
+descriptions and limited mapping.
+
+Overall, therefore the \emph{Defined} problem to be addressed by this
+research related to produce information displays that answer these five
+questions. Hence, the final two Double Diamond phases involved
+developing and delivering software tools that could create such displays
+in a totem / pedestal or poster-sized format. Such tools also needed to
+include functionality to assist users in obtaining data and producing
+maps, but also allow user input of component elements, descriptive text
+and other details about a mobility hub.\\
+Finally, the software needed to be generalisable, such that it might be
+used to develop mobility hub informational displays elsewhere, not just
+in the UK.
 
 \subsection{Development}\label{development}
 
@@ -577,7 +545,7 @@ is allocated for facility description text and logos.
 
 }
 
-\caption{Bristol hubs, selected images. Source: authors.}\label{fig:synthesis_output}
+\caption{Bristol hubs, selected images. Source: authors.}\label{fig:display_synthesis_output}
 \end{figure}
 
 Further \emph{Development} involved creation of a \emph{synthesis}
@@ -604,26 +572,6 @@ Element 6.
 
 Element 5 includes a large scale map, using the ``Transport Map'' tiles
 used by Open Street Maps from \citet{Allan:0aa}, but with additional.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  What is this --- MOBILTY HUB / LOCAL TRAVEL POINT / SHARED TRANSPORT
-  STATION
-\item
-  Where is this --- NAME, 3 WORDS. POSTAL CODE. STREET ADDRESS
-\item
-  What is here and where is it --- MAP OF THE HUB FACILITIES
-\item
-  What is nearby and how can you get there --- REGIONAL MAP
-\item
-  How else can you get around --- BIKE ROUTES, TRANSIT MAP
-\end{enumerate}
-
-Locating yourself: INCLUDE WHAT 3 WORDS. POSTAL CODE. STREET ADDRESS
-Locating the hub facilities: Undertanding the surroundings ----- people
-have mobile phones now ---do we really need a regional map? TRANSIT MAP
 
 \subsection{Delivery}\label{delivery}
 
