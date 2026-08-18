@@ -157,10 +157,12 @@ into mobility hubs may help to resolve some of these challenges.
 Shared *electric* mobility hubs where 
 each shared e-car, e-bike or other vehicle has 
 its own powered parking space 
-might eliminate the need for rebalancing or battery swapping entirely, 
-as is the case at sites in Galway and other parts of Ireland that are part 
+might eliminate the need for rebalancing or battery swapping entirely. 
+This is case at sites in Galway and other parts of Ireland that are part 
 of the current ongoing 
-Electric shaRed mOBility hUbS Trial (ROBUST) [@ROBUST:2025aa]. 
+Electric shaRed mOBility hUbS Trial (ROBUST) [@ROBUST:2025aa], 
+of which the research described in this paper is a part.
+
  
 Mobility hubs, 
 however, 
@@ -347,7 +349,7 @@ stepping through each phase in turn.
 ## Discovery
 
 Table \ref{tab:synthesis_table} summarises findings 
-from the case research^[Table notes: 1. Case study questions (column 1) are of the form 'How are details related to <COLUMN 1> at the hub communicated?' 2. An 'X' denotes an explicit mention of the feature in hub information. 'N' denotes no explicit mention, and a blank cell indicates the feature is not present at the hub. 'S' denotes secure bicycle parking, such as a locker. 3. Totem denotes a free standing information pedestal. 4. The totem / pedestal information display at the Doric Way mobility hub is specific to the Transport For London 'Cycles' docked bike share facility. There is no information provided specifically about the mobility hub at Doric Way.]. Figures \ref{fig:selected_images} and \ref{fig:bristol_images_panels} show selected images from various hubs.  
+from the case research^[Table notes: 1. Case study questions (column 1) are of the form 'How are details related to <COLUMN 1> at the hub communicated?' 2. An 'X' denotes an explicit mention of the feature in hub information. 'N' denotes no explicit mention, and a blank cell indicates the feature is not present at the hub. 'S' denotes secure bicycle parking, such as a locker. 3. Totem denotes a free standing information pedestal. 4. The totem information display at the Doric Way mobility hub is specific to the Transport For London 'Cycles' docked bike share facility. There is no information provided specifically about the mobility hub at Doric Way.]. Figures \ref{fig:selected_images} and \ref{fig:bristol_images_panels} show selected images from various hubs.  
 
 ```{r synthesis_table, eval = TRUE, echo = FALSE,  warning=FALSE, message=FALSE}
 
@@ -384,22 +386,22 @@ CERC_synthesis[c(-1,-5,-17, -24, -27),1:10] %>%
 
 
 ```{r selected_images, out.width = "100%", fig.align = "center", fig.cap = "Selected hub images, clockwise from top left: Doric Way totem (Camden), Andrew Road totem and Andrew Road poster (TWM), Wanstead placard and branding (Redbridge) and South Woodford placard (Redbridge). Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
-knitr::include_graphics("graphics/selected_images.png") 
+knitr::include_graphics("graphics/Figure1.png") 
 
 ```
 
 ```{r bristol_images_panels, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
-knitr::include_graphics("graphics/bristol_03.png") 
+knitr::include_graphics("graphics/Figure2.png") 
 
 ```
 
 Information displays ranged from small placard signs 
 (South Woodford and Wanstead) 
-to comprehensive totems / pedestal displays and posters (Bristol and Birmingham). 
+to comprehensive totem displays and posters (Bristol and Birmingham). 
 Mobility hubs in Camden lacked any information signs. 
 Sites were labelled as "Mobility Hub" or "Village Hub" (South Woodford and Wanstead) and "Local Travel Point" in Birmingham. 
 
-Where present, totems / pedestals all included two maps: 
+Where present, totems all included two maps: 
 one at a local scale (within 5 minutes walk) 
 and a second showing a larger area (within 15 minutes). 
 These generally showed 
@@ -424,7 +426,7 @@ and wifi internet connectivity at some locations.
 
 Overall, findings during the *Discovery* phase suggest that current practices 
 relating to information displays at mobility hubs are inconsistent. 
-Best practices appear to be represented by the totems / pedestal displays 
+Best practices appear to be represented by the totem displays 
 in Bristol and Birmingham. These are generally similiar to other such displays, 
 notably the Transport For London Cycles display that is close to, 
 but not part of, 
@@ -446,10 +448,10 @@ does (or does not) respond to each.
 ```{r definition_details, eval = TRUE, echo = FALSE,  warning=FALSE, message=FALSE}
 
 tibble(Question = c("1. What is this?", 
-                    "2. Where is it?", 
+                    "2. Where am I?", 
                     "3. What is here?", 
                     "4. What is nearby?", 
-                    "5. How can you travel from here?"),
+                    "5. How can I travel from here?"),
        Purpose = c("Define current location as a mobility hub", 
                    "Identify current location", 
                    "Identify hub elements", 
@@ -476,7 +478,7 @@ tibble(Question = c("1. What is this?",
                "Local and regional maps, description, direction arrows", 
                "Description of bus routes only")) %>% 
   kable(align = "lllll",
-    caption = "Defining the design problems. Authors' concept.", 
+    caption = "Defining the design problem through five questions. Authors' concept.", 
     col.names = c("Question", "Purpose", "Redbridge London", "Camden London", "WEMCA Bristol", "TWM Birmingham"))  %>% 
   kable_styling(font_size = 7) %>% 
   column_spec(1, width = "2.25cm", border_right = TRUE) %>%
@@ -508,15 +510,17 @@ that answer these five questions.
 Hence, the final two Double Diamond phases 
 involved developing and delivering software tools 
 that could create such displays 
-in a totem / pedestal or poster-sized format. 
+in a totem or poster-sized format. 
 Such tools also needed to include functionality 
 to assist users in obtaining data and producing maps, 
 but also allow user input of component elements, 
 descriptive text and other details about a mobility hub.  
-Finally, the software needed to be generalisable, such that it might be used to develop mobility hub informational displays elsewhere, not just in the UK. 
+Finally, the software needed to be generalisable, such that it might be used to develop mobility hub informational displays elsewhere 
+(i.e. beyond the cases examined in this study). 
 
 
 ## Development
+
 
 
 ```{r download_osm_data_function, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
@@ -622,7 +626,6 @@ holding <- lapply(holding, function(x)
 }
 ```
 
-
 ```{r download_and_process_bristol_data, eval=FALSE, include=TRUE, echo=FALSE, warning=FALSE, message=FALSE }
 
 
@@ -670,15 +673,11 @@ output[[i]] <- o1
   
   
 }
-
 net <- list()
 net <- lapply(placebb, function(x) dodgr::dodgr_streetnet(x))
 list.save(net, "data/bristol_net_260627.rdata")
 
 list.save(hub_location, "data/bristol_hub_location.rdata")
-
-
-
 
 process_osm_list_function(
   list_to_load_and_process = "data/bristol_amenity_260627.rdata", 
@@ -719,42 +718,13 @@ process_osm_list_function(
 
 ```
 
-```{r load_bristol_data, eval = FALSE, echo=FALSE}
-bristol_amenity <- list.load("data/bristol_amenity.rdata")
-bristol_building <- list.load("data/bristol_building.rdata")
-bristol_highway <- list.load("data/bristol_highway.rdata")
-bristol_leisure <- list.load("data/bristol_leisure.rdata")
-bristol_landuse <- list.load("data/bristol_landuse.rdata")
-bristol_natural <- list.load("data/bristol_natural.rdata")
-bristol_railway <- list.load("data/bristol_railway.rdata")
-bristol_waterway <- list.load("data/bristol_waterway.rdata")
-bristol_hub_location <- list.load("data/bristol_hub_location.rdata")
 
-crs_local_metres <- 27700
-
-#drop points from building layers
-for (i in seq(bristol_building %>% names())){
-bristol_building[[i]] <- bristol_building[[i]][!(bristol_building[[i]] %>% st_geometry_type() == "POINT"),]
-}
-
-```
-
-
-The *Development* phase started with creation of software tools to download Open Street Maps data and use it to replicate the Bristol and Birmingham totems, as shown in Figure \ref{fig:bristol_and_birmingham_output}. Each style includes user-adjustable hub names, facility icons and directional indicators at the top.  Maps is generated for each hub at the local and regional scales, indicating the location of nearby transit stops and stations, and highlighting buildings and other features (see detail, Figure \ref{fig:bristol_and_birmingham_output} bottom left). Icon and feature locations are generated directly from the OSM datasets, although the user can select which are to be highlighted and labeled. Finally, space is allocated for facility description text and logos. 
-
-
-```{r bristol_and_birmingham_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
-knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
-
-```
-
-
-
-```{r synthesis_totem_gainsborough, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
-
+```{r generate_greensborough_totems, eval = FALSE, echo=FALSE}
+bristol_totem_pedestal()
+birmingham_totem_pedestal(file_to_save_to = "results/gainsborough_birmingham_test.pdf") 
 synthesis_totem(file_to_save_to = "results/gainsborough_synthesis_test.pdf")
-
 ```
+
 
 
 ```{r download_galway_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
@@ -766,68 +736,68 @@ crs_local_metres_galway <- 2157
 ### Create hub locations
 hub_location_galway <- list(galway = tibble(lat = 53.277352, lon =  -9.073269, name = "Westside"))
 
-amenity_galway_260816 <- download_osm_data_by_category_function(
+amenity_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "amenity"
 )
 
-building_galway_260816 <- download_osm_data_by_category_function(
+building_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "building"
 )
 
-highway_galway_260816 <- download_osm_data_by_category_function(
+highway_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "highway"
 )
 
-lesiure_galway_260816 <- download_osm_data_by_category_function(
+lesiure_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "lesiure"
 )
 
-landuse_galway_260816 <- download_osm_data_by_category_function(
+landuse_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "landuse"
 )
 
-natural_galway_260816 <- download_osm_data_by_category_function(
+natural_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "natural"
 )
 
-railway_galway_260816 <- download_osm_data_by_category_function(
+railway_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "railway"
 )
 
-waterway_galway_260816 <- download_osm_data_by_category_function(
+waterway_galway_260818 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "waterway"
 )
 
 
-list.save(amenity_galway_260816, "data/amenity_galway_260816.rdata")
-list.save(highway_galway_260816, "data/highway_galway_260816.rdata")
-list.save(landuse_galway_260816, "data/landuse_galway_260816.rdata")
-list.save(leisure_galway_260816, "data/leisure_galway_260816.rdata")
-list.save(natural_galway_260816, "data/natural_galway_260816.rdata")
-list.save(railway_galway_260816, "data/railway_galway_260816.rdata")
-list.save(waterway_galway_260816, "data/waterway_galway_260816.rdata")
+list.save(amenity_galway_260818, "data/amenity_galway_260818.rdata")
+list.save(highway_galway_260818, "data/highway_galway_260818.rdata")
+list.save(landuse_galway_260818, "data/landuse_galway_260818.rdata")
+list.save(leisure_galway_260818, "data/leisure_galway_260818.rdata")
+list.save(natural_galway_260818, "data/natural_galway_260818.rdata")
+list.save(railway_galway_260818, "data/railway_galway_260818.rdata")
+list.save(waterway_galway_260818, "data/waterway_galway_260818.rdata")
 
 
 ```
 
 
-```{r synthesis_totem_galway, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+```{r generate_galway_totems, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
 
 crs_local_metres_galway <- 2157
 building_galway <- rlist::list.load(
@@ -840,8 +810,6 @@ hub_location_galway <- tibble::tibble(
         sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
       sf::st_transform(crs =  crs_local_metres_galway) %>%
       sf::st_cast("POINT")
-
-
 
 hub_element_locations_galway <- tibble::tibble(
         lat = c(
@@ -867,6 +835,58 @@ hub_element_locations_galway <- tibble::tibble(
       sf::st_transform(crs =  crs_local_metres_galway) %>%
       sf::st_cast("POINT")
 
+
+
+bristol_totem_pedestal(file_to_save_to = "results/galway_bristol_test.pdf",
+                          hub_name_text = "Gainsborough Square",
+    icons_to_include_in_header = list(
+      system.file(
+        "extdata/bus_stop.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle_parking.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/rental_bicycle.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle-electric-2.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/shared-car-14.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/charging_station.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/toilets.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/parcel_locker.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools")),
+    map_local = bristol_local_map(
+      building = building_galway,
+      hub_location = hub_location_galway,
+      crs_local_metres = crs_local_metres_galway,
+      highlight_building = c("Westside Public Library")),
+    
+    facilities_image =  system.file(
+      "extdata/bristol_facilities.png", package = "mobilityHubTools"),
+    map_regional = bristol_regional_map(
+      building = building_galway,
+    hub_location = hub_location_galway,
+    crs_local_metres = crs_local_metres_galway,
+    highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius")),
+    acknowledgements_text = "Map data from OpenStreetMap, available under the Open Database License. © OpenStreetMap contributors. See openstreetmap.org/copyright \n \nIcons from https://github.com/gmgeo/osmic https://www.svgrepo.com/svg/450115/e-scooter \nand https://commons.wikimedia.org/wiki/File:RWBA_Behinderten-WC.svg")
+
+
+birmingham_totem_pedestal(file_to_save_to = "results/galway_birmingham_test.pdf") 
 
 synthesis_totem(
     file_to_save_to = "results/galway_synthesis_test.pdf",
@@ -999,58 +1019,199 @@ map_limits = 2000,
 
 
 
-```{r display_synthesis_output, out.width = "100%", fig.align = "center", fig.cap = "Bristol hubs, selected images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
-knitr::include_graphics("graphics/bristol_and_birmingham_output.png") 
+
+
+
+```{r display_outputs_figure, out.width = "100%", fig.align = "center", fig.cap = "Software output: Birmingham (left), Bristol (centre) and synthesis (right) display types. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+knitr::include_graphics("graphics/Figure3.png") 
 
 ```
 
 
+During the *Development* phase 
+software tools were created
+in the R language 
+to: download Open Street Maps (OSM) data; 
+produce local and regional maps; and
+replicate the Bristol and Birmingham styles of 
+totems; and 
+create a *synthesis* display format, 
+which responds to the problem *Definition*. 
+OSM and R were chosen to facilitate reuse of the software, 
+as these are both open source and freely available. 
+Figure \ref{fig:display_outputs_figure} shows 
+outputs of the software 
+generated for the Gainsborough Square 
+case location, 
+across the three developed styles: 
+replicating the Bristol totem  (left), 
+and the Birmingham totem (centre); and 
+the developed synthesis display (right).  
+These are intended to be printed at A0-scale, 
+but the inset in Figure \ref{fig:display_outputs_figure} (bottom left) 
+demonstrates how the mapping labels points of interests 
+and includes iconographic representation of nearby facilities 
+such as bus stops and cafes.  
 
-Further *Development* involved creation of a *synthesis* display format, which responds to the problem *Definition* by: 1) adopting an A0 paper size, so as to fit with typical plotter availability; 2) leveraging Open Street Maps mapping tiles for nearby features, transit and ; and 3) explictly answering the five questions identified in the design problem *Definition* phase. Figure \ref{fig:synthesis_poster} shows an example of the synthesis totem design generated for the Greensborough Square (Bristol). ALSO INCLUDE AN EXAMPLE FOR ROBUST GALWAY?
+Higher resolution images of the software outputs are available 
+together with the software used to prepare this paper 
+on github^[See https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/tree/main/results]. 
+Also included in that repository are software outputs for 
+the location of the Galway ROBUST e-mobility hub. 
+Figure \ref{fig:display_synthesis_details} shows 
+selected excerpts from that output^[Full size available at See https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/tree/main/results/galway_synthesis_test.pdf], which are described in the following.  
 
-The synthesis totem design has eleven elements. These in turn: answer the five design problem questions at large size that might be visible at distance (elements 1 to 5, counting top to bottom); answer the five questions again in detail and at small scale, for when standing close to the totem (elements 6 to 10); and space in the bottom right for branding or agency logos (element 11). Element 1 explicitly calls the facility a "Mobility Hub / Local Travel Point", while Element 2 includes the specific place name and details of the address, including the postal code, such that a user might be able to tell someone else (e.g. on the phone) where they are. This and further details are also shown in Element 6.   
+```{r display_synthesis_details, out.width = "100%", fig.align = "center", fig.cap = "Software output: Birmingham (left), Bristol (centre) and synthesis (right) display types. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}
+knitr::include_graphics("graphics/Figure4.png") 
 
-Element 5 includes a large scale map, using the "Transport Map" tiles used by Open Street Maps from @Allan:0aa, but with additional.  
+```
 
+The synthesis totem answers 
+the five questions developed in the *Definition* phase of this research, 
+as indicated in Figure \ref{fig:display_synthesis_details}. 
+Question 1 (*What is this?*) is answered by large font 
+text ("e-Mobility Hub / Local Travel Point") for viewing from distance, 
+and detailed text in the main body of the display.  
+Likewise Questions 2 (*Where am I?*) and 3 (*What is here?*) are answered through 
+text at various sizes, 
+icons and detailed maps.  
+Included maps that address Questions 4 (*What is nearby*) 
+and 5 (*How can I travel from here?*) 
+leverage existing 
+map tiles associated with OSM, 
+including the the "Transport" 
+and "Cycle" tile sets from @Allan:0aa and @Allan:0ab
 
 ## Delivery
 
-BRIEF DESCRIPTION OF FUNCTIONS
+Software developed in this research 
+was assembled into a package of functions, 
+as per the guidance provided by @wickham2023r.
+This package is available at [https://github.com/James-Reynolds/mobilityHubTools](https://github.com/James-Reynolds/mobilityHubTools). 
+It includes functions for 
+creating maps (e.g. bristol_local_map.R, synthesis_hub_elements_map.R) 
+and totems (e.g. brimingham_totem_pedestal.R, synthesis_totem.R). 
+As per the @wickham2023r recommendations 
+each function includes a description of variables and other details 
+(through a Roxygen Skeleton), 
+such that R help files and other package documentation 
+are automatically generated.  
+Also included in the package are icons (.svg) and 
+test data used to generate the Gainsborough Square outputs. 
 
-As discussed above, this paper is part of a larger program of research seeking to develop tools for practitioners and mobility hub implementers. A developmental version is available as an R package at [https://github.com/James-Reynolds/mobilityHubTools](https://github.com/James-Reynolds/mobilityHubTools). This is a non-static version, which is expected to continue to be modified as the program of research progresses.  
+# Discussion and Conclusions
 
+As briefly noted earlier, 
+the research described in this paper is part of the ROBUST project, 
+which involves trials of shared electric mobility hubs 
+in various locations across Ireland. 
+Part of this larger program of research 
+will include looking at user behaviour, 
+usability 
+and related issues 
+under real-world conditions. 
+Experiments with 
+information displays, 
+including testing and co-design with users, 
+is a direction for future research during ROBUST. 
+The research described in this paper, 
+however, 
+represents an initial 
+exploration of this topic 
+both through case studies of current practices 
+and use of a design-research approach. 
 
-APPLICATION TO THE GALWAY ROBUST HUB
+Hub characteristics discovered from the cases studied 
+during the first phase of this research 
+suggest mobility hubs come in many forms. 
+There also appears to be much variability in information displays and user guidance, from comprehensive displays in Bristol and Birmingham 
+to linemarking only at some sites in London.
+The design problem this study has focused on relates 
+specifically to totems and mapping, 
+but clearly there are opportunities 
+for further research into mobility hub wayfinding 
+and information provision. 
+As well, 
+even those mobility hubs included within the cases 
+with more extensive information displays 
+do not appear to have fully answered 
+the five questions defined here as the 
+design problem to be addressed. 
 
-
-# Discussion and conclusions
-
-This design-based research has developed basic software tools that might be used in
-the context of mobility hubs. The general format and styling is largely based on
-elements in place at various mobility hubs in Bristol, but as discussed above the
-flexibility of R might allow users to adjust layouts, styling and other details as desired.
-As well as being freely available, the OSM online platform allows this dataset to be
-edited by anyone, including for the purposes of mobility hub implementation
-Clearly, there are many avenues for further research, including: expansion to produce
-websites, posters, banners, leaflets and other informational products; developing
-more generic materials for other purposes such as maintenance schedules, inspection
-logs, management resources and other items that might help a mobility hub ‘product
-owner’ facilitate operations, continuance and growth. Further development of ‘best
-practices’ in mobility hub informational provision might involve additional case studies,
-especially of non-UK sites, as well as improvements to the base ‘hub signage mockup’
-developed here. There may be a need to better understand what facilities and services
+While the synthesis totem display 
+output from the *Development* phase 
+of the research described here 
+does answer all five questions (multiple times), 
+further design improvements can clearly be made. 
+There may be a need to better understand what facilities and services
 might best be included as ‘part’ of a hub, as opposed to those that are mapped as
-being ‘nearby’. More immediately, user testing and further development of the
-software, and of the software outputs, especially the maps, would seem an important
-direction for further research efforts in the short term.
-This paper’s title asked a question related to the applicability of tactical urbanist
-approaches to the topic of mobility hubs. Underlying this may be larger questions
-related to ‘what is a mobility hub’ and ‘who gets to define and advertise something as
-being a mobility hub’. Perhaps every railway station, bus or tram stop, shared or micro-
-mobility facilities or many other places are already mobility hubs, but just no one has
-put up a sign or handed out a leaflet that designates this as being the case? With
-access to this software and a printer, turning the existing mobility offerings in your
-own community into a defined hub may be within easier reach.
+being ‘nearby’. 
+More immediately, 
+further development of the
+software 
+and user testing of the software outputs 
+would seem a direction for future research. 
+
+However, the aim of this research 
+was to improve understandings 
+related to mobility hub informational displays, 
+and explore whether it was possible 
+to develop software tools 
+for implementing mobility hubs at other locations. 
+The maps and other details shown in Figure \ref{ref:display_synthesis_details} 
+and three different
+outputs for the Galway ROBUST hub^[See https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/tree/main/results/galway_synthesis_test.pdf] 
+indicate that it is possible to use OSM data 
+and mapping tiles 
+to produce
+mobility hub information displays that might be suitable 
+for prototyping, 
+public consultation or 
+to hand to a graphic designer^[More formally, disproving the (null) hypothesis this paper tests.]. 
+The flexibility of R might also 
+allow users to adjust layouts, styling and other details as desired.
+Likewise, the OSM dataset can be freely accessed and edited by anyone. 
+Hence, starting with the developed software 
+and a printer tactical urbanists or other grassroots activitist 
+might be able define a mobility hub in their own community, 
+and keep information displays up to date as circumstances change.
+This might raise larger questions, 
+such as *who gets to decide what a mobility hub is?*
+Perhaps mobility hubs already exist 
+wherever there are combinations of: 
+railway or electric vehicle charging stations; 
+bus or tram stops; 
+shared bike docks, 
+parking zones or other micro-mobility offerings; 
+or other transport-related facilities and services. 
+Hopefully the software tools
+developed in this study may
+help facilitate bottom-up implementation, 
+pop-ups or trials, 
+or other efforts to 
+develop and maintain mobility hubs. 
+
+
+More generally, 
+the research outcomes of 
+this study may provide 
+insights about current mobility hub information displays developed by practitioners, 
+as a step towards identifying 'best practices'.  
+Mobility hubs are still a new and evolving approach. 
+As per the @Roukouni:2023aa definition, 
+a mobility hub needs to provide "integration", 
+"seamless, flexible connection" and
+"...an enjoyable experience for travelers" 
+across multiple modes, 
+while also connecting users to 
+surrounding services and facilities.  
+Overall, it appears that there is 
+some way to go in understanding how to deliver upon this, 
+even within the narrower confines of information displays 
+and other guidance for users at mobility hubs. 
+
+
+
 
 
 ```{r contribution_matrix_template, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
