@@ -44,9 +44,9 @@ linenumbers: false
 numbersections: true
 # Use a CSL with `citation_package = "default"`
 # csl: https://www.zotero.org/styles/elsevier-harvard
-header-includes:
-   - \usepackage{setspace}
-   - \doublespacing
+#header-includes:
+#   - \usepackage{setspace}
+#   - \doublespacing
 output: 
   rticles::elsevier_article:
     keep_tex: true
@@ -187,7 +187,7 @@ and a need for
 practitioners, 
 tactical urbanists 
 and others 
-to need adopt a   
+to need adopt a 
 'do it yourself' attitude 
 to developing information displays 
 and supporting maps. 
@@ -677,65 +677,72 @@ crs_local_metres_galway <- 2157
 ### Create hub locations
 hub_location_galway <- list(galway = tibble(lat = 53.277352, lon =  -9.073269, name = "Westside"))
 
-amenity_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "amenity"
-)
-
-building_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "building"
-)
-
-highway_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "highway"
-)
-
-lesiure_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "lesiure"
-)
-
-landuse_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "landuse"
-)
-
-natural_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "natural"
-)
-
-railway_galway_260818 <- download_osm_data_by_category_function(
-  hub_location = hub_location_galway, 
-  crs_local_metres = crs_local_metres_galway, 
-  key = "railway"
-)
-
-waterway_galway_260818 <- download_osm_data_by_category_function(
+waterway_galway_260819 <- download_osm_data_by_category_function(
   hub_location = hub_location_galway, 
   crs_local_metres = crs_local_metres_galway, 
   key = "waterway"
 )
 
 
-list.save(amenity_galway_260818, "data/amenity_galway_260818.rdata")
-list.save(highway_galway_260818, "data/highway_galway_260818.rdata")
-list.save(landuse_galway_260818, "data/landuse_galway_260818.rdata")
-list.save(leisure_galway_260818, "data/leisure_galway_260818.rdata")
-list.save(natural_galway_260818, "data/natural_galway_260818.rdata")
-list.save(railway_galway_260818, "data/railway_galway_260818.rdata")
-list.save(waterway_galway_260818, "data/waterway_galway_260818.rdata")
+amenity_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "amenity"
+)
+
+building_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "building"
+)
+
+highway_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "highway"
+)
+
+lesiure_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "lesiure"
+)
+
+landuse_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "landuse"
+)
+
+
+natural_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "natural"
+)
+
+railway_galway_260819 <- download_osm_data_by_category_function(
+  hub_location = hub_location_galway, 
+  crs_local_metres = crs_local_metres_galway, 
+  key = "railway"
+)
+
+
+
+list.save(amenity_galway_260819, "data/amenity_galway_260819.rdata")
+list.save(building_galway_260819, "data/building_galway_260819.rdata")
+list.save(highway_galway_260819, "data/highway_galway_260819.rdata")
+list.save(landuse_galway_260819, "data/landuse_galway_260819.rdata")
+list.save(lesiure_galway_260819, "data/lesiure_galway_260819.rdata")
+list.save(natural_galway_260819, "data/natural_galway_260819.rdata")
+list.save(railway_galway_260819, "data/railway_galway_260819.rdata")
+list.save(waterway_galway_260819, "data/waterway_galway_260819.rdata")
 
 
 ```
+
+
+
 
 
 ```{r generate_galway_totems, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
@@ -957,6 +964,96 @@ map_limits = 2000,
 
 
 ```
+
+
+
+```{r download_letterkenny_data, eval = FALSE, echo = FALSE,  warning=FALSE, message=FALSE}
+
+crs_local_metres_letterkenny <- 2157
+
+### Create hub locations
+hub_location_letterkenny <- list(letterkenny = tibble(lat = 54.95151634666276, lon =  -7.734450098708954, name = "Letterkenny"))
+
+
+
+
+waterway_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "waterway"
+)
+
+list.save(waterway_letterkenny_26021, "data/waterway_letterkenny_26021.rdata")
+
+
+amenity_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "amenity"
+)
+
+
+list.save(amenity_letterkenny_26021, "data/amenity_letterkenny_26021.rdata")
+
+building_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "building"
+)
+
+list.save(building_letterkenny_26021, "data/building_letterkenny_26021.rdata")
+
+
+highway_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "highway"
+)
+
+list.save(highway_letterkenny_26021, "data/highway_letterkenny_26021.rdata")
+
+
+
+lesiure_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "lesiure"
+)
+
+
+list.save(lesiure_letterkenny_26021, "data/lesiure_letterkenny_26021.rdata")
+
+landuse_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "landuse"
+)
+
+list.save(landuse_letterkenny_26021, "data/landuse_letterkenny_26021.rdata")
+
+
+natural_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "natural"
+)
+
+list.save(natural_letterkenny_26021, "data/natural_letterkenny_26021.rdata")
+
+railway_letterkenny_26021 <- download_osm_data_by_category_function(
+  hub_location = hub_location_letterkenny, 
+  crs_local_metres = crs_local_metres_letterkenny, 
+  key = "railway"
+)
+
+list.save(railway_letterkenny_26021, "data/railway_letterkenny_26021.rdata")
+
+
+
+```
+
+
+
 
 
 ```{r display_outputs_figure, out.width = "100%", fig.align = "center", fig.cap = "Software output: Birmingham (left), Bristol (centre) and synthesis (right) display types. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE}

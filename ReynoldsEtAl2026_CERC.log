@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  19 AUG 2026 16:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  19 AUG 2026 17:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -398,9 +398,7 @@ Package hyperref Warning: Option `bookmarks' has already been used,
 (hyperref)                setting the option has no effect on input line 51.
 
 Package hyperref Info: Option `colorlinks' set `false' on input line 51.
-(/usr/local/texlive/2024/texmf-dist/tex/latex/setspace/setspace.sty
-Package: setspace 2022/12/04 v6.7b set line spacing
-) (/usr/local/texlive/2024/texmf-dist/tex/latex/subfig/subfig.sty
+(/usr/local/texlive/2024/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 (/usr/local/texlive/2024/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
@@ -604,31 +602,31 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 84
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 82
 .
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (./ReynoldsEtAl2026_CERC.aux)
 \openout1 = `ReynoldsEtAl2026_CERC.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count338
@@ -686,21 +684,19 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 84.
-Package microtype Info: Applying patch `item' on input line 84.
-Package microtype Info: Applying patch `toc' on input line 84.
-Package microtype Info: Applying patch `eqnum' on input line 84.
-
-Package microtype Warning: Unable to apply patch `footnote' on input line 84.
-
-Package microtype Info: Applying patch `verbatim' on input line 84.
+LaTeX Info: Redefining \microtypecontext on input line 82.
+Package microtype Info: Applying patch `item' on input line 82.
+Package microtype Info: Applying patch `toc' on input line 82.
+Package microtype Info: Applying patch `eqnum' on input line 82.
+Package microtype Info: Applying patch `footnote' on input line 82.
+Package microtype Info: Applying patch `verbatim' on input line 82.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 84.
+LaTeX Info: Redefining \showhyphens on input line 82.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -708,7 +704,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 84.
+Package hyperref Info: Link coloring OFF on input line 82.
 (./ReynoldsEtAl2026_CERC.out) (./ReynoldsEtAl2026_CERC.out)
 \@outlinefile=\write4
 \openout4 = `ReynoldsEtAl2026_CERC.out'.
@@ -724,39 +720,39 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-51.
+49.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-51.
+49.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-151.
+149.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-151.
+149.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 151.
+(Font)              <10> on input line 149.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 151.
+(Font)              <7> on input line 149.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 151.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 151
+(Font)              <5> on input line 149.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 149
 .
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 151
+LaTeX Font Info:    Trying to load font information for U+msb on input line 149
 .
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -764,11 +760,11 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 151.
+(Font)              <8> on input line 149.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 151.
+(Font)              <6> on input line 149.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-51.
+49.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -783,183 +779,182 @@ Overfull \hbox (2.22221pt too wide) has occurred while \output is active
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\cnotenum' on input line 173.
+(hyperref)                removing `\cnotenum' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@corref' on input line 173.
+(hyperref)                removing `\@corref' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<let>-command' on input line 173.
+(hyperref)                removing `\<let>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\comma' on input line 173.
+(hyperref)                removing `\comma' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\<def>-command' on input line 173.
+(hyperref)                removing `\<def>-command' on input line 184.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@fnmark' on input line 173.
+(hyperref)                removing `\@fnmark' on input line 184.
 
 [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/202
-4/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2] [3] [4]
-Overfull \hbox (1.66443pt too wide) in paragraph at lines 347--347
+4/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}] [2]
+Overfull \hbox (1.66443pt too wide) in paragraph at lines 344--344
  \T1/lmr/m/n/7 (-20) Wanstead| 
  []
 
 
-Overfull \hbox (6.96925pt too wide) in paragraph at lines 347--347
+Overfull \hbox (6.96925pt too wide) in paragraph at lines 344--344
  []|\T1/lmr/m/n/7 (-20) Goldington 
  []
 
 
-Overfull \hbox (4.92409pt too wide) in paragraph at lines 347--347
+Overfull \hbox (4.92409pt too wide) in paragraph at lines 344--344
  []|\T1/lmr/m/n/7 (-20) Gainsborough 
  []
 
 
-Overfull \hbox (32.56335pt too wide) in alignment at lines 342--384
+Overfull \hbox (32.56335pt too wide) in alignment at lines 339--381
  [] [] [] [] [] [] [] [] [] [] 
  []
 
-[5]
-<graphics/Figure1.png, id=153, 2489.3pt x 3521.155pt>
+[3]
+<graphics/Figure1.png, id=145, 2489.3pt x 3521.155pt>
 File: graphics/Figure1.png Graphic file (type png)
 <use graphics/Figure1.png>
-Package pdftex.def Info: graphics/Figure1.png  used on input line 389.
+Package pdftex.def Info: graphics/Figure1.png  used on input line 386.
 (pdftex.def)             Requested size: 468.0pt x 661.98799pt.
 
-LaTeX Warning: Float too large for page by 59.48798pt on input line 394.
+LaTeX Warning: Float too large for page by 59.48798pt on input line 391.
 
-
-Overfull \hbox (36.03671pt too wide) in alignment at lines 434--447
+[4] [5 <./graphics/Figure1.png>]
+Overfull \hbox (36.03671pt too wide) in alignment at lines 431--444
  [] [] [] [] [] [] 
  []
 
-[6] [7 <./graphics/Figure1.png>]
-<graphics/Figure2.png, id=167, 2472.23625pt x 3078.50125pt>
+<graphics/Figure2.png, id=158, 2472.23625pt x 3078.50125pt>
 File: graphics/Figure2.png Graphic file (type png)
 <use graphics/Figure2.png>
-Package pdftex.def Info: graphics/Figure2.png  used on input line 471.
+Package pdftex.def Info: graphics/Figure2.png  used on input line 468.
 (pdftex.def)             Requested size: 468.0pt x 582.76051pt.
-[8] [9 <./graphics/Figure2.png>] [10] (./ReynoldsEtAl2026_CERC.bbl [11]
+[6] [7 <./graphics/Figure2.png>] (./ReynoldsEtAl2026_CERC.bbl [8]
 Underfull \hbox (badness 1237) in paragraph at lines 90--94
 []\T1/lmr/m/n/8 (+20) TRIP - Cen-tre for Trans-port Re-search and In-no-va-tion
  for Peo-ple.  RO-BUST: Elec-tric shaRed mO-Bil-ity hUbS
  []
 
-) [12] (./ReynoldsEtAl2026_CERC.aux)
+) [9] (./ReynoldsEtAl2026_CERC.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -968,52 +963,28 @@ Package rerunfilecheck Info: File `ReynoldsEtAl2026_CERC.out' has not changed.
 (rerunfilecheck)             Checksum: F824E3EC9B4F1FF78C9A9A6D8A54D175;1554.
  ) 
 Here is how much of TeX's memory you used:
- 17620 strings out of 474116
- 282286 string characters out of 5743682
- 1988187 words of memory out of 5000000
- 39425 multiletter control sequences out of 15000+600000
+ 17577 strings out of 474116
+ 281387 string characters out of 5743682
+ 1993187 words of memory out of 5000000
+ 39389 multiletter control sequences out of 15000+600000
  614974 words of font info for 167 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,10n,79p,1018b,611s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
-, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2
-024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf-d
-ist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/ty
-pe1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/l
-m/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri10.pfb
-></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2
-024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf-d
-ist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/fonts/
-type1/public/lm/lmtt8.pfb>
-Output written on ReynoldsEtAl2026_CERC.pdf (12 pages, 19540108 bytes).
+ 72i,10n,79p,1018b,613s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
+cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive
+/2024/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2024/texmf
+-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2024/texmf-dist/fonts/
+type1/public/lm/lmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public
+/lm/lmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri10.p
+fb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/lm/lmri8.pfb></usr/lo
+cal/texlive/2024/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive
+/2024/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2024/texmf
+-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2024/texmf-dist/font
+s/type1/public/lm/lmtt8.pfb>
+Output written on ReynoldsEtAl2026_CERC.pdf (9 pages, 19538504 bytes).
 PDF statistics:
- 285 PDF objects out of 1000 (max. 8388607)
- 242 compressed objects within 3 object streams
- 57 named destinations out of 1000 (max. 500000)
+ 272 PDF objects out of 1000 (max. 8388607)
+ 232 compressed objects within 3 object streams
+ 54 named destinations out of 1000 (max. 500000)
  27755 words of extra memory for PDF output out of 29859 (max. 10000000)
 
