@@ -1,0 +1,373 @@
+---
+title: "DIY information provision with mobilityHubTools: CERC presentation notes"
+runningheader: "DIY mobilityHubTools" # only for pdf output
+author: James Reynolds
+date: "`r Sys.Date()`"
+output:
+  tufte::tufte_handout:
+#    citation_package: natbib
+#    latex_engine: xelatex
+#  tufte::tufte_book:
+#    citation_package: nobib
+#    latex_engine: xelatex
+bibliography: references.bib
+csl: https://www.zotero.org/styles/chicago-fullnote-bibliography-16th-edition
+suppress-bibliography: yes
+link-citations: yes
+---
+
+
+```{r setup, include=FALSE}
+library(tufte)
+#library(rnaturalearth)
+#library(rnaturalearthhires)
+library(sf)
+library(ggplot2)
+library(viridis)
+library(patchwork)
+library(elevatr)
+library(terra)
+library(osmdata)
+library(leaflet)
+library(tidyverse)
+library(pipeR)
+library(rlist)
+library(sf)
+library(janitor)
+library(knitr)
+library(kableExtra)
+library(dodgr)
+library(magick)
+#library(osmplotr)
+library(magrittr)
+library(scales)
+library(cowplot)
+library(rosm)
+library(mobilityHubTools)
+
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+
+```
+
+
+
+```{r logo, echo=FALSE, fig.margin = TRUE, out.width="100%"}
+
+knitr::include_graphics("graphics/robust-logo-news.png") 
+
+```
+
+- *Situation:* Shared mobility hubs^["A shared mobility hub is a place where different transport modes are integrated seamlessly, promoting efficient and sustainable urban mobility. Emphasis is given on shared mobility options such as bikes, scooters and cars. Connection with public transport (transit) is desirable but not necessary. The integration between mobility suppliers is important to provide a seamless, flexible connection at these transfer points. Ensuring an enjoyable experience for travelers is a crucial part of the hub concept as well, and therefore the hub should be considered not just as a transfer node but as a place where a variety of services come together, such as logistics services or restaurants." (Roukouni et al. 2023)] are a (relatively) new direction in transport.  They seek to co-locate shared, micro-mobility transport modes,  sometimes with electrified and/or public transport services or other facilities that might help the movement of people and goods[@Roukouni:2023aa]. These tend to aim towards providing more options for those, more occasional, trips that are difficult to make or otherwise impractical on foot, bicycle or using transit, and so contribute to more sustainable travel behaviors[@Geurs:2024aa].  
+
+- *Problem:* Not much is yet known about providing users with information at mobility hubs.  While there is some guidance from CoMoUK and others, as of yet there do not appear to be tools available to support practitioners implementing hubs. Rather, mobility hub information provision appears to be largely done on a site-by-site, system-by-system or otherwise bespoke.  
+
+- *Question:* Is it possible to improve understandings of current (and best) practices, and to develop tools to fill this gap? 
+
+- *Answer:* Undertake design and case-based research guided by the iterative Double Diamond design process to examine information at selected mobility hubs, and to discover current practices.  Then define what mobility hub information provision might be trying to solve, develop design solutions and deliver a package of software.  
+
+
+# Background
+
+
+```{r plot_robust_qr_code_to_youtube_and_website, include=TRUE, echo=FALSE, fig.fullwidth = FALSE, out.width="100%", fig.cap="Draft mobility hub video and website links"}
+
+knitr::include_graphics("graphics/video_website_code_QR.png")
+
+```
+ 
+
+This is part of the Electric shaRed mOBility hUbs Trial (ROBUST) project^[See https://www.tcd.ie/transport-research/our-research/research-projects/ROBUST-electric-shared-mobility-hubs-trial/]. The project includes co-design, behaviour nudging and hub incubation activities (Figure 1).  
+
+\newthought{The literature suggests:} branding, signage, guidance, 'totem' displays, and online information [@CoMoUK:2021ab, @CoMoUK:2021ac]; and notes a need for: “integration”, “seamless, flexible connection” and “. . . an enjoyable experience for travelers” (Roukouni et al. 2023).
+
+
+```{r comouk_toolkit, include=TRUE, echo=FALSE, fig.margin = FALSE, out.width="100%", fig.cap="CoMoUK toolkit excerpt", eval=FALSE}
+
+knitr::include_graphics("graphics/comouk_toolkit.png")
+
+```
+
+
+```{r comouk_awareness, include=TRUE, echo=FALSE, fig.margin = FALSE, out.width="100%", fig.cap="CoMoUK increasing awareness case study"}
+
+knitr::include_graphics("graphics/comouk_increase_awareness.png")
+
+```
+
+
+# Methodology
+
+```{r double_diamond_figure, include=TRUE, echo=FALSE, out.width = "100%", fig.margin = TRUE, fig.cap = "Framework for Innovation. Source : UK Design Council (undated)", crop = TRUE}
+
+knitr::include_graphics("graphics/Double_Diamond.png")
+
+```
+
+- four phases, 
+- alternate between divergent (discover, develop) and convergent (define, deliver) approaches, 
+- overall process is iterative,
+- industrial design research approach, with broad applications to transport [@Coxon:2018aa].
+
+\newthought{Discovery and definition:} case-based
+
+- effective when research at an early stage, and for 'how' or 'why' questions (How is information provided at
+and about mobility hubs?  How might information at and about mobility hubs be provided ideally? How can such best practices can be made generally applicable?). 
+- select cases for theoretical reasons (e.g. leading, notable or representative, or for polar opposites for cross-case comparison etc.)(@Yin:2018ab and others)^[Cases: (*Redbridge*) South Woodford and High Street, Wanstead; (*Camden*) Goldington Crescent, and Doric Way; (*Bristol*) Abbey Wood, UWE Frenchay, and Gainsborough Square; and (*Birmingham*) Huntingtree Park and Andrew Road]. 
+- duality criterion: at the same time grounded within the context of the small number of cases (depth of research), yet seeking generalisable results that apply to more than just the cases studied (@Denscombe:2007aa and others).
+
+\newthought{Development and delivery}: iterative coding to replicate various examples; develop synthesis version (industry practice + respond to defined problem); and deliver as a software package[@wickham2023r]. 
+
+# Results
+
+```{r selected_images, out.width = "100%", fig.margin = FALSE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=FALSE}
+knitr::include_graphics("graphics/Figure1.png") 
+
+```
+
+*Discovery:* wide range of examples^[https://maps.app.goo.gl/1dd8sEJCiwCgPkc98, https://maps.app.goo.gl/j7b7MLr8HzcjqoS66, https://maps.app.goo.gl/BW8cEVXioYSoNbiz9, https://maps.app.goo.gl/1JqvPLWkwkbnyGB27 ].
+
+
+```{r more_selected_images, out.width = "100%", fig.margin = TRUE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+knitr::include_graphics("graphics/andrew_road.png") 
+
+```
+
+
+*Definition* of the problem to be addressed by the design output: 1. What is this? 2. Where am I? 3. What is here? 4. What is nearby? 5. How can I travel from here? (6. How do I use each bit of this?)^[This is coming out of subsequent co-design workshops.].
+
+*Development* of:  Bristol-style totem, Birmingham-style totem and 'synthesis' totem.  Examples in Figure 5, but also up on the walls around us. 
+
+
+
+
+
+
+```{r mobilityHubTools, out.width = "100%", fig.fullwidth = FALSE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=FALSE}
+knitr::include_graphics("graphics/mobilityHubTools.png") 
+
+```
+
+
+
+*Delivery* of:  R package on github^[https://github.com/James-Reynolds/mobilityHubTools]; code developed to produce paper outputs^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd]; and these notes and associated outputs^[].
+
+
+# Discussion and conclusions
+- Tactical urbanism: why not make a "mobility hub" of your own? 
+- More to do to improve the code, develop further outputs etc.  
+- Open Street Maps data quite powerful, as are the GIS tools available for R. 
+
+
+```{r output_images, out.width = "100%", fig.fullwidth = TRUE, fig.align = "center", fig.cap = "Software output examples: Bristol, Birmingham and synthesis-style totem displays (left, centre, right). Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+knitr::include_graphics("graphics/Figure2.png") 
+
+```
+
+
+
+```{r update_osm_data, eval = FALSE, echo=FALSE}
+
+
+hub_location <- list(
+  letterkenny = tibble(lat=54.95151900289267, lon =-7.734405435672215, name = "Letterkenny"), 
+  galway = tibble(lat = 53.277326344086504, lon = -9.073269666553948, name = "Galway"), 
+  waterford = tibble(lat = 52.2599339, lon = -7.1170565, name = "Waterford"),
+  dundrum = tibble(lat = 53.288029794549054, lon = -6.241222689308968, name = "Dublin"), 
+  atu_wellpark = tibble(lat = 53.283377, lon = -9.025875, name = "ATU Wellpark Gr"), 
+  atu_dublin = tibble(lat = 53.277556, lon = -9.010766, name = "ATU Dublin Road"),
+  eyre_sq = tibble(lat = 53.274263, lon = -9.048220, name = "Eyre Square"), 
+  barnagh_greenway_hub = tibble(lat = 52.42013736039186, lon = -9.13317636029644, name = "Barnagh Greenway Hub"),
+  ballymahon_greenway_cycle = tibble(lat = 53.567116106914014, lon =  -7.761893285075223, name = "Ballmahon Greenway Cycles"), 
+  dungarvan_greenway_hire = tibble(lat = 52.09251304782626, lon =  -7.614901327250086, name = "Waterford Greenway Bike Hire"),
+  mullingar_bike_hire = tibble(lat = 53.52968967725919, lon =  -7.344271902620216, name = "Mullingar Bike Hire"), 
+  abbeyfield = tibble(lat = 52.394231634624234, lon = -9.302617810937106, name = "Former Abbeyfeale station"),
+  park_hotel = tibble(lat = 52.095131031765575, lon = -7.6244785542369895, name = "The Park Hotel"), 
+  dungarvan_carpark = tibble(lat = 52.093303004303216, lon =  -7.622031687213521, name = "Dungarvan Greenway Car Park"), 
+  congress_house = tibble(lat = 52.09281648814859, lon =  -7.614055602558226, name = "Congress House"), 
+  davitts_quay = tibble(lat = 52.09143069019557, lon =  -7.620394387213649, name = "1 Davitts Quay"), 
+  kilmacthomas = tibble(lat = 52.205811229925594, lon =  -7.424998169918687, name = "Main Street"), 
+  one_merchants = tibble(lat = 52.26368611221513, lon =  -7.118604979952401, name = "1 Merchants Quay")
+  )
+
+hub_location <- lapply(hub_location, function(x) x %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>%
+  st_transform(crs = crs_local_metres) %>% 
+  st_cast("POINT"))
+    
+
+placebb <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) %>%
+                    st_bbox())
+
+#DOWNLOADED from geofabrik OSM host   
+file_path = "~/WP4_behaviour_nudging_etc/data/ireland-and-northern-ireland-261003.osm.pbf"
+
+osm_data_points <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "points", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_lines <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "lines", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_multilinestrings <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "multilinestrings", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_multipolygons <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "multipolygons", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+amenity <- list()
+building <- list()
+highway <- list()
+landuse <- list()
+lesiure <- list()
+natural <- list()
+railway <- list()
+waterway <- list()
+
+all_osm_data <- list()
+
+
+i <- 1
+for(i in seq_along(placebb)){
+  
+  all_osm_data[[i]] <- osm_data_points[[i]] %>% 
+      bind_rows(osm_data_lines[[i]]) %>% 
+      bind_rows(osm_data_multilinestrings[[i]]) %>% 
+      bind_rows(osm_data_multipolygons[[i]])
+  
+  amenity[[i]] <- all_osm_data[[i]] %>% filter(!is.na(amenity))
+  building[[i]] <- all_osm_data[[i]] %>% filter(!is.na(building))
+  highway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(highway))
+  landuse[[i]] <- all_osm_data[[i]] %>% filter(!is.na(landuse))
+  lesiure[[i]] <- all_osm_data[[i]] %>% filter(!is.na(lesiure))
+  natural[[i]] <- all_osm_data[[i]] %>% filter(!is.na(natural))
+  railway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(railway))
+  waterway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(waterway))
+}
+
+names(amenity) <- names(hub_location)
+names(building) <- names(hub_location)
+names(highway) <- names(hub_location)
+names(landuse) <- names(hub_location)
+names(lesiure) <- names(hub_location)
+names(natural) <- names(hub_location)
+names(railway) <- names(hub_location)
+names(waterway) <- names(hub_location)
+
+
+amenity <- lapply(amenity, function(x) x %>% 
+      st_transform(crs = 2157))
+building <- lapply(building, function(x) x %>% 
+      st_transform(crs = 2157))
+highway <- lapply(highway, function(x) x %>% 
+      st_transform(crs = 2157))
+landuse <- lapply(landuse, function(x) x %>% 
+      st_transform(crs = 2157))
+lesiure <- lapply(lesiure, function(x) x %>% 
+      st_transform(crs = 2157))
+natural <- lapply(natural, function(x) x %>% 
+      st_transform(crs = 2157))
+railway <- lapply(railway, function(x) x %>% 
+      st_transform(crs = 2157))
+waterway <- lapply(waterway, function(x) x %>% 
+      st_transform(crs = 2157))
+
+list.save(amenity, "data/amenity.rdata")
+list.save(building, "data/building.rdata")
+list.save(highway, "data/highway.rdata")
+list.save(landuse, "data/landuse.rdata")
+list.save(lesiure, "data/lesiure.rdata")
+list.save(natural, "data/natural.rdata")
+list.save(railway, "data/railway.rdata")
+list.save(waterway, "data/waterway.rdata")
+list.save(hub_location, "data/hublocation.rdata")
+list.save(placebb, "data/placebb.rdata")
+
+```
+
+
+```{r produce_output_for_Greensborough_Square, eval = FALSE, echo=FALSE}
+
+
+bristol_totem_pedestal(file_to_save_to = "results/gainsborough_bristol_test2.pdf",
+                       hub_name_text = "Gainsborough Square")
+birmingham_totem_pedestal(file_to_save_to = "results/gainsborough_birmingham_test2.pdf",
+                          hub_name_text = "Gainsborough Square") 
+
+
+
+
+synthesis_totem(
+  file_to_save_to = "results/gainsborough_synthesis_test2.pdf", 
+  element2_where_is_it_top_text = "Gainsborough Square",
+  element2_where_is_it_top_text_detail = "Lockleaze, Brisol, BS7 9AP",
+  element4_up_what_is_nearby = "^ Buses: Gainsborough Square Stop B (Routes 24, 72, 73", 
+  element4_left_what_is_nearby = "<- Buses: Gainsborough Square Stop A (Routes 24, 77 northbound) \n<- North Advice Centre",
+  element4_right_what_is_nearby = "Buses: Cameron Walk stop (Route 24, 72 westbound) ->\nSt James Church −>", 
+  element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point, \na location where shared mobility and other services \noffer a range of options to support sustainable travel.
+\n 
+What is here: (see left)\nThis mobility hub includes nearby bus stops, \nbicycle parking and a repair station, \nshared scooters and electric bikes, and toilets (in the Hub).",
+element8_how_can_you_travel = "How can you travel from here: (see maps below)\nBuses 24, 77 northbound leave from Gainsborough Square Stop A (left and across the square), \nBuses 24, 72 and 73 eastbound leave from Gainsbourough Square Stop B (in front of you).\nBuses 24, 72 westbound leave from a stop in Cameron Walk (to your right) \nAshley Down and Filton Abbey Wd Railway Stations are around a 15 minute walk away (see map below centre). \nThe Frome Valley Greenway and Concorde Way are also nearby (see map below right).",
+element10_what_is_nearby_bottom_text = "What is nearby: (see maps above)\nThe Hub is accross the street behind you. \nThe North Bristol Advice Centre is across Gainsborough Square to your left. \nShops, food and services are also across Gainborough Square. \nTo get to St James Church go right along Cameron Walk \nuntil you get to Romney Avenue. 
+\n \nWhere am I:
+Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and the longitude is −2.5627. \nwhat3words.com calls this location hero.blend.sock"
+  )
+
+```
+
+
+
+```{r produce_output_for_ATU_wellpark, eval = FALSE, echo=FALSE}
+
+
+bristol_totem_pedestal(file_to_save_to = "results/gainsborough_bristol_test2.pdf",
+                       hub_name_text = "Gainsborough Square")
+birmingham_totem_pedestal(file_to_save_to = "results/gainsborough_birmingham_test2.pdf",
+                          hub_name_text = "Gainsborough Square") 
+
+
+
+
+synthesis_totem(
+  file_to_save_to = "results/gainsborough_synthesis_test2.pdf", 
+  element2_where_is_it_top_text = "Gainsborough Square",
+  element2_where_is_it_top_text_detail = "Lockleaze, Brisol, BS7 9AP",
+  element4_up_what_is_nearby = "^ Buses: Gainsborough Square Stop B (Routes 24, 72, 73", 
+  element4_left_what_is_nearby = "<- Buses: Gainsborough Square Stop A (Routes 24, 77 northbound) \n<- North Advice Centre",
+  element4_right_what_is_nearby = "Buses: Cameron Walk stop (Route 24, 72 westbound) ->\nSt James Church −>", 
+  element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point, \na location where shared mobility and other services \noffer a range of options to support sustainable travel.
+\n 
+What is here: (see left)\nThis mobility hub includes nearby bus stops, \nbicycle parking and a repair station, \nshared scooters and electric bikes, and toilets (in the Hub).",
+element8_how_can_you_travel = "How can you travel from here: (see maps below)\nBuses 24, 77 northbound leave from Gainsborough Square Stop A (left and across the square), \nBuses 24, 72 and 73 eastbound leave from Gainsbourough Square Stop B (in front of you).\nBuses 24, 72 westbound leave from a stop in Cameron Walk (to your right) \nAshley Down and Filton Abbey Wd Railway Stations are around a 15 minute walk away (see map below centre). \nThe Frome Valley Greenway and Concorde Way are also nearby (see map below right).",
+element10_what_is_nearby_bottom_text = "What is nearby: (see maps above)\nThe Hub is accross the street behind you. \nThe North Bristol Advice Centre is across Gainsborough Square to your left. \nShops, food and services are also across Gainborough Square. \nTo get to St James Church go right along Cameron Walk \nuntil you get to Romney Avenue. 
+\n \nWhere am I:
+Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and the longitude is −2.5627. \nwhat3words.com calls this location hero.blend.sock"
+  )
+
+```
+
+
+
+
+
+
+
+
+
+

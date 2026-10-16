@@ -754,7 +754,7 @@ building_galway <- rlist::list.load(
 hub_location_galway <- tibble::tibble(
         lat = c(53.277352),
         lon = c(-9.073269),
-        name = c("Westside")) %>% 
+        name = c("Westside hub")) %>% 
         sf::st_as_sf(coords = c("lon", "lat"), crs = 4326) %>%
       sf::st_transform(crs =  crs_local_metres_galway) %>%
       sf::st_cast("POINT")
@@ -786,7 +786,7 @@ hub_element_locations_galway <- tibble::tibble(
 
 
 bristol_totem_pedestal(file_to_save_to = "results/galway_bristol_test.pdf",
-                          hub_name_text = "Gainsborough Square",
+                          hub_name_text = "Westside ROBUST mobility hub",
     icons_to_include_in_header = list(
       system.file(
         "extdata/bus_stop.svg",
@@ -818,23 +818,76 @@ bristol_totem_pedestal(file_to_save_to = "results/galway_bristol_test.pdf",
       system.file(
         "extdata/No_image.svg",
         package = "mobilityHubTools")),
-    map_local = bristol_local_map(
-      building = building_galway,
-      hub_location = hub_location_galway,
-      crs_local_metres = crs_local_metres_galway,
-      highlight_building = c("Westside Public Library")),
-    
-    facilities_image =  system.file(
-      "extdata/bristol_facilities.png", package = "mobilityHubTools"),
-    map_regional = bristol_regional_map(
-      building = building_galway,
+    directions_image = "graphics/galway_bristo_directions.png",
+    map_local = synthesis_hub_elements_map(
+    building = building_galway,
     hub_location = hub_location_galway,
+    map_limits = 100,
     crs_local_metres = crs_local_metres_galway,
-    highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius")),
+    hub_element_locations = hub_element_locations_galway
+    ),
+    
+    facilities_image =  "graphics/galway_bristol_info.png",
+    map_regional = synthesis_regional_map(
+      building = building_galway,
+      hub_location = hub_location_galway, 
+      map_limits = 1500, 
+      crs_local_metres = crs_local_metres_galway, 
+      annotation_map_tile_type = "osm", 
+      annotation_map_zoom = 14,
+      highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius")),
     acknowledgements_text = "Map data from OpenStreetMap, available under the Open Database License. © OpenStreetMap contributors. See openstreetmap.org/copyright \n \nIcons from https://github.com/gmgeo/osmic https://www.svgrepo.com/svg/450115/e-scooter \nand https://commons.wikimedia.org/wiki/File:RWBA_Behinderten-WC.svg")
 
 
-birmingham_totem_pedestal(file_to_save_to = "results/galway_birmingham_test.pdf") 
+birmingham_totem_pedestal(file_to_save_to = "results/galway_birmingham_test.pdf", 
+                                                hub_name_text = "Westside ROBUST mobility hub",
+    icons_to_include_in_header = list(
+      system.file(
+        "extdata/bus_stop.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle_parking.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/rental_bicycle.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/bicycle-electric-2.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/shared-car-14.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/charging_station.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/toilets.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/parcel_locker.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools"),
+      system.file(
+        "extdata/No_image.svg",
+        package = "mobilityHubTools")), 
+    directions_image = "graphics/galway_birmingham_directions.png",
+    map_local = synthesis_hub_elements_map(
+    building = building_galway,
+    hub_location = hub_location_galway,
+    map_limits = 100,
+    crs_local_metres = crs_local_metres_galway,
+    hub_element_locations = hub_element_locations_galway
+    ),
+    map_regional = synthesis_regional_map(
+      building = building_galway,
+      hub_location = hub_location_galway, 
+      map_limits = 1500, 
+      crs_local_metres = crs_local_metres_galway, 
+      annotation_map_tile_type = "osm", 
+      annotation_map_zoom = 14,
+      highlight_building_regional = c("Westside Public Library", "Emergency Department", "University of Galway Sports Centre", "McDonald's", "Research and Innovation Centre", "Church of Saint Ignatius")))
 
 synthesis_totem(
     file_to_save_to = "results/galway_synthesis_test.pdf",
