@@ -152,7 +152,7 @@ knitr::include_graphics("graphics/mobilityHubTools.png")
 
 
 
-*Delivery* of:  R package on github^[https://github.com/James-Reynolds/mobilityHubTools]; code developed to produce paper outputs^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd]; and these notes and associated outputs^[].
+*Delivery* of:  R package on github^[https://github.com/James-Reynolds/mobilityHubTools]; code developed to produce paper outputs^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd]; and these notes and the associated outputs used in this presentation^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC_preso.Rmd].
 
 
 # Discussion and conclusions
@@ -336,28 +336,223 @@ Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and th
 ```{r produce_output_for_ATU_wellpark, eval = FALSE, echo=FALSE}
 
 
-bristol_totem_pedestal(file_to_save_to = "results/gainsborough_bristol_test2.pdf",
-                       hub_name_text = "Gainsborough Square")
-birmingham_totem_pedestal(file_to_save_to = "results/gainsborough_birmingham_test2.pdf",
-                          hub_name_text = "Gainsborough Square") 
-
-
-
+bristol_totem_pedestal(
+  file_to_save_to = "results/ATU_wellpark_bristol_style.pdf",
+  hub_name_text = "ATU Wellpark Road", 
+  icons_to_include_in_header = list(
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/bus_stop.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bicycle_parking.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/toilets.svg", package =
+    "mobilityHubTools"), 
+     system.file("extdata/RWBA_Behinderten-WC.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools")),
+  directions_image = "graphics/wellpark_bistol_directions.png", 
+  map_local = bristol_local_map(
+    amenity = amenity$atu_wellpark, 
+    building = building$atu_wellpark, 
+    highway = highway$atu_wellpark,
+    leisure = lesiure$atu_wellpark,
+    landuse = landuse$atu_wellpark,
+    natural = natural$atu_wellpark,
+    railway = railway$atu_wellpark,
+    waterway = waterway$atu_wellpark,
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 700, 
+    crs_local_metres = 2157, 
+    highlight_building = c("Bon Secours Hospital Galway"),
+    highlight_amenity = c("Galway Community College", "EasyGo Charging Station", 	"EasyGo Fast Charger", 	"Applegreen Electric"),
+    highlight_leisure = c("O'Sullivan Park"),
+    highlight_landuse = c("Wellpark Retail Centre")
+    
+  ), 
+  facilities_image = "graphics/wellpark_bristol_info.png", 
+  map_regional = bristol_regional_map(
+    amenity = amenity$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)), 
+    building = building$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)), 
+    highway = highway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    leisure = lesiure$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    landuse = landuse$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    natural = natural$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    railway = railway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    waterway = waterway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 3000, 
+    crs_local_metres = 2157, 
+    highlight_building_regional = c("Bon Secours Hospital Galway", "Galway Shopping Centre"),
+    highlight_amenity_regional = c("Atlantic Technological University Galway", "Lough Atalia", "Glenina", "Galway Bus Station", "EasyGo Charging Station", "EasyGo Fast Charger", "Applegreen Electric", "Galway Coach Station"),
+    highlight_leisure_regional = c("Eyre Square"),
+    highlight_landuse_regional = c("Wellpark Retail Centre"))
+  )
+  
+                       
+                       
+                       
+                       
+birmingham_totem_pedestal(
+  file_to_save_to = "results/ATU_wellpark_birmingham_style.pdf",
+  hub_name_text = "ATU Wellpark Road", 
+  icons_to_include_in_header = list(
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/bus_stop.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/toilets.svg", package =
+    "mobilityHubTools"), 
+     system.file("extdata/RWBA_Behinderten-WC.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools")),
+  directions_image = "graphics/wellpark_birmingham_directions.png", 
+  map_local = bristol_local_map(
+    amenity = amenity$atu_wellpark, 
+    building = building$atu_wellpark, 
+    highway = highway$atu_wellpark,
+    leisure = lesiure$atu_wellpark,
+    landuse = landuse$atu_wellpark,
+    natural = natural$atu_wellpark,
+    railway = railway$atu_wellpark,
+    waterway = waterway$atu_wellpark,
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 700, 
+    crs_local_metres = 2157, 
+    highlight_building = c("Bon Secours Hospital Galway"),
+    highlight_amenity = c("Galway Community College", "EasyGo Charging Station", 	"EasyGo Fast Charger", 	"Applegreen Electric"),
+    highlight_leisure = c("O'Sullivan Park"),
+    highlight_landuse = c("Wellpark Retail Centre")
+    
+  ), 
+  points_of_interest_image = "graphics/wellpark_bristol_info.png", 
+  map_regional = bristol_regional_map(
+    amenity = amenity$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)), 
+    building = building$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)), 
+    highway = highway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    leisure = lesiure$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    landuse = landuse$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    natural = natural$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    railway = railway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    waterway = waterway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 3000, 
+    crs_local_metres = 2157, 
+    highlight_building_regional = c("Bon Secours Hospital Galway", "Galway Shopping Centre"),
+    highlight_amenity_regional = c("Atlantic Technological University Galway", "Lough Atalia", "Glenina", "Galway Bus Station", "EasyGo Charging Station", "EasyGo Fast Charger", "Applegreen Electric", 	"Galway Coach Station"),
+    highlight_leisure_regional = c("Eyre Square"),
+    highlight_landuse_regional = c("Wellpark Retail Centre"))
+  )
+  
 
 synthesis_totem(
-  file_to_save_to = "results/gainsborough_synthesis_test2.pdf", 
-  element2_where_is_it_top_text = "Gainsborough Square",
-  element2_where_is_it_top_text_detail = "Lockleaze, Brisol, BS7 9AP",
-  element4_up_what_is_nearby = "^ Buses: Gainsborough Square Stop B (Routes 24, 72, 73", 
-  element4_left_what_is_nearby = "<- Buses: Gainsborough Square Stop A (Routes 24, 77 northbound) \n<- North Advice Centre",
-  element4_right_what_is_nearby = "Buses: Cameron Walk stop (Route 24, 72 westbound) ->\nSt James Church −>", 
+  file_to_save_to = "results/ATU_wellpark_synthesis.pdf", 
+  element2_where_is_it_top_text = "ATU Wellpark Road",
+  element2_where_is_it_top_text_detail = "Cluain Mhuire, Wellpark Road H91 DY9Y",
+  element3_what_is_here_top = list(
+    system.file("extdata/bus_stop.svg", package ="mobilityHubTools"), 
+    system.file("extdata/toilets.svg", package = "mobilityHubTools"), 
+    system.file("extdata/RWBA_Behinderten-WC.svg", package = "mobilityHubTools"),
+    system.file("extdata/shared-car-14.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package = "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package ="mobilityHubTools")),
+  element4_up_what_is_nearby = "", 
+  element4_left_what_is_nearby = "<- Buses",
+  element4_right_what_is_nearby = "ATU Main Enterance ->", 
+  element5_regional_map = synthesis_regional_map(
+    amenity = amenity$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)), 
+    building = building$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)), 
+    highway = highway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    leisure = lesiure$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    landuse = landuse$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    natural = natural$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    railway = railway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    waterway = waterway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 2500, 
+    crs_local_metres = 2157, 
+    highlight_building_regional = c("Bon Secours Hospital Galway", "Galway Shopping Centre"),
+    highlight_amenity_regional = c("Atlantic Technological University Galway", "Lough Atalia", "Glenina", "Galway Bus Station", "EasyGo Charging Station", "EasyGo Fast Charger", "Applegreen Electric", 	"Galway Coach Station"),
+    highlight_leisure_regional = c("Eyre Square"),
+    highlight_landuse_regional = c("Wellpark Retail Centre")),
   element6_what_is_this_bottom_text = "What is this: \nWelcome to this Mobility Hub / Local Travel Point, \na location where shared mobility and other services \noffer a range of options to support sustainable travel.
 \n 
-What is here: (see left)\nThis mobility hub includes nearby bus stops, \nbicycle parking and a repair station, \nshared scooters and electric bikes, and toilets (in the Hub).",
-element8_how_can_you_travel = "How can you travel from here: (see maps below)\nBuses 24, 77 northbound leave from Gainsborough Square Stop A (left and across the square), \nBuses 24, 72 and 73 eastbound leave from Gainsbourough Square Stop B (in front of you).\nBuses 24, 72 westbound leave from a stop in Cameron Walk (to your right) \nAshley Down and Filton Abbey Wd Railway Stations are around a 15 minute walk away (see map below centre). \nThe Frome Valley Greenway and Concorde Way are also nearby (see map below right).",
-element10_what_is_nearby_bottom_text = "What is nearby: (see maps above)\nThe Hub is accross the street behind you. \nThe North Bristol Advice Centre is across Gainsborough Square to your left. \nShops, food and services are also across Gainborough Square. \nTo get to St James Church go right along Cameron Walk \nuntil you get to Romney Avenue. 
-\n \nWhere am I:
-Gainsborough Square, Lockleaze, Bristol BS7 9AP.\nThe latitude is 51.4904 and the longitude is −2.5627. \nwhat3words.com calls this location hero.blend.sock"
+What is here: (see left)\nThere are nearby bus stops and toilets (in ATU). \nFurther away are electric car chargers, car share vehicles and docked shared bikes",
+  element7_hub_elements_map = synthesis_hub_elements_map(
+    amenity = amenity$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)), 
+    building = building$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)), 
+    highway = highway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    leisure = lesiure$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    landuse = landuse$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    natural = natural$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    railway = railway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    waterway = waterway$atu_wellpark %>% st_crop(hub_location$atu_wellpark %>% st_buffer(dist = 2500)),
+    hub_location = hub_location$atu_wellpark,
+    map_limits = 750, 
+    crs_local_metres = 2157, 
+    hub_element_locations = tibble::tibble(
+      lat = c(53.2838857, 53.2843966, 53.283092, 53.28574, 
+              53.280021, 53.278295
+), 
+      lon = c(-9.0279230, -9.0263526, -9.025092,  -9.01776, -9.035418, -9.017404), 
+      name = c("Well Park Estate (523271)", "GMIT Cluain Mhuire (523651)", NA, "Plunket Av GoCar", "Lough Atalia TFI bikeshare", "Glenina TFI bikeshare"), 
+      icon_filename = c(
+        system.file("extdata/bus_stop.svg", package = "mobilityHubTools"),
+        system.file("extdata/bus_stop.svg", package = "mobilityHubTools"), 
+        system.file("extdata/toilets.svg", package = "mobilityHubTools"), 
+        system.file("extdata/shared-car-14.svg", package = "mobilityHubTools"),
+        system.file("extdata/rental_bicycle.svg", package = "mobilityHubTools"),
+        system.file("extdata/rental_bicycle.svg", package = "mobilityHubTools")
+      ))),
+  element8_how_can_you_travel = "How can you travel from here: (see maps below)\nBuses from are available from GMIT Cluain Mhuire (id: 523651) traveling south-westbound  towards the city centre.\nBuses travelling north-east are available at the Well Park Estate stop, across Wellpark Road (id: 523271).\nGalway Railway Station, Galway Bus Station and the Galway Coach Station \nare about 2kms (30 minute walk) to the southwest, close to the city centre. \nEuroVelo 1 is around 300m to the south, on Old Dublin Road (see map below right).",
+  element9_hub_surrounds_map = synthesis_hub_surrounds_map(
+     building = building$atu_wellpark, 
+     map_limits = 500, 
+     crs_local_metres = 2157,
+     annotation_map_zoom = 15, 
+     hub_location = hub_location$atu_wellpark
+  ),
+  element10_what_is_nearby_bottom_text = "What is nearby: (see maps above)\nRetail areas, cafes, shopping and other facilities are nearby.\n The ATU Old Dublin Road campus is only around 1.5km to the south east. 
+\n \nWhere am I:\n
+Atlantic Technological University, Cluain Muire, Wellpark Road, Galway, H91 DY9Y.\nThe latitude is 53.283 and the longitude is −9.026. \nwhat3words.com calls this location dates.spider.foil",  
+element11_transport_map_small = synthesis_hub_surrounds_map(
+  building = building$atu_wellpark, 
+  map_limits = 250, 
+  crs_local_metres = 2157,
+  hub_location = hub_location$atu_wellpark, 
+  annotation_map_zoom = 16, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+element12_transport_map_large = synthesis_hub_surrounds_map(
+  building = building$atu_wellpark, 
+  map_limits = 2000, 
+  crs_local_metres = 2157,
+  hub_location = hub_location$atu_wellpark,
+  annotation_map_zoom = 13, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+  element13_cycle_map = synthesis_hub_surrounds_map(
+    building = building$atu_wellpark, 
+    map_limits = 2000, 
+    crs_local_metres = 2157,
+    hub_location = hub_location$atu_wellpark,
+    annotation_map_zoom = 13, 
+    annotation_map_type = "opencycle", 
+    highlight_building = "")
   )
 
 ```

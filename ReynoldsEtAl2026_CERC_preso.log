@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  16 OCT 2026 12:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  16 OCT 2026 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -951,7 +951,9 @@ Underfull \hbox (badness 1348) in paragraph at lines 249--249
  []
 
 
-LaTeX Warning: Marginpar on page 3 moved.
+Underfull \hbox (badness 1348) in paragraph at lines 251--251
+\T1/fvm/m/n/8 James-[]Reynolds / WP5 _ 
+ []
 
 
 LaTeX Warning: Marginpar on page 3 moved.
@@ -968,10 +970,13 @@ LaTeX Warning: Marginpar on page 3 moved.
 
 LaTeX Warning: Marginpar on page 3 moved.
 
-<graphics/Figure2.png, id=62, 2472.23625pt x 3078.50125pt>
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+<graphics/Figure2.png, id=63, 2472.23625pt x 3078.50125pt>
 File: graphics/Figure2.png Graphic file (type png)
 <use graphics/Figure2.png>
-Package pdftex.def Info: graphics/Figure2.png  used on input line 267.
+Package pdftex.def Info: graphics/Figure2.png  used on input line 268.
 (pdftex.def)             Requested size: 479.9905pt x 597.69827pt.
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -991,7 +996,7 @@ nged.
 Here is how much of TeX's memory you used:
  15889 strings out of 474116
  249928 string characters out of 5743682
- 1953187 words of memory out of 5000000
+ 1954187 words of memory out of 5000000
  37860 multiletter control sequences out of 15000+600000
  606834 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1001,10 +1006,10 @@ local/texlive/2024/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/t
 exlive/2024/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2
 024/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2024/tex
 mf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on ReynoldsEtAl2026_CERC_preso.pdf (4 pages, 22383162 bytes).
+Output written on ReynoldsEtAl2026_CERC_preso.pdf (4 pages, 22383350 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 114 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  14 named destinations out of 1000 (max. 500000)
  1087 words of extra memory for PDF output out of 10000 (max. 10000000)
 
