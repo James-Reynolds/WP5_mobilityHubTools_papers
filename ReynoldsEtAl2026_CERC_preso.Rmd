@@ -54,19 +54,19 @@ knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 
 
 
-```{r logo, echo=FALSE, fig.margin = TRUE, out.width="100%"}
+```{r logo, echo=FALSE, fig.margin = TRUE, out.width="50%"}
 
 knitr::include_graphics("graphics/robust-logo-news.png") 
 
 ```
 
-- *Situation:* Shared mobility hubs^["A shared mobility hub is a place where different transport modes are integrated seamlessly, promoting efficient and sustainable urban mobility. Emphasis is given on shared mobility options such as bikes, scooters and cars. Connection with public transport (transit) is desirable but not necessary. The integration between mobility suppliers is important to provide a seamless, flexible connection at these transfer points. Ensuring an enjoyable experience for travelers is a crucial part of the hub concept as well, and therefore the hub should be considered not just as a transfer node but as a place where a variety of services come together, such as logistics services or restaurants." (Roukouni et al. 2023)] are a (relatively) new direction in transport.  They seek to co-locate shared, micro-mobility transport modes,  sometimes with electrified and/or public transport services or other facilities that might help the movement of people and goods[@Roukouni:2023aa]. These tend to aim towards providing more options for those, more occasional, trips that are difficult to make or otherwise impractical on foot, bicycle or using transit, and so contribute to more sustainable travel behaviors[@Geurs:2024aa].  
+- *Situation:* Shared mobility hubs^["...a place where different transport modes are integrated seamlessly, promoting efficient and sustainable urban mobility. Emphasis is given to shared mobility options such as bikes, scooters and cars. Connection with public transport (transit) is desirable but not necessary. The integration between mobility suppliers is important to provide a seamless, flexible connection at these transfer points. Ensuring an enjoyable experience for travelers is a crucial part of the hub concept as well, and therefore the hub should be considered not just as a transfer node but as a place where a variety of services come together, such as logistics services or restaurants." (Roukouni et al. 2023)] are a (relatively) new direction in transport.  They co-locate shared, micro-mobility transport modes (sometimes with electrified and/or public transport services or other facilities[@Roukouni:2023aa]). This might provide options for (more occasional) trips that are difficult on foot, bicycle or using transit, and so contribute to more sustainable travel patterns[@Geurs:2024aa].  
 
-- *Problem:* Not much is yet known about providing users with information at mobility hubs.  While there is some guidance from CoMoUK and others, as of yet there do not appear to be tools available to support practitioners implementing hubs. Rather, mobility hub information provision appears to be largely done on a site-by-site, system-by-system or otherwise bespoke.  
+- *Problem:* Not much is yet known about providing information at mobility hubs.  While there is some guidance from CoMoUK and others, there do not appear to be tools available to support practitioners implementing hubs. Rather, mobility hub information provision appears to be largely done on a site-by-site, system-by-system or otherwise bespoke basis.  
 
-- *Question:* Is it possible to improve understandings of current (and best) practices, and to develop tools to fill this gap? 
+- *Question:* Is it possible to improve understandings of current (and best) practices, and to develop tools to support implementers? 
 
-- *Answer:* Undertake design and case-based research guided by the iterative Double Diamond design process to examine information at selected mobility hubs, and to discover current practices.  Then define what mobility hub information provision might be trying to solve, develop design solutions and deliver a package of software.  
+- *Answer:* Undertake design and case-based research guided by the iterative Double Diamond process. First, examine selected mobility hubs and *discover* current practices.  Then *define* what mobility hub information provision might be trying to solve, *develop* design solutions and *deliver* a package of software.  
 
 
 # Background
@@ -79,10 +79,11 @@ knitr::include_graphics("graphics/video_website_code_QR.png")
 ```
  
 
-This is part of the Electric shaRed mOBility hUbs Trial (ROBUST) project^[See https://www.tcd.ie/transport-research/our-research/research-projects/ROBUST-electric-shared-mobility-hubs-trial/]. The project includes co-design, behaviour nudging and hub incubation activities (Figure 1).  
+This research is part of the Electric shaRed mOBility hUbs Trial (ROBUST) project^[See https://www.tcd.ie/transport-research/our-research/research-projects/ROBUST-electric-shared-mobility-hubs-trial/]. The project includes co-design, behaviour nudging and hub incubation activities.  
 
-\newthought{The literature suggests:} branding, signage, guidance, 'totem' displays, and online information [@CoMoUK:2021ab, @CoMoUK:2021ac]; and notes a need for: “integration”, “seamless, flexible connection” and “. . . an enjoyable experience for travelers” (Roukouni et al. 2023).
+\newthought{The literature suggests:} branding, signage, guidance, 'totem' displays, and online information[@CoMoUK:2021ab] [@CoMoUK:2021ac]. It also notes a need for: “integration”, “seamless, flexible connection” and “. . . an enjoyable experience for travelers” (Roukouni et al. 2023).
 
+\vspace{0.5cm}
 
 ```{r comouk_toolkit, include=TRUE, echo=FALSE, fig.margin = FALSE, out.width="100%", fig.cap="CoMoUK toolkit excerpt", eval=FALSE}
 
@@ -91,7 +92,7 @@ knitr::include_graphics("graphics/comouk_toolkit.png")
 ```
 
 
-```{r comouk_awareness, include=TRUE, echo=FALSE, fig.margin = FALSE, out.width="100%", fig.cap="CoMoUK increasing awareness case study"}
+```{r comouk_awareness, include=TRUE, echo=FALSE, fig.margin = FALSE, out.width="100%", fig.cap="CoMoUK increasing awareness case study. Source: CoMoUK (2021)(6)"}
 
 knitr::include_graphics("graphics/comouk_increase_awareness.png")
 
@@ -100,23 +101,22 @@ knitr::include_graphics("graphics/comouk_increase_awareness.png")
 
 # Methodology
 
-```{r double_diamond_figure, include=TRUE, echo=FALSE, out.width = "100%", fig.margin = TRUE, fig.cap = "Framework for Innovation. Source : UK Design Council (undated)", crop = TRUE}
+```{r double_diamond_figure, include=TRUE, echo=FALSE, out.width = "75%", fig.margin = FALSE, fig.cap = "Framework for Innovation. Source : UK Design Council (undated)", crop = TRUE}
 
 knitr::include_graphics("graphics/Double_Diamond.png")
 
 ```
 
-- four phases, 
-- alternate between divergent (discover, develop) and convergent (define, deliver) approaches, 
-- overall process is iterative,
-- industrial design research approach, with broad applications to transport [@Coxon:2018aa].
+- industrial design research approach,  apllicable to transport [@Coxon:2018aa],
+- alternate between divergent and convergent approaches, 
+- overall process is iterative.
 
-\newthought{Discovery and definition:} case-based
+\newthought{Discovery and definition} using case-based research approach: 
 
-- effective when research at an early stage, and for 'how' or 'why' questions (How is information provided at
-and about mobility hubs?  How might information at and about mobility hubs be provided ideally? How can such best practices can be made generally applicable?). 
-- select cases for theoretical reasons (e.g. leading, notable or representative, or for polar opposites for cross-case comparison etc.)(@Yin:2018ab and others)^[Cases: (*Redbridge*) South Woodford and High Street, Wanstead; (*Camden*) Goldington Crescent, and Doric Way; (*Bristol*) Abbey Wood, UWE Frenchay, and Gainsborough Square; and (*Birmingham*) Huntingtree Park and Andrew Road]. 
-- duality criterion: at the same time grounded within the context of the small number of cases (depth of research), yet seeking generalisable results that apply to more than just the cases studied (@Denscombe:2007aa and others).
+- effective for early stage research, and for 'how' or 'why' questions^[How is information provided at
+and about mobility hubs?  How might information at and about mobility hubs be provided ideally? How can such best practices can be made generally applicable?]. 
+- select cases for theoretical reasons (e.g. leading case, representative case, critical case, or for polar opposites (cross-case comparison))(@Yin:2018ab and others)^[Cases: (*Redbridge*) South Woodford and High Street, Wanstead; (*Camden*) Goldington Crescent, and Doric Way; (*Bristol*) Abbey Wood, UWE Frenchay, and Gainsborough Square; and (*Birmingham*) Huntingtree Park and Andrew Road]. 
+- duality criterion: grounded within the context of the small number of cases (for depth of research), yet at the same time seeking generalisable results that apply to more than just the cases studied (@Denscombe:2007aa and others).
 
 \newthought{Development and delivery}: iterative coding to replicate various examples; develop synthesis version (industry practice + respond to defined problem); and deliver as a software package[@wickham2023r]. 
 
@@ -127,7 +127,7 @@ knitr::include_graphics("graphics/Figure1.png")
 
 ```
 
-*Discovery:* wide range of examples^[https://maps.app.goo.gl/1dd8sEJCiwCgPkc98, https://maps.app.goo.gl/j7b7MLr8HzcjqoS66, https://maps.app.goo.gl/BW8cEVXioYSoNbiz9, https://maps.app.goo.gl/1JqvPLWkwkbnyGB27 ].
+- *Discovery:* wide range of examples^[https://maps.app.goo.gl/1dd8sEJCiwCgPkc98, https://maps.app.goo.gl/j7b7MLr8HzcjqoS66, https://maps.app.goo.gl/BW8cEVXioYSoNbiz9, https://maps.app.goo.gl/1JqvPLWkwkbnyGB27 ].
 
 
 ```{r more_selected_images, out.width = "100%", fig.margin = TRUE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
@@ -136,9 +136,15 @@ knitr::include_graphics("graphics/andrew_road.png")
 ```
 
 
-*Definition* of the problem to be addressed by the design output: 1. What is this? 2. Where am I? 3. What is here? 4. What is nearby? 5. How can I travel from here? (6. How do I use each bit of this?)^[This is coming out of subsequent co-design workshops.].
+- *Definition* of the problem to be addressed by the design output: 
+  1. What is this? 
+  2. Where am I? 
+  3. What is here? 
+  4. What is nearby? 
+  5. How can I travel from here? 
+  6. (*new*)^[This is coming out of subsequent co-design workshops.] How do I use each bit of this?.
 
-*Development* of:  Bristol-style totem, Birmingham-style totem and 'synthesis' totem.  Examples in Figure 5, but also up on the walls around us. 
+- *Development* of:  Bristol-style totem, Birmingham-style totem and 'synthesis' totem.  Examples in Figure 5, but also up on the walls around us. 
 
 
 
@@ -152,12 +158,12 @@ knitr::include_graphics("graphics/mobilityHubTools.png")
 
 
 
-*Delivery* of:  R package on github^[https://github.com/James-Reynolds/mobilityHubTools]; code developed to produce paper outputs^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd]; and these notes and the associated outputs used in this presentation^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC_preso.Rmd].
+- *Delivery* of:  R package on github^[https://github.com/James-Reynolds/mobilityHubTools]; code developed to produce paper outputs^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC.Rmd]; and these notes and the associated outputs used in this presentation^[https://github.com/James-Reynolds/WP5_mobilityHubTools_papers/blob/main/ReynoldsEtAl2026_CERC_preso.Rmd].
 
 
 # Discussion and conclusions
 - Tactical urbanism: why not make a "mobility hub" of your own? 
-- More to do to improve the code, develop further outputs etc.  
+- More to do to improve the code, develop further outputs etc. (Open source, so you can help with this).  
 - Open Street Maps data quite powerful, as are the GIS tools available for R. 
 
 

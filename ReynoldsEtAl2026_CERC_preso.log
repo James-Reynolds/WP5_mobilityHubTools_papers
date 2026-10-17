@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  16 OCT 2026 17:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.15)  17 OCT 2026 10:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -766,7 +766,7 @@ e
 File: graphics/robust-logo-news.png Graphic file (type png)
 <use graphics/robust-logo-news.png>
 Package pdftex.def Info: graphics/robust-logo-news.png  used on input line 94.
-(pdftex.def)             Requested size: 143.99855pt x 131.24867pt.
+(pdftex.def)             Requested size: 71.99927pt x 65.62433pt.
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 
 94.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ot1pplx.fd
@@ -839,34 +839,37 @@ LaTeX Warning: Marginpar on page 1 moved.
 File: graphics/video_website_code_QR.png Graphic file (type png)
 <use graphics/video_website_code_QR.png>
 Package pdftex.def Info: graphics/video_website_code_QR.png  used on input line
- 147.
+ 146.
 (pdftex.def)             Requested size: 311.98631pt x 128.09138pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
 LaTeX Font Info:    Trying to load font information for T1+fvm on input line 15
-2.
+1.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 6.80005pt on input line 152.
+(Font)              scaled to size 6.80005pt on input line 151.
 
-Underfull \hbox (badness 1014) in paragraph at lines 152--152
+Underfull \hbox (badness 1014) in paragraph at lines 151--151
 $[]$\T1/pplj/m/n/8 See []$\T1/fvm/m/n/8 https : / / www . tcd . 
  []
 
 
-Overfull \hbox (34.526pt too wide) in paragraph at lines 152--152
+Overfull \hbox (34.526pt too wide) in paragraph at lines 151--151
 \T1/fvm/m/n/8 ROBUST-[]electric-[]shared-[]mobility-[]hubs-[]trial/$[]  
  []
+
+
+LaTeX Warning: Marginpar on page 1 moved.
 
 [1
 
@@ -879,27 +882,30 @@ LaTeX Warning: Marginpar on page 2 moved.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<graphics/comouk_increase_awareness.png, id=38, 747.79375pt x 549.05125pt>
+
+LaTeX Warning: Marginpar on page 2 moved.
+
+<graphics/comouk_increase_awareness.png, id=43, 747.79375pt x 549.05125pt>
 File: graphics/comouk_increase_awareness.png Graphic file (type png)
 <use graphics/comouk_increase_awareness.png>
 Package pdftex.def Info: graphics/comouk_increase_awareness.png  used on input 
-line 164.
+line 166.
 (pdftex.def)             Requested size: 311.99454pt x 229.07518pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
-<graphics/Double_Diamond.png, id=39, 704.6325pt x 341.02406pt>
+<graphics/Double_Diamond.png, id=44, 704.6325pt x 341.02406pt>
 File: graphics/Double_Diamond.png Graphic file (type png)
 <use graphics/Double_Diamond.png>
-Package pdftex.def Info: graphics/Double_Diamond.png  used on input line 170.
-(pdftex.def)             Requested size: 143.99902pt x 69.69183pt.
+Package pdftex.def Info: graphics/Double_Diamond.png  used on input line 172.
+(pdftex.def)             Requested size: 233.9917pt x 113.24597pt.
 
 LaTeX Warning: Marginpar on page 2 moved.
 
@@ -931,10 +937,16 @@ LaTeX Warning: Marginpar on page 3 moved.
 
 LaTeX Warning: Marginpar on page 3 moved.
 
-<graphics/andrew_road.png, id=59, 2489.3pt x 3521.155pt>
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+
+LaTeX Warning: Marginpar on page 3 moved.
+
+<graphics/andrew_road.png, id=61, 2489.3pt x 3521.155pt>
 File: graphics/andrew_road.png Graphic file (type png)
 <use graphics/andrew_road.png>
-Package pdftex.def Info: graphics/andrew_road.png  used on input line 232.
+Package pdftex.def Info: graphics/andrew_road.png  used on input line 237.
 (pdftex.def)             Requested size: 143.99586pt x 203.68448pt.
 
 LaTeX Warning: Marginpar on page 3 moved.
@@ -946,12 +958,12 @@ LaTeX Warning: Marginpar on page 3 moved.
 LaTeX Warning: Marginpar on page 3 moved.
 
 
-Underfull \hbox (badness 1348) in paragraph at lines 249--249
+Underfull \hbox (badness 1348) in paragraph at lines 271--271
 \T1/fvm/m/n/8 James-[]Reynolds / WP5 _ 
  []
 
 
-Underfull \hbox (badness 1348) in paragraph at lines 251--251
+Underfull \hbox (badness 1348) in paragraph at lines 273--273
 \T1/fvm/m/n/8 James-[]Reynolds / WP5 _ 
  []
 
@@ -973,10 +985,10 @@ LaTeX Warning: Marginpar on page 3 moved.
 
 LaTeX Warning: Marginpar on page 3 moved.
 
-<graphics/Figure2.png, id=63, 2472.23625pt x 3078.50125pt>
+<graphics/Figure2.png, id=65, 2472.23625pt x 3078.50125pt>
 File: graphics/Figure2.png Graphic file (type png)
 <use graphics/Figure2.png>
-Package pdftex.def Info: graphics/Figure2.png  used on input line 268.
+Package pdftex.def Info: graphics/Figure2.png  used on input line 292.
 (pdftex.def)             Requested size: 479.9905pt x 597.69827pt.
 
 Package bibentry Warning: You have used \nobibliography* 
@@ -994,22 +1006,22 @@ nged.
 (rerunfilecheck)             Checksum: 1EBC3568E6320FC2E86CD09D6FC304F8;452.
  ) 
 Here is how much of TeX's memory you used:
- 15889 strings out of 474116
- 249928 string characters out of 5743682
- 1954187 words of memory out of 5000000
- 37860 multiletter control sequences out of 15000+600000
+ 15899 strings out of 474116
+ 250046 string characters out of 5743682
+ 1957187 words of memory out of 5000000
+ 37864 multiletter control sequences out of 15000+600000
  606834 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,11n,96p,300b,537s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,11n,96p,300b,539s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/
 local/texlive/2024/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/t
 exlive/2024/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2
 024/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2024/tex
 mf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on ReynoldsEtAl2026_CERC_preso.pdf (4 pages, 22383350 bytes).
+Output written on ReynoldsEtAl2026_CERC_preso.pdf (4 pages, 22383755 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
+ 123 PDF objects out of 1000 (max. 8388607)
+ 97 compressed objects within 1 object stream
+ 20 named destinations out of 1000 (max. 500000)
  1087 words of extra memory for PDF output out of 10000 (max. 10000000)
 
