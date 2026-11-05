@@ -1,0 +1,686 @@
+---
+title: "MobilityhubTools: applications to the Australian context"
+runningheader: "DIY mobilityHubTools" # only for pdf output
+author: James Reynolds
+date: "`r Sys.Date()`"
+output:
+  tufte::tufte_handout:
+#    citation_package: natbib
+#    latex_engine: xelatex
+#  tufte::tufte_book:
+#    citation_package: nobib
+#    latex_engine: xelatex
+bibliography: references.bib
+csl: https://www.zotero.org/styles/chicago-fullnote-bibliography-16th-edition
+suppress-bibliography: yes
+link-citations: yes
+---
+
+
+```{r setup, include=FALSE}
+library(tufte)
+#library(rnaturalearth)
+#library(rnaturalearthhires)
+library(sf)
+library(ggplot2)
+library(viridis)
+library(patchwork)
+library(elevatr)
+library(terra)
+library(osmdata)
+library(leaflet)
+library(tidyverse)
+library(pipeR)
+library(rlist)
+library(sf)
+library(janitor)
+library(knitr)
+library(kableExtra)
+library(dodgr)
+library(magick)
+#library(osmplotr)
+library(magrittr)
+library(scales)
+library(cowplot)
+library(rosm)
+library(mobilityHubTools)
+
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+
+```
+
+# Introduction
+
+Shared mobility hubs are an emerging approach in transport systems, aiming to improve sustainability and many other aspects of transport and landuse systems^["...a place where different transport modes are integrated seamlessly, promoting efficient and sustainable urban mobility. Emphasis is given to shared mobility options such as bikes, scooters and cars. Connection with public transport (transit) is desirable but not necessary. The integration between mobility suppliers is important to provide a seamless, flexible connection at these transfer points. Ensuring an enjoyable experience for travelers is a crucial part of the hub concept as well, and therefore the hub should be considered not just as a transfer node but as a place where a variety of services come together, such as logistics services or restaurants" (Roukouni et al. 2023).][@Roukouni:2023aa]. Recent research has explored shared mobility hub information provision and started the development of tools for practitioners, tactical urbanists and others who might wish to implement their own hub [@Reynolds:2026ab]. However, as of yet these tools have not been used on hubs (or potential hub locations) outside of Ireland and the UK.  It is unclear whether this approach, based on Open Street Maps datasets, will work elsewhere, while there is also a need for cross-case comparison.  
+
+This research note explores the use of the mobilityHubTools R package on sites within Australia.  It seeks to improve understanding of the generalisability of the mobilityHubTool software, and whether this approach is worth persuing further. The note details the application of the software to a small number of cases in Australia, and reports findings about the performance of the tools and directions for future research.  
+
+# Background
+
+Various guidance has already been developed for the provision of user informational displays at shared mobility hubs.For example. @CoMoUK:2021ac, @CoMoUK:2021aa and @CoMoUK:2021ab provide some insights as to preferred practices.  However, most mobility hub informational displays, maps and associated signage appears to be bespoke, and largely delivered on a site-by-site or region-by-region basis. For example, Figure \ref{fig:comouk_awareness} provides an example of branding and guidance at a hub in Bremen, Germany (via @CoMoUK:2021ac), while Figures \ref{fig:andrew_road} and \ref{fig:bristol_mobility_hubs} show images from the authors' visits to Birmhimgham and Bristol undertaken as part of the research described in @Reynolds:2026ab. 
+
+
+
+```{r comouk_awareness, include=TRUE, echo=FALSE, fig.fullwidth = TRUE, out.width="100%", fig.cap="CoMoUK increasing awareness case study. Source: CoMoUK (2021)"}
+
+knitr::include_graphics("graphics/comouk_increase_awareness.png")
+
+```
+
+
+```{r andrew_road, out.width = "100%", fig.fullwidth = TRUE, fig.align = "center", fig.cap = "Images of the mobility hub at Andrew Road, Birmingham. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+knitr::include_graphics("graphics/andrew_road.png") 
+
+```
+
+
+```{r bristol_mobility_hubs, out.width = "100%", fig.fullwidth = TRUE, fig.align = "center", fig.cap = ", Images of mobility hubs in Bristol. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+knitr::include_graphics("graphics/bristol_03.png") 
+
+```
+
+
+
+```{r output_images, out.width = "100%", fig.fullwidth = TRUE, fig.align = "center", fig.cap = "Software output examples: Bristol, Birmingham and synthesis-style totem displays (left, centre, right). Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=TRUE}
+knitr::include_graphics("graphics/Figure2.png") 
+
+```
+
+
+\newthought{A brief scan} suggests that there has been much mobility-hub-related activity in the Australasian context, including: 
+
+- research about site selection in Melbourne [@Pimenta:2024aa]; 
+- trials of four mobility hubs at Melbourne Airport, seeking to improve access and navigation around car parks, pick-up and drop-off areas, check-in and baggage reclaim^[\url{https://www.instagram.com/p/DBsn0WsoLS5/}]; 
+- planning for a mobility hub in Meadowbrook, within the City of Logan (Queensland)^[\url{https://www.haveyoursaylogan.com.au/projects/project-11-meadowbrook-mobility-hub}]; and 
+- construction of a mobility hub at Glen Eden Train Station in Auckland^[\url{https://tinyurl.com/bdzsupe5}].
+
+# Methodology
+
+```{r double_diamond_figure, include=TRUE, echo=FALSE, out.width = "75%", fig.margin = FALSE, fig.cap = "Framework for Innovation. Source : UK Design Council (undated)", crop = TRUE}
+
+knitr::include_graphics("graphics/Double_Diamond.png")
+
+```
+
+# Results
+
+```{r selected_images, out.width = "100%", fig.margin = FALSE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=FALSE}
+knitr::include_graphics("graphics/Figure1.png") 
+
+```
+
+- *Discovery:* wide range of examples^[https://maps.app.goo.gl/1dd8sEJCiwCgPkc98, https://maps.app.goo.gl/j7b7MLr8HzcjqoS66, https://maps.app.goo.gl/BW8cEVXioYSoNbiz9, https://maps.app.goo.gl/1JqvPLWkwkbnyGB27 ].
+
+
+
+
+```{r mobilityHubTools, out.width = "100%", fig.fullwidth = FALSE, fig.align = "center", fig.cap = "Selected hub images. Source: authors.", echo = FALSE, warning=FALSE, message=FALSE, cache=FALSE, eval=FALSE}
+knitr::include_graphics("graphics/mobilityHubTools.png") 
+
+```
+
+
+
+# Discussion and conclusions
+- Tactical urbanism: why not make a "mobility hub" of your own? 
+- More to do to improve the code, develop further outputs etc. (Open source, so you can help with this).  
+- Open Street Maps data quite powerful, as are the GIS tools available for R. 
+
+
+
+```{r load_osm_data, eval = FALSE, echo=FALSE}
+
+crs_local_metres <- 20353
+
+hub_location <- list(
+  james_gormley = tibble(lat=
+-37.908672, lon =145.131905, name = "James Gormley Bike Arrival Station"),
+cheltenham_station = tibble(lat=
+-37.966734, lon =145.055022, name = "Cheltenham Station"),
+hawthorn_station = tibble(lat=
+-37.821326, lon =145.024078, name = "Hawthorn Station"),
+east_malvern_station = tibble(lat=
+-37.877117, lon =145.069324, name = "East Malvern Station"))
+
+hub_location <- lapply(hub_location, function(x) x %>% 
+  st_as_sf(coords = c("lon", "lat"), 
+           crs = 4326) %>%
+  st_transform(crs = crs_local_metres) %>% 
+  st_cast("POINT"))
+
+placebb <- lapply(hub_location, function(x) x %>% 
+                    st_buffer(dist = 2000) %>%
+                    st_transform(crs = 4326) %>%
+                    st_bbox()
+                  )
+
+
+#DOWNLOADED from geofabrik OSM host   
+file_path = "data/australia-261102.osm.pbf"
+
+osm_data_points <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "points", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_lines <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "lines", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_multilinestrings <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "multilinestrings", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+osm_data_multipolygons <- lapply(placebb, function(x) osmextract::oe_read(
+  file_path = file_path,
+  layer = "multipolygons", 
+  boundary = x, 
+  extra_tags = c("amenity", "building", "highway", "landuse", "lesiure", "natural", "railway", "waterway", "addr:housenumber", "addr:housename")))
+
+amenity <- list()
+building <- list()
+highway <- list()
+landuse <- list()
+lesiure <- list()
+natural <- list()
+railway <- list()
+waterway <- list()
+
+all_osm_data <- list()
+
+
+i <- 1
+for(i in seq_along(placebb)){
+  
+  all_osm_data[[i]] <- osm_data_points[[i]] %>% 
+      bind_rows(osm_data_lines[[i]]) %>% 
+      bind_rows(osm_data_multilinestrings[[i]]) %>% 
+      bind_rows(osm_data_multipolygons[[i]])
+  
+  amenity[[i]] <- all_osm_data[[i]] %>% filter(!is.na(amenity))
+  building[[i]] <- all_osm_data[[i]] %>% filter(!is.na(building))
+  highway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(highway))
+  landuse[[i]] <- all_osm_data[[i]] %>% filter(!is.na(landuse))
+  lesiure[[i]] <- all_osm_data[[i]] %>% filter(!is.na(lesiure))
+  natural[[i]] <- all_osm_data[[i]] %>% filter(!is.na(natural))
+  railway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(railway))
+  waterway[[i]] <- all_osm_data[[i]] %>% filter(!is.na(waterway))
+}
+
+names(amenity) <- names(hub_location)
+names(building) <- names(hub_location)
+names(highway) <- names(hub_location)
+names(landuse) <- names(hub_location)
+names(lesiure) <- names(hub_location)
+names(natural) <- names(hub_location)
+names(railway) <- names(hub_location)
+names(waterway) <- names(hub_location)
+
+
+amenity <- lapply(amenity, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+building <- lapply(building, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+highway <- lapply(highway, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+landuse <- lapply(landuse, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+lesiure <- lapply(lesiure, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+natural <- lapply(natural, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+railway <- lapply(railway, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+waterway <- lapply(waterway, function(x) x %>% 
+      st_transform(crs = crs_local_metres))
+
+list.save(amenity, "data/amenity_australia.rdata")
+list.save(building, "data/building_australia.rdata")
+list.save(highway, "data/highway_australia.rdata")
+list.save(landuse, "data/landuse_australia.rdata")
+list.save(lesiure, "data/lesiure_australia.rdata")
+list.save(natural, "data/natural_australia.rdata")
+list.save(railway, "data/railway_australia.rdata")
+list.save(waterway, "data/waterway_australia.rdata")
+list.save(hub_location, "data/hublocation_australia.rdata")
+list.save(placebb, "data/placebb_australia.rdata")
+
+```
+
+
+```{r produce_output_for_James_Gormley, eval = FALSE, echo=FALSE}
+
+
+amenity <- list.load("data/amenity_australia.rdata")
+building <- list.load("data/building_australia.rdata")
+highway <- list.load("data/highway_australia.rdata")
+landuse <- list.load("data/landuse_australia.rdata")
+lesiure <- list.load("data/lesiure_australia.rdata")
+natural <- list.load("data/natural_australia.rdata")
+railway <- list.load("data/railway_australia.rdata")
+waterway <- list.load("data/waterway_australia.rdata")
+hub_location <- list.load("data/hublocation_australia.rdata")
+placebb <- list.load( "data/placebb_australia.rdata")
+
+
+crs_local_metres <- 20353
+
+
+bristol_totem_pedestal(
+  file_to_save_to = "results/australia/James_Gormley_bristol_style.pdf",
+  hub_name_text = hub_location$james_gormley$name, 
+  icons_to_include_in_header = list(
+    system.file("extdata/parking-bicycle-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bicycle_repair_station.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/toilets.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/RWBA_Behinderten-WC.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/shower.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bus-stop-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/charging_station.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/cafe.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/shared-car-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/drinking_water.svg", package =
+    "mobilityHubTools")),
+  directions_image = "graphics/james_gormley.001.png", 
+  map_local = bristol_local_map(
+    amenity = amenity$james_gormley, 
+    building = building$james_gormley, 
+    highway = highway$james_gormley,
+    leisure = lesiure$james_gormley,
+    landuse = landuse$james_gormley,
+    natural = natural$james_gormley,
+    railway = railway$james_gormley,
+    waterway = waterway$james_gormley,
+    hub_location = hub_location$james_gormley,
+    map_limits = 550, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building = c("James Gormley Bike Arrival Station", "New Horizons", "Campus Centre", "Hargrave Andrew Library", "The Alan Finkel Building for Technology & Design", "Biotechnology"),
+    highlight_amenity = c("CSIRO Clayton", "Cafelito"),
+    highlight_leisure = c(""),
+    highlight_landuse = c("")
+    
+  ), 
+  facilities_image = "graphics/james_gormley.002.png", 
+  map_regional = bristol_regional_map(
+    amenity = amenity$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)), 
+    building = building$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)), 
+    highway = highway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    leisure = lesiure$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    landuse = landuse$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    natural = natural$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    railway = railway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    waterway = waterway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$james_gormley, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building_regional = c("Campus Centre", "Clayton", "Sir Louis Matheson Library", "Victorian Heart Hospital", "Australian Synchrotron"),
+    highlight_amenity_regional = c("Monash University", "CSIRO Clayton", "Victorian Heart Hospital"),
+    highlight_leisure_regional = c("Monash Sport", "Monash Medical Centre, Clayton Campus"),
+    highlight_landuse_regional = c("Omnico Business Centre"))
+  )
+  
+birmingham_totem_pedestal(
+  file_to_save_to = "results/australia/James_Gormley_birmingham_style.pdf",
+  hub_name_text = "Bike Arrival Station", 
+  icons_to_include_in_header = list(
+    system.file("extdata/parking-bicycle-14.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/shower.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/toilets.svg", package =
+    "mobilityHubTools"), 
+     system.file("extdata/charging_station.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bus_stop.svg", package =
+    "mobilityHubTools")),
+  directions_image = "graphics/james_gormley.003.png", 
+  map_local = bristol_local_map(
+    amenity = amenity$james_gormley, 
+    building = building$james_gormley, 
+    highway = highway$james_gormley,
+    leisure = lesiure$james_gormley,
+    landuse = landuse$james_gormley,
+    natural = natural$james_gormley,
+    railway = railway$james_gormley,
+    waterway = waterway$james_gormley,
+    hub_location = hub_location$james_gormley,
+    map_limits = 700, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building = c("James Gormley Bike Arrival Station", "New Horizons", "Campus Centre", "Hargrave Andrew Library", "The Alan Finkel Building for Technology & Design", "Biotechnology"),
+    highlight_amenity = c("CSIRO Clayton", "Cafelito"),
+    highlight_leisure = c(""),
+    highlight_landuse = c("")
+  ), 
+  points_of_interest_image = "graphics/wellpark_bristol_info.png", 
+  map_regional = bristol_regional_map(
+    amenity = amenity$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)), 
+    building = building$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)), 
+    highway = highway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    leisure = lesiure$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    landuse = landuse$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    natural = natural$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    railway = railway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 5000)),
+    waterway = waterway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$james_gormley, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building_regional = c("Campus Centre", "Sir Louis Matheson Library", "Victorian Heart Hospital", "Australian Synchrotron"),
+    highlight_amenity_regional = c("Monash University", "CSIRO Clayton", "Victorian Heart Hospital"),
+    highlight_leisure_regional = c("Monash Sport", "Monash Medical Centre, Clayton Campus"),
+    highlight_landuse_regional = c("Omnico Business Centre"))
+)
+  
+
+synthesis_totem(
+  file_to_save_to = "results/australia/James_Gormley_synthesis.pdf", 
+  element2_where_is_it_top_text = "5 Rainforest Walk",
+  element2_where_is_it_top_text_detail = hub_location$james_gormley$name,
+  element3_what_is_here_top = list(
+    system.file("extdata/parking-bicycle-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bicycle_repair_station.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/toilets.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/RWBA_Behinderten-WC.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/shower.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/bus-stop-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/charging_station.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/cafe.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/shared-car-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/drinking_water.svg", package =
+    "mobilityHubTools")),
+  element4_up_what_is_nearby = "^ Bus", 
+  element4_left_what_is_nearby = "<- N1 Parking Lot",
+  element4_right_what_is_nearby = "New Horizons ->", 
+  element5_regional_map = synthesis_regional_map(
+    amenity = amenity$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 2500)), 
+    building = building$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 2500)), 
+    highway = highway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    leisure = lesiure$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    landuse = landuse$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    natural = natural$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    railway = railway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    waterway = waterway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$james_gormley,
+    crs_local_metres = crs_local_metres, 
+    highlight_building_regional = c("Campus Centre", "Clayton", "Sir Louis Matheson Library", "Victorian Heart Hospital", "Australian Synchrotron"),
+    highlight_amenity_regional = c("Monash University", "CSIRO Clayton", "Victorian Heart Hospital"),
+    highlight_leisure_regional = c("Monash Sport", "Monash Medical Centre, Clayton Campus"),
+    highlight_landuse_regional = c("Omnico Business Centre")),
+  element6_what_is_this_bottom_text = "What is this: \nWelcome to the James Gormely Bike Arrive Station, \nwhere shared mobility and other services \noffer a range of options to support sustainable travel.
+\n 
+What is here: (see left)\nThere is secure bike parking, bike repair facilities and showers, and a bike shop. \nFurther away are electric car chargers, car share vehicles, bus stops, a cafe ",
+  element7_hub_elements_map = synthesis_hub_elements_map(
+    amenity = amenity$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)), 
+    building = building$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)), 
+    highway = highway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    leisure = lesiure$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    landuse = landuse$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    natural = natural$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    railway = railway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    waterway = waterway$james_gormley %>% st_crop(hub_location$james_gormley %>% st_buffer(dist = 300)),
+    hub_location = hub_location$james_gormley,
+    map_limits = 40, 
+    crs_local_metres = crs_local_metres, 
+    hub_element_locations = tibble::tibble(
+      lat = c(-37.908600, -37.908672, -37.908414, -37.908437), 
+      lon = c(145.131905, 145.131959, 145.132012, 145.131948), 
+      name = c(NA, NA, "Bike shop", NA), 
+      icon_filename = c(
+        system.file("extdata/shower.svg", package = "mobilityHubTools"),
+        system.file("extdata/bike_repair_station.svg", package = "mobilityHubTools"),
+        system.file("extdata/bike_repair_station.svg", package = "mobilityHubTools"),
+        system.file("extdata/parking-bicycle-14.svg", package = "mobilityHubTools")
+      ))),
+  element8_how_can_you_travel = "How can you travel from here: (see maps below)\nBuses from are available from Research Way (north) and the Monash Uni Bus Station (south side of campus) \n\nBike routes include the Scotchmans Creek Trail (2km north) and \nroutes along North Road and Princes Highway (to the south-west).",
+  element9_hub_surrounds_map = synthesis_hub_surrounds_map(
+     building = building$james_gormley, 
+     map_limits = 500, 
+     crs_local_metres = crs_local_metres,
+     annotation_map_zoom = 15, 
+     hub_location = hub_location$james_gormley,
+     highlight_building = c("New Horizons", "Campus Centre", "Hargrave Andrew Library", "Biotechnology"),
+  ),
+  element10_what_is_nearby_bottom_text = "What is nearby: the New Horizons building, the Campus Centre and \nmany other university buildings(see maps above)  
+\n \nWhere am I:
+5 Rainforest Way, Monash University.\nwhat3words.com calls this location ///pounds.custom.spider",  
+element11_transport_map_small = synthesis_hub_surrounds_map(
+  building = building$james_gormley, 
+  map_limits = 750, 
+  crs_local_metres = crs_local_metres,
+  hub_location = hub_location$james_gormley, 
+  annotation_map_zoom = 14, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+element12_transport_map_large = synthesis_hub_surrounds_map(
+  building = building$james_gormley, 
+  map_limits = 3000, 
+  crs_local_metres = crs_local_metres,
+  hub_location = hub_location$james_gormley,
+  annotation_map_zoom = 12, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+  element13_cycle_map = synthesis_hub_surrounds_map(
+    building = building$james_gormley, 
+    map_limits = 3000, 
+    crs_local_metres = crs_local_metres,
+    hub_location = hub_location$james_gormley,
+    annotation_map_zoom = 12, 
+    annotation_map_type = "opencycle", 
+    highlight_building = "")
+  )
+
+```
+
+
+```{r produce_output_for_hawthorn, eval = FALSE, echo=FALSE}
+
+
+amenity <- list.load("data/amenity_australia.rdata")
+building <- list.load("data/building_australia.rdata")
+highway <- list.load("data/highway_australia.rdata")
+landuse <- list.load("data/landuse_australia.rdata")
+lesiure <- list.load("data/lesiure_australia.rdata")
+natural <- list.load("data/natural_australia.rdata")
+railway <- list.load("data/railway_australia.rdata")
+waterway <- list.load("data/waterway_australia.rdata")
+hub_location <- list.load("data/hublocation_australia.rdata")
+placebb <- list.load( "data/placebb_australia.rdata")
+
+
+crs_local_metres <- 20353
+
+
+bristol_totem_pedestal(
+  file_to_save_to = "results/australia/hawthorn_station_bristol_style.pdf",
+  hub_name_text = hub_location$hawthorn_station$name, 
+  icons_to_include_in_header = list(
+    system.file("extdata/railway-station-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/tram-stop-14.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/shared-car-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools")),
+  directions_image = "graphics/hawthorn_station.001.png", 
+  map_local = bristol_local_map(
+    amenity = amenity$hawthorn_station, 
+    building = building$hawthorn_station, 
+    highway = highway$hawthorn_station,
+    leisure = lesiure$hawthorn_station,
+    landuse = landuse$hawthorn_station,
+    natural = natural$hawthorn_station,
+    railway = railway$hawthorn_station,
+    waterway = waterway$hawthorn_station,
+    hub_location = hub_location$hawthorn_station,
+    map_limits = 550, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building = c(NA),
+    highlight_amenity = c("Epworth Hawthorn"),
+    highlight_leisure = c("St. James Park", "Grace Park"),
+    highlight_landuse = c("")
+    
+  ), 
+  facilities_image = "graphics/hawthorn_station.002.png", 
+  map_regional = bristol_regional_map(
+    amenity = amenity$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)), 
+    building = building$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)), 
+    highway = highway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    leisure = lesiure$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    landuse = landuse$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    natural = natural$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    railway = railway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    waterway = waterway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$hawthorn_station, 
+    crs_local_metres = crs_local_metres, 
+    highlight_building_regional = c(NA),
+    highlight_amenity_regional = c(NA),
+    highlight_leisure_regional = c("Burnley Park"),
+    highlight_landuse_regional = c(NA))
+  )
+  
+synthesis_totem(
+  file_to_save_to = "results/australia/hawthorn_station_synthesis.pdf", 
+  element2_where_is_it_top_text = "Hawthorn Station",
+  element2_where_is_it_top_text_detail = "Burwood Road"
+  element3_what_is_here_top = list(
+    system.file("extdata/railway-station-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/tram-stop-14.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/shared-car-14.svg", package =
+    "mobilityHubTools"), 
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools"),
+    system.file("extdata/No_image.svg", package =
+    "mobilityHubTools")),
+  element4_up_what_is_nearby = "^ Trams", 
+  element4_left_what_is_nearby = "",
+  element4_right_what_is_nearby = "", 
+  element5_regional_map = synthesis_regional_map(
+    amenity = amenity$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 2500)), 
+    building = building$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 2500)), 
+    highway = highway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    leisure = lesiure$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    landuse = landuse$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    natural = natural$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    railway = railway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    waterway = waterway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 3000)),
+    hub_location = hub_location$hawthorn_station,
+    crs_local_metres = crs_local_metres, 
+   highlight_building_regional = c(NA),
+    highlight_amenity_regional = c(NA),
+    highlight_leisure_regional = c("Burnley Park"),
+    highlight_landuse_regional = c(NA)),
+  element6_what_is_this_bottom_text = "What is this: \nWelcome to the James Gormely Bike Arrive Station, \nwhere shared mobility and other services \noffer a range of options to support sustainable travel.
+\n 
+What is here: (see left)\nThere is secure bike parking, bike repair facilities and showers, and a bike shop. \nFurther away are electric car chargers, car share vehicles, bus stops, a cafe ",
+  element7_hub_elements_map = synthesis_hub_elements_map(
+    amenity = amenity$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)), 
+    building = building$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)), 
+    highway = highway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    leisure = lesiure$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    landuse = landuse$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    natural = natural$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    railway = railway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    waterway = waterway$hawthorn_station %>% st_crop(hub_location$hawthorn_station %>% st_buffer(dist = 300)),
+    hub_location = hub_location$hawthorn_station,
+    map_limits = 40, 
+    crs_local_metres = crs_local_metres, 
+    hub_element_locations = tibble::tibble(
+      lat = c(-37.82221838399117), 
+      lon = c(145.02342189243546), 
+      name = c("Flexicar Car Share"), 
+      icon_filename = c(
+        system.file("shared-car-14.svg", package = "mobilityHubTools")
+      ))),
+  element8_how_can_you_travel = "How can you travel from here: (see maps below)\nTrams are in Burwood Road \nThe Flexicar Car Share is in Evansdale Road",
+  element9_hub_surrounds_map = synthesis_hub_surrounds_map(
+     building = building$hawthorn_station, 
+     map_limits = 500, 
+     crs_local_metres = crs_local_metres,
+     annotation_map_zoom = 15, 
+     hub_location = hub_location$hawthorn_station,
+     highlight_building = c(NA),
+  ),
+  element10_what_is_nearby_bottom_text = "What is nearby: <INSERT TEXT>  
+\n \nWhere am I:\nwhat3words.com calls this location ///slide.leaps.topic",  
+element11_transport_map_small = synthesis_hub_surrounds_map(
+  building = building$hawthorn_station, 
+  map_limits = 250, 
+  crs_local_metres = crs_local_metres,
+  hub_location = hub_location$hawthorn_station, 
+  annotation_map_zoom = 16, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+element12_transport_map_large = synthesis_hub_surrounds_map(
+  building = building$hawthorn_station, 
+  map_limits = 3000, 
+  crs_local_metres = crs_local_metres,
+  hub_location = hub_location$hawthorn_station,
+  annotation_map_zoom = 12, 
+  annotation_map_type = "osmtransport", 
+  highlight_building = ""),
+  element13_cycle_map = synthesis_hub_surrounds_map(
+    building = building$hawthorn_station, 
+    map_limits = 3000, 
+    crs_local_metres = crs_local_metres,
+    hub_location = hub_location$hawthorn_station,
+    annotation_map_zoom = 12, 
+    annotation_map_type = "opencycle", 
+    highlight_building = "")
+  )
+
+```
+
+
+
+
+
+
+
